@@ -18,6 +18,7 @@ void START() {
           Jika CC = MARK maka EOP akan menyala (true) */
 
 	/* Algoritma */
+  // fopen(stdin);
 	pita = stdin;
 	ADV();
 }
@@ -33,7 +34,7 @@ void ADV() {
 	/* Algoritma */
 	retval = fscanf(pita,"%c",&CC);
 	EOP = (CC == MARK);
-	if (EOP) {
-       fclose(pita);
- 	}
+	// if (EOP) {
+ //       fclose(pita);
+ // 	}
 }
