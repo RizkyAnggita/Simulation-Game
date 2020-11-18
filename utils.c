@@ -3,6 +3,7 @@
 
 #include "boolean.h"
 #include "mesinkata.h"
+#include "jam.h"
 
 #define ENDL printf("\n")
 
@@ -90,12 +91,32 @@ void PrintPlayerStat(Kata username)
 	PrintKata(username);
 	ENDL;
 
-	printf("Money: 1000\n");
+	printf("Money: 1000");
+}
 
-	printf("Current Time: 21.00\n");
-	printf("Opening Time: 09.00\n");
-	printf("Time Remaining: 12 hour(s)");
+void PrintTime(JAM CurrentTime, JAM EndTime, boolean PrepPhase)
+/* Menampilkan waktu untuk preparation phase */
+{
+	//KAMUS
+	JAM TR;
 
+	//ALGORITMA
+	printf("Current Time: ");
+	TulisJAM(CurrentTime);
+	ENDL;
+
+	if (PrepPhase)
+	{
+		printf("Opening Time: ");
+	} else
+	{
+		printf("Closing Time: ");
+	}
+	TulisJAM(EndTime);
+	ENDL;
+
+	TR = DetikToJAM(Durasi(CurrentTime, EndTime));
+	printf("Time Remaining: %d hour(s) %d minute(s) %d second(s)", Hour(TR), Minute(TR), Second(TR));
 }
 
 void PrintPrepStat()
@@ -105,4 +126,11 @@ void PrintPrepStat()
 	printf("Total aksi yang akan dilakukan: 1\n");
 	printf("Total waktu yang dibutuhkan: 1 hour(s) 45 minute(s)\n");
 	printf("Total uang yang dibutuhkan: 60");
+}
+
+void PrintMainQueue()
+/* Menampilkan  antrian pengunjung saat main phase*/
+{
+	printf("Antrian [1/5]:\n");
+	printf("(Wangky's Universe), Kesabaran: 5");
 }

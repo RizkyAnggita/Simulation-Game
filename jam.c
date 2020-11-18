@@ -1,8 +1,3 @@
-/* File: point.h */
-// Nama : Ariya Adinatha
-// NIM : 13519048
-/* Tanggal: 2 September 2020 */
-/* *** Definisi ABSTRACT DATA TYPE JAM *** */
 #include <stdio.h>
 #include <math.h>
 #include "jam.h"
@@ -143,12 +138,15 @@ JAM PrevNDetik(JAM J, int N)
 /* *** Kelompok Operator Aritmetika *** */
 long Durasi(JAM JAw, JAM JAkh)
 {
-    long Dw = JAMToDetik(JAw), Dk = JAMToDetik(JAkh);
-    long out = Dk - Dw;
-    if (out < 0)
-        out = 86400;
-    /* out += 86400; kalau negatif jadi 0*/
-    return out;
+   long totalDetikJAw, totalDetikJAkh;
+   /*ALGORITMA*/
+   totalDetikJAw = JAMToDetik(JAw);
+   totalDetikJAkh = JAMToDetik(JAkh);
+   if (totalDetikJAw > totalDetikJAkh){
+      return (totalDetikJAkh - totalDetikJAw + 86400);
+   } else {
+      return (totalDetikJAkh - totalDetikJAw);
+   }
 }
 /* Mengirim JAkh-JAw dlm Detik, dengan kalkulasi */
 /* Jika JAw > JAkh, maka JAkh adalah 1 hari setelah JAw */
