@@ -2,12 +2,6 @@
 #include <stdio.h>
 
 #include "utils.h"
-#include "boolean.h"
-#include "mesinkata.h"
-#include "mesinkar.h"
-#include "jam.h"
-#include "arraybahan.h"
-#include "mesinbahan.h"
 
 #define ENDL printf("\n")
 
@@ -144,6 +138,41 @@ void PrintBuyBahan(TabBahan ListBahan)
 		PrintKata(Name(Elmt(ListBahan, i)));
 		printf(": %d\n", Val(Elmt(ListBahan, i)));
 	}
+}
+
+int PriceBuyBahan(Kata name, int qty, TabBahan ShopBahan)
+/* Menghitung harga yang perlu dibayar untuk membeli bahan dengan quantity tertentu 
+   Mengembalikan total harga jika bahan yang ingin dibeli pengguna (name) ada di 
+   shop bahan
+   Jika tidak ada di shop bahan, akan mengembalikan total harga -999*/
+{
+	//KAMUS
+	IdxType i;
+	boolean found;
+	int price;
+
+	//ALGORITMA
+
+	i = GetFirstIdxListBahan(ShopBahan);
+	found = false;
+
+	while ((i <= GetLastIdxListBahan(ShopBahan)) && (!found))
+	{
+		if (IsKataSama(name, Name(Elmt(ShopBahan, i))))
+		{
+			price = qty * Val(Elmt(ShopBahan, i));
+			found = true;
+		}
+
+		i += 1;
+	}
+
+	if (!found)
+	{
+		price = -999;
+	}
+
+	return price;
 }
 
 void PrintTitle()

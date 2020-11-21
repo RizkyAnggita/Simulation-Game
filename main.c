@@ -253,10 +253,19 @@ int main()
 					PrintBuyBahan(ShopBahan);
 					ENDL;
 
-					STARTBAHAN(" ");
-					printf("You are buying %d ", CBahan.Val);
-					PrintKata(CBahan.Name);
-					ENDL;
+					STARTBAHAN(" ");				
+
+					int MoneyNeeded = PriceBuyBahan(Name(CBahan), Val(CBahan), ShopBahan);
+					if (MoneyNeeded == -999) //Nama bahan tidak ditemukan
+					{
+						printf("Bahan yang ingin anda beli tidak tersedia\n");
+
+					} else
+					{
+						printf("You are buying %d ", CBahan.Val);
+						PrintKata(CBahan.Name);
+						ENDL;
+					}
 
 				} else if (IsKataSama(CKata, CUndo))
 				{

@@ -36,6 +36,12 @@ void PrintBuyBahan(TabBahan ListBahan);
 /* I.S. ListBahan terdefinisi 
    F.S Isi dari ListBahan ditampilkan ke layar dengan format "{name}: {value}"*/
 
+int PriceBuyBahan(Kata name, int qty, TabBahan ShopBahan);
+/* Menghitung harga yang perlu dibayar untuk membeli bahan dengan quantity tertentu 
+   Mengembalikan total harga jika bahan yang ingin dibeli pengguna (name) ada di 
+   shop bahan
+   Jika tidak ada di shop bahan, akan mengembalikan total harga -999*/
+
 void PrintTitle();
 /* Menampilkan ke layar pembukaan dari game */
 
