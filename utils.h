@@ -24,6 +24,14 @@ TabBahan FileToListBahan();
 /* Membaca file yang berisi nama bahan beserta harganya */
 /* Mengembalikan list bahan  */
 
+TabBahan CreateEmptyBahanPlayer(TabBahan ListBahan);
+/* Membuat inventory utk penyimpanan bahan player
+   Semua val pada elemen list diset ke 0 */
+
+void PrintBahanPlayer(TabBahan ListBahan);
+/* I.S. ListBahan terdefinisi 
+   F.S Isi dari ListBahan ditampilkan ke layar dengan format "{name}: {qty}"*/
+
 void PrintBuyBahan(TabBahan ListBahan);
 /* I.S. ListBahan terdefinisi 
    F.S Isi dari ListBahan ditampilkan ke layar dengan format "{name}: {value}"*/

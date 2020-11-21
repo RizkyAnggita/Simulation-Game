@@ -168,6 +168,8 @@ int main()
 	JAM MainStartTime = MakeJAM(9, 0, 0);
 	JAM MainEndTime = MakeJAM(21, 0, 0);
 
+	TabBahan BahanPlayer = CreateEmptyBahanPlayer(ShopBahan);
+
 
 
 	// Main program 
@@ -245,6 +247,9 @@ int main()
 
 				} else if (IsKataSama(CKata, CBuy))
 				{
+					PrintBahanPlayer(BahanPlayer);
+					ENDL;
+
 					PrintBuyBahan(ShopBahan);
 					ENDL;
 

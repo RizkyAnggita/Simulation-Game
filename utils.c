@@ -90,6 +90,42 @@ TabBahan FileToListBahan()
 	return ListBahan;
 }
 
+TabBahan CreateEmptyBahanPlayer(TabBahan ListBahan)
+/* Membuat inventory utk penyimpanan bahan player
+   Semua val pada elemen list diset ke 0 */
+{
+	//KAMUS
+	IdxType i;
+
+	//ALGORITMA
+	for (i = GetFirstIdxListBahan(ListBahan); i <= GetLastIdxListBahan(ListBahan); ++i)
+	{
+		Val(Elmt(ListBahan, i)) = 0;
+	}
+
+	return ListBahan;
+}
+
+void PrintBahanPlayer(TabBahan ListBahan)
+/* I.S. ListBahan terdefinisi 
+   F.S Isi dari ListBahan ditampilkan ke layar dengan format "{name}: {qty}"*/
+{
+	//KAMUS
+	IdxType i;
+
+	//ALGORITMA
+
+	printf("Inventory Bahan\n");
+	printf("List: (Nama): (qty)\n");
+
+	for (i = GetFirstIdxListBahan(ListBahan); i <= GetLastIdxListBahan(ListBahan); ++i)
+	{
+		printf("    - ");
+		PrintKata(Name(Elmt(ListBahan, i)));
+		printf(": %d\n", Val(Elmt(ListBahan, i)));
+	}
+}
+
 void PrintBuyBahan(TabBahan ListBahan)
 /* I.S. ListBahan terdefinisi 
    F.S Isi dari ListBahan ditampilkan ke layar dengan format "{name}: {value}"*/
@@ -104,11 +140,9 @@ void PrintBuyBahan(TabBahan ListBahan)
 
 	for (i = GetFirstIdxListBahan(ListBahan); i <= GetLastIdxListBahan(ListBahan); ++i)
 	{
-		printf("      ");
+		printf("    - ");
 		PrintKata(Name(Elmt(ListBahan, i)));
 		printf(": %d\n", Val(Elmt(ListBahan, i)));
-
-
 	}
 }
 
