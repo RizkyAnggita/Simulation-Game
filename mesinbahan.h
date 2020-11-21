@@ -5,6 +5,7 @@
 
 #include "boolean.h"
 #include "mesinkar.h"
+#include "mesinkata.h"
 #include "arraybahan.h"
 
 #define BLANK ' '

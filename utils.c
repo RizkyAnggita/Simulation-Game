@@ -1,9 +1,12 @@
 
 #include <stdio.h>
 
+#include "utils.h"
 #include "boolean.h"
 #include "mesinkata.h"
 #include "jam.h"
+#include "arraybahan.h"
+#include "mesinbahan.h"
 
 #define ENDL printf("\n")
 

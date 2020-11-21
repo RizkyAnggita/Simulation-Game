@@ -4,6 +4,7 @@
 
 #include "mesinbahan.h"
 #include "mesinkar.h"
+#include "mesinkata.h"
 #include "boolean.h"
 #include "arraybahan.h"
 
@@ -87,10 +88,11 @@ void SalinBahan()
 
 	while ((CC != BLANK) && (CC != MARK))
 	{	
-		CBahan.Name[idx] = CC;
+		CBahan.Name.TabKata[idx] = CC;
 		idx += 1;
 		ADV();	
 	}
+	CBahan.Name.Length = idx;
 
 	IgnoreBlankBahan();
 

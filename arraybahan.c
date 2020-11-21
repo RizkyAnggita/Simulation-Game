@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "boolean.h"
 #include "arraybahan.h"
+#include "mesinkata.h"
 
 
 

@@ -7,6 +7,7 @@
 #define ARRAYBAHAN_H
 
 #include "boolean.h"
+#include "mesinkata.h"
 
 
 /*  Kamus Umum */
@@ -16,14 +17,13 @@
 /* Indeks minimum array */
 #define IdxUndef -999  
 /* Indeks tak terdefinisi*/
-// Value Undef dari Bahan adalah dengan Namenya adalah "" dan Val nya adalah -999
+// Value Undef dari Bahan adalah dengan Namenya adalah Kata dengan Tabkata nya adalah "" 
+// dan Val nya adalah -999
 /* Nilai elemen tak terdefinisi*/
-
-#define NMaxBahan 20
 
 typedef struct {
  	int Val;
-	char Name[NMaxBahan];
+	Kata Name;
 } Bahan;
 
 /* Definisi elemen dan koleksi objek */
@@ -47,34 +47,27 @@ typedef struct {
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
-void MakeEmpty (TabInt * T);
+void MakeEmptyListBahan (TabInt * T);
 /* I.S. T sembarang */
 /* F.S. Terbentuk tabel T kosong dengan kapasitas IdxMax-IdxMin+1 */
 /* Proses: Inisialisasi semua elemen tabel T dengan ValUndef */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int NbElmt (TabInt T);
+int NbElmtListBahan (TabInt T);
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 /* *** Daya tampung container *** */
-int MaxNbEl (TabInt T);
+int MaxNbElListBahan (TabInt T);
 /* Mengirimkan maksimum elemen yang dapat ditampung oleh tabel */
 /* *** Selektor INDEKS *** */
-IdxType GetFirstIdx (TabInt T);
+IdxType GetFirstIdxListBahan (TabInt T);
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen T pertama */
-IdxType GetLastIdx (TabInt T);
+IdxType GetLastIdxListBahan (TabInt T);
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen T terakhir */
 
-/* ********** Test Indeks yang valid ********** */
-boolean IsIdxValid (TabInt T, IdxType i);
-/* Mengirimkan true jika i adalah indeks yang valid utk ukuran tabel */
-/* yaitu antara indeks yang terdefinisi utk container*/
-boolean IsIdxEff (TabInt T, IdxType i);
-/* Mengirimkan true jika i adalah indeks yang terdefinisi utk tabel */
-/* yaitu antara FirstIdx(T)..LastIdx(T) */
 
 
 

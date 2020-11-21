@@ -243,7 +243,7 @@ int main()
 				} else if (IsKataSama(CKata, CBuy))
 				{
 					STARTBAHAN();
-					printf("You are buying %d %s\n", CBahan.Val, CBahan.Name);
+					printf("You are buying %d %s\n", CBahan.Val, CBahan.Name.TabKata);
 
 				} else if (IsKataSama(CKata, CUndo))
 				{

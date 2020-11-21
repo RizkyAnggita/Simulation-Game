@@ -5,6 +5,8 @@
 #include "boolean.h"
 #include "mesinkata.h"
 #include "jam.h"
+#include "arraybahan.h"
+#include "mesinbahan.h"
 
 boolean IsKataSama(Kata K1, Kata K2);
 /* Mengembalikan True jika kita sama, false jika tidak */
