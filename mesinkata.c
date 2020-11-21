@@ -1,11 +1,3 @@
-/*
-NIM : 13519108
-Nama : Nathaniel Jason
-Tanggal : 01/10/2020
-Topik praktikum : Mesin Kata
-Deskripsi : fungsi dan prosedur Mesin Kata
-*/
-
 #include "boolean.h"
 #include "mesinkata.h"
 

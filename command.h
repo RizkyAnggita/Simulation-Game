@@ -1,4 +1,4 @@
-/* Kumpulan command game*/
+sub/* Kumpulan command game*/
 
 #ifndef __COMMAND_H__
 #define __COMMAND_H__
@@ -7,9 +7,11 @@
 #include <stdio.h>
 
 
-extern Kata CNew;
-extern Kata CLoad;
-extern Kata CExit;
+// extern Kata CNew;
+// extern Kata CLoad;
+// extern Kata CExit;
+
+extern int glvar;
 
 
 

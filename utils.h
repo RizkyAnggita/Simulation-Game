@@ -4,6 +4,7 @@
 
 #include "boolean.h"
 #include "mesinkata.h"
+#include "jam.h"
 
 boolean IsKataSama(Kata K1, Kata K2);
 /* Mengembalikan True jika kita sama, false jika tidak */
@@ -26,10 +27,16 @@ void PrintMap();
 /* Menampilkan map beserta legend ke layar */
 
 void PrintPlayerStat(Kata username);
-/* Menampilkan stat utama pemain seperti nama, money, dan time */
+/* Menampilkan stat utama pemain seperti nama dan money */
+
+void PrintTime(JAM CurrentTime, JAM EndTime, boolean PrepPhase);
+/* Menampilkan waktu untuk preparation phase */
 
 void PrintPrepStat();
-/* Menampilkan stat khusus preparation day, total aksi waktu
+/* Menampilkan stat khusus preparation phase, total aksi waktu
    dan uang yang dibutuhkan */
+
+void PrintMainQueue();
+/* Menampilkan  antrian pengunjung saat main phase*/
 
 #endif
