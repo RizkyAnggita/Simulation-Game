@@ -1,8 +1,3 @@
-// Nama/NIM : Muhammad Atthaumar Rifqy/13519148
-// Nama file: stackins.c
-// Topik	: Tugas Besar
-// Tanggal  : 10 November 2020
-// Deskripsi: Body Stack of Instruction
 
 #include "boolean.h"
 #include "stackins.h"

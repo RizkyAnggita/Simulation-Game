@@ -4,6 +4,8 @@
 #include "mesinkata.h"
 #include "mesinbahan.h"
 #include "jam.h"
+#include "instruction.h"
+#include "stackins.h"
 #include "utils.h"
 
 
@@ -169,6 +171,8 @@ int main()
 	JAM MainEndTime = MakeJAM(21, 0, 0);
 
 	TabBahan BahanPlayer = CreateEmptyBahanPlayer(ShopBahan);
+
+	// Prep state
 
 
 
