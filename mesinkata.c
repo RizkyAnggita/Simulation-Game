@@ -16,19 +16,19 @@ void IgnoreBlank(){
 		ADV();
 	}
 }
-void STARTKATA(){
+void STARTKATA(char * filename){
 /* I.S. : CC sembarang 
    F.S. : EndKata = true, dan CC = MARK; 
           atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir kata */
 	//KAMUS
 	//ALGORITMA
-	START();
+	START(filename);
 	//mengabaikan blank sebelum mengakuisisi kata
 	IgnoreBlank();
 	//Pada model akuisisi versi 1, kata diakuisisi mulai dari karakter pertama,
 	//sesudah akhir kata atau karakter pertama pita untuk kata pertama
-	if (CC != MARK){
+	if (!EOP){
 		EndKata = false;
 		SalinKata();
 	} else {
@@ -46,7 +46,7 @@ void ADVKATA(){
 	//ALGORITMA
 	//mengabaikan blank sebelum mengakuisisi kata
 	IgnoreBlank();
-	if (CC != MARK){
+	if (!EOP){
 		EndKata = false;
 		SalinKata();
 	} else {
@@ -66,7 +66,7 @@ void SalinKata(){
 	int idx;
 	//ALGORITMA
 	idx = 0;//inisialisasi idx
-	while ((CC != BLANK) && (CC != MARK)){
+	while ((CC != BLANK) && !EOP){
 		//jika melebihi NMax maka kata dipotong, tapi tetap ADV
 		if (idx < NMax){
 			//menyimpan setiap character pada kata

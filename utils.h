@@ -4,6 +4,7 @@
 
 #include "boolean.h"
 #include "mesinkata.h"
+#include "mesinkar.h"
 #include "jam.h"
 #include "arraybahan.h"
 #include "mesinbahan.h"
@@ -18,6 +19,14 @@ void CopyKata(Kata K1, Kata *K2);
 
 void PrintKata(Kata K);
 /* Menampilkan kata K ke layar*/
+
+TabBahan FileToListBahan();
+/* Membaca file yang berisi nama bahan beserta harganya */
+/* Mengembalikan list bahan  */
+
+void PrintBuyBahan(TabBahan ListBahan);
+/* I.S. ListBahan terdefinisi 
+   F.S Isi dari ListBahan ditampilkan ke layar dengan format "{name}: {value}"*/
 
 void PrintTitle();
 /* Menampilkan ke layar pembukaan dari game */

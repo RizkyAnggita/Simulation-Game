@@ -8,7 +8,7 @@
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
-void MakeEmptyListBahan (TabInt * T){
+void MakeEmptyListBahan (TabBahan * T){
 /* I.S. T sembarang */
 /* F.S. Terbentuk tabel T kosong dengan kapasitas IdxMax-IdxMin+1 */
 /* Proses: Inisialisasi semua elemen tabel T dengan ValUndef */
@@ -26,7 +26,7 @@ void MakeEmptyListBahan (TabInt * T){
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int NbElmtListBahan (TabInt T){
+int NbElmtListBahan (TabBahan T){
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 /* *** Daya tampung container *** */
@@ -46,7 +46,7 @@ int NbElmtListBahan (TabInt T){
 	return eff;
 }
 
-int MaxNbElListBahan (TabInt T){
+int MaxNbElListBahan (TabBahan T){
 /* Mengirimkan maksimum elemen yang dapat ditampung oleh tabel */
 /* *** Selektor INDEKS *** */
 	/*KAMUS*/
@@ -54,14 +54,14 @@ int MaxNbElListBahan (TabInt T){
 	return IdxMax + 1 - IdxMin;
 }
 
-IdxType GetFirstIdxListBahan (TabInt T){
+IdxType GetFirstIdxListBahan (TabBahan T){
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen T pertama */
 	/*KAMUS*/
 	/*ALGORITMA*/
 	return IdxMin;
 }
-IdxType GetLastIdxListBahan (TabInt T){
+IdxType GetLastIdxListBahan (TabBahan T){
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen T terakhir */
 	/*KAMUS*/

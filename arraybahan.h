@@ -26,16 +26,19 @@ typedef struct {
 	Kata Name;
 } Bahan;
 
+#define Name(B) (B).Name
+#define Val(B) (B).Val
+
 /* Definisi elemen dan koleksi objek */
 typedef int IdxType;  /* type indeks */
 typedef Bahan ElType;   /* type elemen tabel */
 typedef struct { 
   ElType TI[IdxMax+1]; /* memori tempat penyimpan elemen (container) */
-} TabInt;
+} TabBahan;
 /* Indeks yang digunakan [IdxMin..IdxMax] */
 /* Indeks ke-0 tidak digunakan */
-/* Jika T adalah TabInt, cara deklarasi dan akses: */
-/* Deklarasi : T : TabInt */
+/* Jika T adalah TabBahan, cara deklarasi dan akses: */
+/* Deklarasi : T : TabBahan */
 /* Maka cara akses: 
    T[i] untuk mengakses elemen ke-i */
 /* Definisi : 
@@ -47,24 +50,24 @@ typedef struct {
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
-void MakeEmptyListBahan (TabInt * T);
+void MakeEmptyListBahan (TabBahan * T);
 /* I.S. T sembarang */
 /* F.S. Terbentuk tabel T kosong dengan kapasitas IdxMax-IdxMin+1 */
 /* Proses: Inisialisasi semua elemen tabel T dengan ValUndef */
 
 /* ********** SELEKTOR (TAMBAHAN) ********** */
 /* *** Banyaknya elemen *** */
-int NbElmtListBahan (TabInt T);
+int NbElmtListBahan (TabBahan T);
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 /* *** Daya tampung container *** */
-int MaxNbElListBahan (TabInt T);
+int MaxNbElListBahan (TabBahan T);
 /* Mengirimkan maksimum elemen yang dapat ditampung oleh tabel */
 /* *** Selektor INDEKS *** */
-IdxType GetFirstIdxListBahan (TabInt T);
+IdxType GetFirstIdxListBahan (TabBahan T);
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen T pertama */
-IdxType GetLastIdxListBahan (TabInt T);
+IdxType GetLastIdxListBahan (TabBahan T);
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen T terakhir */
 

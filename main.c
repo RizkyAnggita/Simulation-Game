@@ -144,6 +144,9 @@ int main()
 	CPrepare.TabKata[6] = 'e';
 	CPrepare.Length = 7;
 
+	TabBahan ShopBahan = FileToListBahan();
+	
+
 
     // Player state
 
@@ -175,14 +178,14 @@ int main()
 	PrintMainMenu();
 	ENDL;
 
-	STARTKATA();
+	STARTKATA(" ");
 
 	if (IsKataSama(CKata, CNew))
 	{
 		printf("Memulai permainan baru...\n");
 
 		printf("Masukkan nama:\n");
-		STARTKATA();
+		STARTKATA(" ");
 		CopyKata(CKata, &Username);
 
 		Play = true;
@@ -212,7 +215,7 @@ int main()
 
 				printf("Masukkan perintah:\n");
 
-				STARTKATA();
+				STARTKATA(" ");
 
 				if (IsKataSama(CKata, CW))
 				{
@@ -242,8 +245,13 @@ int main()
 
 				} else if (IsKataSama(CKata, CBuy))
 				{
-					STARTBAHAN();
-					printf("You are buying %d %s\n", CBahan.Val, CBahan.Name.TabKata);
+					PrintBuyBahan(ShopBahan);
+					ENDL;
+
+					STARTBAHAN(" ");
+					printf("You are buying %d ", CBahan.Val);
+					PrintKata(CBahan.Name);
+					ENDL;
 
 				} else if (IsKataSama(CKata, CUndo))
 				{
@@ -286,7 +294,7 @@ int main()
 
 				printf("Masukkan perintah:\n");
 
-				STARTKATA();
+				STARTKATA(" ");
 
 				if (IsKataSama(CKata, CServe))
 				{
@@ -326,7 +334,7 @@ int main()
 		printf("load game\n");
 	} else if (IsKataSama(CKata, CExit))
 	{
-		printf("exit");
+		printf("exit\n");
 	}
 
 

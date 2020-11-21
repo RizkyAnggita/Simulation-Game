@@ -22,15 +22,15 @@ void IgnoreBlankBahan()
 	}
 }
 
-void STARTBAHAN()
+void STARTBAHAN(char * filename)
 /* I.S. : CC sembarang 
    F.S. : EndBahan = true, dan CC = MARK; 
           atau EndBahan = false, CBahan adalah bahan yang sudah diakuisisi,
           CC karakter pertama sesudah karakter terakhir bahan */
 {
-	START();
+	START(filename);
 	IgnoreBlankBahan();
-	if (CC == MARK)
+	if (EOP)
 	{
 		EndBahan = true;
 	} else
@@ -48,7 +48,7 @@ void ADVBAHAN()
    Proses : Akuisisi kata menggunakan procedure SalinKata */
 {
 	IgnoreBlankBahan();
-	if (CC == MARK)
+	if (EOP)
 	{
 		EndBahan = true;
 	} else
@@ -86,7 +86,7 @@ void SalinBahan()
 
 	idx = 0;
 
-	while ((CC != BLANK) && (CC != MARK))
+	while ((CC != BLANK) && !EOP)
 	{	
 		CBahan.Name.TabKata[idx] = CC;
 		idx += 1;

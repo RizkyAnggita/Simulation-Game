@@ -1,0 +1,1 @@
+10 Wood 5 Stone 15 Tile 7 Cement 5 Sand.

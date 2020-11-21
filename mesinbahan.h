@@ -20,7 +20,7 @@ void IgnoreBlankBahan();
    I.S. : CC sembarang 
    F.S. : CC ≠ BLANK atau CC = MARK */
 
-void STARTBAHAN();
+void STARTBAHAN(char * filename);
 /* I.S. : CC sembarang 
    F.S. : EndBahan = true, dan CC = MARK; 
           atau EndBahan = false, CBahan adalah bahan yang sudah diakuisisi,

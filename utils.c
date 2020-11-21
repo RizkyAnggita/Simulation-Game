@@ -4,6 +4,7 @@
 #include "utils.h"
 #include "boolean.h"
 #include "mesinkata.h"
+#include "mesinkar.h"
 #include "jam.h"
 #include "arraybahan.h"
 #include "mesinbahan.h"
@@ -58,6 +59,57 @@ void PrintKata(Kata K)
 	//ALGORITMA
 	for (i = 0; i < K.Length; ++i)
 		printf("%c", K.TabKata[i]);
+}
+
+
+TabBahan FileToListBahan()
+/* Membaca file yang berisi nama bahan beserta harganya */
+/* Mengembalikan list bahan  */
+{
+	//KAMUS
+	TabBahan ListBahan;
+	int i;
+
+	//ALGORITMA
+	MakeEmptyListBahan(&ListBahan);
+
+	STARTBAHAN("materials.txt");
+
+	i = 0;
+	while (!EndBahan)
+	{
+		// printf("%d ", CBahan.Val);
+		// PrintKata(CBahan.Name);
+		// ENDL;
+		Elmt(ListBahan, i) = CBahan;
+		i += 1;
+
+		ADVBAHAN();
+	}
+
+	return ListBahan;
+}
+
+void PrintBuyBahan(TabBahan ListBahan)
+/* I.S. ListBahan terdefinisi 
+   F.S Isi dari ListBahan ditampilkan ke layar dengan format "{name}: {value}"*/
+{
+	//KAMUS
+	IdxType i;
+
+	//ALGORITMA
+
+	printf("Ingin membeli apa?\n");
+	printf("List: (Nama): (Harga)\n");
+
+	for (i = GetFirstIdxListBahan(ListBahan); i <= GetLastIdxListBahan(ListBahan); ++i)
+	{
+		printf("      ");
+		PrintKata(Name(Elmt(ListBahan, i)));
+		printf(": %d\n", Val(Elmt(ListBahan, i)));
+
+
+	}
 }
 
 void PrintTitle()
