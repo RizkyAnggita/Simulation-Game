@@ -3,6 +3,7 @@
 
 #include "mesinkata.h"
 #include "mesinbahan.h"
+#include "point.h"
 #include "jam.h"
 #include "instruction.h"
 #include "stackins.h"
@@ -172,9 +173,14 @@ int main()
 
 	TabBahan BahanPlayer = CreateEmptyBahanPlayer(ShopBahan);
 
+	POINT PlayerPosition = MakePOINT(0, 0);
+
+	int PlayerMap = 1;
+
 	// Prep state
 
-
+	StackI InstructionStack;
+	CreateEmpty(&InstructionStack);
 
 	// Main program 
 
@@ -266,9 +272,18 @@ int main()
 
 					} else
 					{
-						printf("You are buying %d ", CBahan.Val);
-						PrintKata(CBahan.Name);
+						Instruction NewInstruction = CreateInstruction(CBuy, PlayerPosition, Name(CBahan), Val(CBahan), PlayerMap);
+
+						Push(&InstructionStack, NewInstruction);
+
+						printf("You ");
+						PrintKata(Function(InfoTop(InstructionStack)));
+						printf(" %d ", Quantity(InfoTop(InstructionStack)));
+						PrintKata(Detail(InfoTop(InstructionStack)));
+
+						// PrintKata(CBahan.Name);
 						ENDL;
+
 					}
 
 				} else if (IsKataSama(CKata, CUndo))

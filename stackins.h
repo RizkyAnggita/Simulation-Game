@@ -25,7 +25,7 @@ typedef struct {
 
 // !!!======!!! Selektor !!!======!!!
 #define Top(S) (S).Top
-#define InfoTop(S) (S).T[(S).Top]
+#define InfoTop(S) (S).I[(S).Top]
 /*
 Top(S) : Index elemen terbaru/teratas (Top) dari stack
 InfoTop(S) : Instruction di index Top; Instruction terbaru di stack

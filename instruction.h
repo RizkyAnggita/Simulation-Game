@@ -3,6 +3,7 @@
 #define instruction_h
 
 #include "point.h"
+#include "mesinkata.h"
 
 // Definisi Instruction
 /*
@@ -23,6 +24,7 @@ typedef struct {
 	Kata Function;
 	POINT Point;
 	Kata Detail;
+	int Qty;
 	int Map;
 } Instruction;
 
@@ -30,9 +32,11 @@ typedef struct {
 #define Function(I) (I).Function
 #define Point(I) (I).Point
 #define Detail(I) (I).Detail
+#define Quantity(I) (I).Qty
 #define Map(I) (I).Map
 
-Instruction CreateInstruction(Kata command, POINT point, Kata detail, int map);
+
+Instruction CreateInstruction(Kata command, POINT point, Kata detail, int qty, int map);
 /* Membuat instruction baru dengan komponen seperti pada parameter dan mengembalikannya*/
 
 #endif
