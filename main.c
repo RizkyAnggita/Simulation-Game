@@ -1,6 +1,8 @@
 
 #include <stdio.h>
+
 #include "mesinkata.h"
+#include "mesinbahan.h"
 #include "jam.h"
 #include "utils.h"
 
@@ -154,9 +156,11 @@ int main()
 	boolean Play;
 
 	JAM CurrentTime = MakeJAM(21, 0, 0);
+	JAM TimeSpent = MakeJAM(0, 0, 0);
 
 	JAM PrepStartTime = MakeJAM(21, 0, 0);
 	JAM PrepEndTime = MakeJAM(9, 0, 0);
+	JAM PrepTotalTime = MakeJAM(0, 0, 0);
 
 	JAM MainStartTime = MakeJAM(9, 0, 0);
 	JAM MainEndTime = MakeJAM(21, 0, 0);
@@ -187,6 +191,7 @@ int main()
 
 		while (Play)
 		{
+
 			if (PrepPhase)
 			{
 				printf("Preparation phase day %d\n", Day);
@@ -201,7 +206,7 @@ int main()
 				PrintTime(CurrentTime, PrepEndTime, true);
 				ENDL;
 
-				PrintPrepStat();
+				PrintPrepStat(PrepTotalTime);
 				ENDL;
 				ENDL;
 
@@ -211,6 +216,8 @@ int main()
 
 				if (IsKataSama(CKata, CW))
 				{
+					TimeSpent = MakeJAM(0, 10, 0);
+					PrepTotalTime = NextNDetik(PrepTotalTime, JAMToDetik(TimeSpent));
 					printf("Wwwwwwwwwwwwwwwwwwwwwwwwwwwwwww\n");
 
 				} else if (IsKataSama(CKata, CA))
@@ -235,7 +242,8 @@ int main()
 
 				} else if (IsKataSama(CKata, CBuy))
 				{
-					printf("buy\n");
+					STARTBAHAN();
+					printf("You are buying %d %s\n", CBahan.Val, CBahan.Name);
 
 				} else if (IsKataSama(CKata, CUndo))
 				{

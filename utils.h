@@ -32,7 +32,8 @@ void PrintPlayerStat(Kata username);
 void PrintTime(JAM CurrentTime, JAM EndTime, boolean PrepPhase);
 /* Menampilkan waktu untuk preparation phase */
 
-void PrintPrepStat();
+void PrintPrepStat(JAM TS);
+/* TS = Time Spent */
 /* Menampilkan stat khusus preparation phase, total aksi waktu
    dan uang yang dibutuhkan */
 

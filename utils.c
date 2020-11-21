@@ -98,7 +98,7 @@ void PrintTime(JAM CurrentTime, JAM EndTime, boolean PrepPhase)
 /* Menampilkan waktu untuk preparation phase */
 {
 	//KAMUS
-	JAM TR;
+	JAM TR; // TR = Time Remaining
 
 	//ALGORITMA
 	printf("Current Time: ");
@@ -119,12 +119,16 @@ void PrintTime(JAM CurrentTime, JAM EndTime, boolean PrepPhase)
 	printf("Time Remaining: %d hour(s) %d minute(s) %d second(s)", Hour(TR), Minute(TR), Second(TR));
 }
 
-void PrintPrepStat()
+void PrintPrepStat(JAM TS)
+/* TS = Time Spent */
 /* Menampilkan stat khusus preparation day, total aksi waktu
    dan uang yang dibutuhkan */
 {
 	printf("Total aksi yang akan dilakukan: 1\n");
-	printf("Total waktu yang dibutuhkan: 1 hour(s) 45 minute(s)\n");
+
+	printf("Total waktu yang dibutuhkan: %d hour(s) %d minute(s) %d second(s)", Hour(TS), Minute(TS), Second(TS));
+	ENDL;
+
 	printf("Total uang yang dibutuhkan: 60");
 }
 
