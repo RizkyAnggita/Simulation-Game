@@ -13,9 +13,9 @@
 #define KolMax 99
 
 typedef int indeks; /* indeks baris, kolom */
-typedef char ElType;
+typedef char ElTypeM;
 typedef struct {
-	ElType Mem[BrsMax+1][KolMax+1];
+	ElTypeM Mem[BrsMax+1][KolMax+1];
     int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
 	int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } MATRIKS;
@@ -33,7 +33,7 @@ void MakeMATRIKS (int NB, int NK, MATRIKS * M);
 /* *** Selektor *** */
 #define NBrsEff(M) (M).NBrsEff
 #define NKolEff(M) (M).NKolEff
-#define Elmt(M,i,j) (M).Mem[(i)][(j)]
+#define ElmtM(M,i,j) (M).Mem[(i)][(j)]
 
 /* *** Selektor "DUNIA MATRIKS" *** */
 boolean IsIdxValid (int i, int j);

@@ -67,7 +67,20 @@ void SalinKata(char * filename){
 	int idx;
 	//ALGORITMA
 	idx = 0;//inisialisasi idx
-	while ((CC != BLANK) && !EOP){
+	// CC != BLANK || (file &&  CC != Blankfile)
+
+	/*
+	1. file, CC == BLANK        false  
+	2. file, CC == BLANKFILE    false
+	3. file, CC == char         true
+	4. !file, CC == BLANK       false
+	5. !file, CC == BLANKFILE   true
+	6. !file, CC == char        true
+
+	*/
+
+
+	while (((CC != BLANK) && ((filename[0] == ' ') || (CC != BLANKFILE))) && !EOP){
 		//jika melebihi NMax maka kata dipotong, tapi tetap ADV
 		if (idx < NMax){
 			//menyimpan setiap character pada kata

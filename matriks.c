@@ -67,19 +67,19 @@ boolean IsIdxEff (MATRIKS M, indeks i, indeks j){
 }
 
 
-/* ********** Assignment  MATRIKS ********** */
-void CopyMATRIKS (MATRIKS MIn, MATRIKS * MHsl){
-/* Melakukan assignment MHsl  MIn */
-	//KAMUS
-	indeks i, j;
-	//ALGORITMA
-	MakeMATRIKS(NBrsEff(MIn), NKolEff(MIn), MHsl);
-	for (i = GetFirstIdxBrs(MIn); i <= GetLastIdxBrs(MIn); ++i){
-		for (j = GetFirstIdxKol(MIn); j <= GetLastIdxKol(MIn); ++j){
-			Elmt(*MHsl, i, j) = Elmt(MIn, i, j);
-		}
-	}
-}
+// /* ********** Assignment  MATRIKS ********** */
+// void CopyMATRIKS (MATRIKS MIn, MATRIKS * MHsl){
+// /* Melakukan assignment MHsl  MIn */
+// 	//KAMUS
+// 	indeks i, j;
+// 	//ALGORITMA
+// 	MakeMATRIKS(NBrsEff(MIn), NKolEff(MIn), MHsl);
+// 	for (i = GetFirstIdxBrs(MIn); i <= GetLastIdxBrs(MIn); ++i){
+// 		for (j = GetFirstIdxKol(MIn); j <= GetLastIdxKol(MIn); ++j){
+// 			Elmt(*MHsl, i, j) = Elmt(MIn, i, j);
+// 		}
+// 	}
+// }
 
 /* ********** KELOMPOK BACA/TULIS ********** */
 void TulisMATRIKS (MATRIKS M){
@@ -97,11 +97,7 @@ void TulisMATRIKS (MATRIKS M){
 	//ALGORITMA
 	for (i = GetFirstIdxBrs(M); i <= GetLastIdxBrs(M); ++i){
 		for (j = GetFirstIdxKol(M); j <= GetLastIdxKol(M); ++j){
-			if (j == 0){
-				printf("%c", Elmt(M, i, j));
-			} else {
-				printf(" %c", Elmt(M, i, j));
-			}
+			printf(" %c", ElmtM(M, i, j));
 		}
 		if (i != GetLastIdxBrs(M)){
 			printf("\n");

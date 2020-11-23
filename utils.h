@@ -6,7 +6,9 @@
 #include "mesinkata.h"
 #include "mesinkar.h"
 #include "jam.h"
+#include "point.h"
 #include "arraybahan.h"
+#include "matriks.h"
 
 boolean IsKataSama(Kata K1, Kata K2);
 /* Mengembalikan True jika kita sama, false jika tidak */
@@ -22,7 +24,21 @@ void PrintKata(Kata K);
 int KataToInteger(Kata K);
 /* Mengubah Kata menjadi integer */
 
-TabBahan FileToListBahan();
+void GetBrsKolFileMap(int * NB, int * NK, char * filename);
+/* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map 
+   F.S. NBrs adalah jumlah baris pada filemap, begitu jg dengan NKol adalah jumlah kolom*/
+
+MATRIKS FileToMatriks(char * filename);
+/* Membaca file yang berisi matriks dan mengembalikan matriks tersebut */
+
+void MovePlayer(MATRIKS * Map, char Command, POINT * Loc);
+/* I.S. Map adalah matriks map yang akan diubah posisi player nya,
+        Command adalah command yg di input pengguna 'w'. 'a'. 's'. 'd'.
+        Loc adalah lokasi player sebelumnya 
+   F.S. Posisi pemain berubah jika tidak menabrak pagar yaitu char '*',
+   		Map dan PlayerLoc akan berubah jika tidak menabrak*/
+
+TabBahan FileToListBahan(char * filename);
 /* Membaca file yang berisi nama bahan beserta harganya */
 /* Mengembalikan list bahan  */
 
@@ -50,7 +66,7 @@ void PrintTitle();
 void PrintMainMenu();
 /* Menampilkan main menu ke layar */
 
-void PrintMap();
+void PrintMap(int PlayerMap, MATRIKS Map1);
 /* Menampilkan map beserta legend ke layar */
 
 void PrintPlayerStat(Kata username);

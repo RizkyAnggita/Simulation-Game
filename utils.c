@@ -75,6 +75,87 @@ int KataToInteger(Kata K)
 	return val;
 }
 
+void GetBrsKolFileMatriks(int * NB, int * NK, char * filename)
+/* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map 
+   F.S. NBrs adalah jumlah baris pada filemap, begitu jg dengan NKol adalah jumlah kolom*/
+{
+	STARTKATA(filename);
+	*NK = CKata.Length;
+
+	*NB = 0;
+	while (!EndKata)
+	{
+		*NB += 1;
+		ADVKATA(filename);
+	}
+}
+
+MATRIKS FileToMatriks(char * filename)
+/* Membaca file yang berisi matriks dan mengembalikan matriks tersebut */
+{
+	//KAMUS
+	int i, j, NBrs, NKol;
+	MATRIKS Map;
+
+	//ALGORITMA
+	GetBrsKolFileMatriks(&NBrs, &NKol, filename);
+
+	MakeMATRIKS(NBrs, NKol, &Map);
+
+	i = GetFirstIdxBrs(Map);
+
+	STARTKATA(filename);
+	while (!EndKata)
+	{
+		for (j = GetFirstIdxKol(Map); j < NKol; ++j)
+		{
+			ElmtM(Map, i, j) = CKata.TabKata[j];
+		}
+		i += 1;
+		ADVKATA(filename);
+	}
+
+	return Map;
+}
+
+void MovePlayer(MATRIKS * Map, char Command, POINT * Loc)
+/* I.S. Map adalah matriks map yang akan diubah posisi player nya,
+        Command adalah command yg di input pengguna 'w'. 'a'. 's'. 'd'.
+        PlayerLoc adalah lokasi player sebelumnya 
+   F.S. Posisi pemain berubah jika tidak menabrak pagar yaitu char '*',
+   		Map dan PlayerLoc akan berubah jika tidak menabrak*/
+{
+	//KAMUS
+	POINT NewLoc;
+
+	//ALGORITMA
+	switch(Command)
+	{
+		case 'w':
+			NewLoc = PrevY(*Loc);
+			break;
+
+		case 'a':
+			NewLoc = PrevX(*Loc);
+			break;
+
+		case 's':
+			NewLoc = NextY(*Loc);
+			break;
+
+		case 'd':
+			NewLoc = NextX(*Loc);
+			break;
+	}
+
+	if (ElmtM(*Map, Ordinat(NewLoc), Absis(NewLoc)) != '*')
+	{
+		ElmtM(*Map, Ordinat(*Loc), Absis(*Loc)) = '-';
+		ElmtM(*Map, Ordinat(NewLoc), Absis(NewLoc)) = 'P';
+		*Loc = NewLoc;	
+	}
+}
+
 TabBahan FileToListBahan(char * filename)
 /* Membaca file yang berisi nama bahan beserta harganya */
 /* Mengembalikan list bahan  */
@@ -213,11 +294,12 @@ void PrintMainMenu()
 	printf("// New game / load game / exit? //");
 }
 
-void PrintMap()
+void PrintMap(int PlayerMap, MATRIKS Map1)
 /*Menampilkan map beserta legend ke layar*/
 {
 	//Menampilkan map 
-	printf("//INSERT MAP HERE\n");
+	TulisMATRIKS(Map1);
+	ENDL;
 
 	//Menampilkan legend
 	printf("Legend:\n");
