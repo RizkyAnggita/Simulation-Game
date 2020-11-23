@@ -23,8 +23,8 @@ int main()
 
 	TabBahan ShopBahan = FileToListBahan(FILE_MATERIAL);
 
-	MATRIKS Map1 = FileToMatriks(FILE_MAP_1);
-	MATRIKS PrevMap1 = Map1;
+	MATRIKS GameMap1 = FileToMatriks(FILE_MAP_1);
+	MATRIKS PlayerMap1 = GameMap1;
 	
 	
     // Player state
@@ -50,7 +50,7 @@ int main()
 	TabBahan BahanPlayer = CreateEmptyBahanPlayer(ShopBahan);
 
 	POINT PlayerPosition = MakePOINT(1, 1);
-	ElmtM(Map1, Ordinat(PlayerPosition), Absis(PlayerPosition)) = 'P';
+	ElmtM(PlayerMap1, Ordinat(PlayerPosition), Absis(PlayerPosition)) = 'P';
 
 	int PlayerMap = 1;
 
@@ -88,7 +88,7 @@ int main()
 			{
 				printf("Preparation phase day %d\n", Day);
 
-				PrintMap(PlayerMap, Map1);
+				PrintMap(PlayerMap, PlayerMap1);
 				ENDL;
 				ENDL;
 
@@ -110,19 +110,19 @@ int main()
 				{
 					// TimeSpent = MakeJAM(0, 10, 0);
 					// PrepTotalTime = NextNDetik(PrepTotalTime, JAMToDetik(TimeSpent));
-					MovePlayer(&Map1, 'w', &PlayerPosition);
+					MovePlayer(GameMap1, &PlayerMap1, 'w', &PlayerPosition);
 
 				} else if (IsKataSama(CKata, CA))
 				{
-					MovePlayer(&Map1, 'a', &PlayerPosition);
+					MovePlayer(GameMap1, &PlayerMap1, 'a', &PlayerPosition);
 
 				} else if (IsKataSama(CKata, CS))
 				{
-					MovePlayer(&Map1, 's', &PlayerPosition);
+					MovePlayer(GameMap1, &PlayerMap1, 's', &PlayerPosition);
 
 				} else if (IsKataSama(CKata, CD))
 				{
-					MovePlayer(&Map1, 'd', &PlayerPosition);
+					MovePlayer(GameMap1, &PlayerMap1, 'd', &PlayerPosition);
 
 				} else if (IsKataSama(CKata, CBuild))
 				{
@@ -192,7 +192,7 @@ int main()
 
 				printf("Main phase day %d\n", Day);
 
-				PrintMap(PlayerMap, Map1);
+				PrintMap(PlayerMap, PlayerMap1);
 				ENDL;
 				ENDL;
 

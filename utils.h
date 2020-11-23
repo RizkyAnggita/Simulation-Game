@@ -31,7 +31,7 @@ void GetBrsKolFileMap(int * NB, int * NK, char * filename);
 MATRIKS FileToMatriks(char * filename);
 /* Membaca file yang berisi matriks dan mengembalikan matriks tersebut */
 
-void MovePlayer(MATRIKS * Map, char Command, POINT * Loc);
+void MovePlayer(MATRIKS GameMap, MATRIKS * PlayerMap, char Command, POINT * Loc);
 /* I.S. Map adalah matriks map yang akan diubah posisi player nya,
         Command adalah command yg di input pengguna 'w'. 'a'. 's'. 'd'.
         Loc adalah lokasi player sebelumnya 

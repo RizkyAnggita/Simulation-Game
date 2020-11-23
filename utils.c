@@ -118,7 +118,7 @@ MATRIKS FileToMatriks(char * filename)
 	return Map;
 }
 
-void MovePlayer(MATRIKS * Map, char Command, POINT * Loc)
+void MovePlayer(MATRIKS GameMap, MATRIKS * PlayerMap, char Command, POINT * Loc)
 /* I.S. Map adalah matriks map yang akan diubah posisi player nya,
         Command adalah command yg di input pengguna 'w'. 'a'. 's'. 'd'.
         PlayerLoc adalah lokasi player sebelumnya 
@@ -148,10 +148,10 @@ void MovePlayer(MATRIKS * Map, char Command, POINT * Loc)
 			break;
 	}
 
-	if (ElmtM(*Map, Ordinat(NewLoc), Absis(NewLoc)) != '*')
+	if (ElmtM(*PlayerMap, Ordinat(NewLoc), Absis(NewLoc)) != '*')
 	{
-		ElmtM(*Map, Ordinat(*Loc), Absis(*Loc)) = '-';
-		ElmtM(*Map, Ordinat(NewLoc), Absis(NewLoc)) = 'P';
+		ElmtM(*PlayerMap, Ordinat(*Loc), Absis(*Loc)) = ElmtM(GameMap, Ordinat(*Loc), Absis(*Loc));
+		ElmtM(*PlayerMap, Ordinat(NewLoc), Absis(NewLoc)) = 'P';
 		*Loc = NewLoc;	
 	}
 }
