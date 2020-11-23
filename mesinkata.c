@@ -6,16 +6,17 @@
 boolean EndKata;
 Kata CKata;
 
-void IgnoreBlank(){
+void IgnoreBlank(char * filename)
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang 
    F.S. : CC ≠ BLANK atau CC = MARK */
-	//KAMUS
-	//ALGORITMA
-	while (CC == BLANK){
+{
+	while ((CC == BLANK) || ((filename[0] != ' ') && (CC == BLANKFILE)))
+	{
 		ADV();
 	}
 }
+
 void STARTKATA(char * filename){
 /* I.S. : CC sembarang 
    F.S. : EndKata = true, dan CC = MARK; 
@@ -25,18 +26,18 @@ void STARTKATA(char * filename){
 	//ALGORITMA
 	START(filename);
 	//mengabaikan blank sebelum mengakuisisi kata
-	IgnoreBlank();
+	IgnoreBlank(filename);
 	//Pada model akuisisi versi 1, kata diakuisisi mulai dari karakter pertama,
 	//sesudah akhir kata atau karakter pertama pita untuk kata pertama
 	if (!EOP){
 		EndKata = false;
-		SalinKata();
+		SalinKata(filename);
 	} else {
 		EndKata = true;
 	}
 }
 
-void ADVKATA(){
+void ADVKATA(char * filename){
 /* I.S. : CC adalah karakter pertama kata yang akan diakuisisi 
    F.S. : CKata adalah kata terakhir yang sudah diakuisisi, 
           CC adalah karakter pertama dari kata berikutnya, mungkin MARK
@@ -45,17 +46,17 @@ void ADVKATA(){
 	//KAMUS
 	//ALGORITMA
 	//mengabaikan blank sebelum mengakuisisi kata
-	IgnoreBlank();
+	IgnoreBlank(filename);
 	if (!EOP){
 		EndKata = false;
-		SalinKata();
+		SalinKata(filename);
 	} else {
 		EndKata = true;
 	}
 	
 }
 
-void SalinKata(){
+void SalinKata(char * filename){
 /* Mengakuisisi kata, menyimpan dalam CKata
    I.S. : CC adalah karakter pertama dari kata
    F.S. : CKata berisi kata yang sudah diakuisisi; 
@@ -77,5 +78,5 @@ void SalinKata(){
 	}
 	//menyimpan panjang kata
 	CKata.Length = idx;
-	IgnoreBlank();
+	IgnoreBlank(filename);
 }

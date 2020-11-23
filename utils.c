@@ -75,7 +75,7 @@ int KataToInteger(Kata K)
 	return val;
 }
 
-TabBahan FileToListBahan()
+TabBahan FileToListBahan(char * filename)
 /* Membaca file yang berisi nama bahan beserta harganya */
 /* Mengembalikan list bahan  */
 {
@@ -87,9 +87,9 @@ TabBahan FileToListBahan()
 	//ALGORITMA
 	MakeEmptyListBahan(&ListBahan);
 
-	STARTKATA("materials.txt");
+	STARTKATA(filename);
 	Val(CBahan) = KataToInteger(CKata);
-	ADVKATA();
+	ADVKATA(filename);
 	Name(CBahan) = CKata;
 
 	i = 0;
@@ -98,11 +98,11 @@ TabBahan FileToListBahan()
 		Elmt(ListBahan, i) = CBahan;
 		i += 1;
 
-		ADVKATA();
+		ADVKATA(filename);
 		if (!EndKata)
 		{
 			Val(CBahan) = KataToInteger(CKata);
-			ADVKATA();
+			ADVKATA(filename);
 			Name(CBahan) = CKata;	
 		}
 	}

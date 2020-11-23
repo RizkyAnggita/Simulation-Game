@@ -8,6 +8,7 @@
 #include "stackins.h"
 #include "command.h"
 #include "utils.h"
+#include "constants.h"
 
 
 #define ENDL printf("\n")
@@ -20,7 +21,7 @@ int main()
 
 	InitGameCommand();
 
-	TabBahan ShopBahan = FileToListBahan();
+	TabBahan ShopBahan = FileToListBahan(FILE_MATERIAL);
 	
 	
     // Player state
@@ -138,7 +139,7 @@ int main()
 					Bahan CBahan;
 					STARTKATA(" ");
 					Val(CBahan) = KataToInteger(CKata);
-					ADVKATA();
+					ADVKATA(" ");
 					Name(CBahan) = CKata;				
 
 					int MoneyNeeded = PriceBuyBahan(Name(CBahan), Val(CBahan), ShopBahan);
