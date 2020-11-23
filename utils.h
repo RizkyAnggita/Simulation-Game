@@ -7,7 +7,6 @@
 #include "mesinkar.h"
 #include "jam.h"
 #include "arraybahan.h"
-#include "mesinbahan.h"
 
 boolean IsKataSama(Kata K1, Kata K2);
 /* Mengembalikan True jika kita sama, false jika tidak */
@@ -19,6 +18,9 @@ void CopyKata(Kata K1, Kata *K2);
 
 void PrintKata(Kata K);
 /* Menampilkan kata K ke layar*/
+
+int KataToInteger(Kata K);
+/* Mengubah Kata menjadi integer */
 
 TabBahan FileToListBahan();
 /* Membaca file yang berisi nama bahan beserta harganya */

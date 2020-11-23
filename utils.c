@@ -52,9 +52,28 @@ void PrintKata(Kata K)
 
 	//ALGORITMA
 	for (i = 0; i < K.Length; ++i)
+	{
 		printf("%c", K.TabKata[i]);
+	}
 }
 
+int KataToInteger(Kata K)
+/* Mengubah Kata menjadi integer */
+{
+	//KAMUS
+	int val, i, currentNum;
+
+	//ALGORITMA
+	val = 0;
+
+	for (i = 0; i < K.Length; ++i)
+	{
+		currentNum = K.TabKata[i] - '0';
+		val = (val * 10) + + currentNum;
+	}
+
+	return val;
+}
 
 TabBahan FileToListBahan()
 /* Membaca file yang berisi nama bahan beserta harganya */
@@ -63,22 +82,29 @@ TabBahan FileToListBahan()
 	//KAMUS
 	TabBahan ListBahan;
 	int i;
+	Bahan CBahan;
 
 	//ALGORITMA
 	MakeEmptyListBahan(&ListBahan);
 
-	STARTBAHAN("materials.txt");
+	STARTKATA("materials.txt");
+	Val(CBahan) = KataToInteger(CKata);
+	ADVKATA();
+	Name(CBahan) = CKata;
 
 	i = 0;
-	while (!EndBahan)
+	while (!EndKata)
 	{
-		// printf("%d ", CBahan.Val);
-		// PrintKata(CBahan.Name);
-		// ENDL;
 		Elmt(ListBahan, i) = CBahan;
 		i += 1;
 
-		ADVBAHAN();
+		ADVKATA();
+		if (!EndKata)
+		{
+			Val(CBahan) = KataToInteger(CKata);
+			ADVKATA();
+			Name(CBahan) = CKata;	
+		}
 	}
 
 	return ListBahan;

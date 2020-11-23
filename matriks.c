@@ -66,12 +66,6 @@ boolean IsIdxEff (MATRIKS M, indeks i, indeks j){
 	return IsBrsValid && IsKolValid;
 }
 
-ElType GetElmtDiagonal (MATRIKS M, indeks i){
-/* Mengirimkan elemen M(i,i) */
-	//KAMUS
-	//ALGORITMA
-	return Elmt(M, i, i);
-}
 
 /* ********** Assignment  MATRIKS ********** */
 void CopyMATRIKS (MATRIKS MIn, MATRIKS * MHsl){
@@ -88,28 +82,6 @@ void CopyMATRIKS (MATRIKS MIn, MATRIKS * MHsl){
 }
 
 /* ********** KELOMPOK BACA/TULIS ********** */
-void BacaMATRIKS (MATRIKS * M, int NB, int NK){
-/* I.S. IsIdxValid(NB,NK) */
-/* F.S. M terdefinisi nilai elemen efektifnya, berukuran NB x NK */
-/* Proses: Melakukan MakeMATRIKS(M,NB,NK) dan mengisi nilai efektifnya */
-/* Selanjutnya membaca nilai elemen per baris dan kolom */
-/* Contoh: Jika NB = 3 dan NK = 3, maka contoh cara membaca isi matriks :
-1 2 3
-4 5 6
-8 9 10
-*/
-	//KAMUS
-	indeks i, j;
-	//ALGORITMA
-	MakeMATRIKS(NB, NK, M);
-	for (i = GetFirstIdxBrs(*M); i <= GetLastIdxBrs(*M); ++i){
-		for (j = GetFirstIdxKol(*M); j <= GetLastIdxKol(*M); ++j){
-			scanf("%d", &Elmt(*M, i, j));
-		}
-	}
-
-}
-
 void TulisMATRIKS (MATRIKS M){
 /* I.S. M terdefinisi */
 /* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
@@ -137,32 +109,32 @@ void TulisMATRIKS (MATRIKS M){
 	}
 
 }
-void MakeMAP(MATRIKS *M){
-    MakeMATRIKS(7,7,M);
-    for (indeks i = GetFirstIdxBrs(*M); i <= GetLastIdxBrs(*M); ++i){
-		for (indeks j = GetFirstIdxKol(*M); j <= GetLastIdxKol(*M); ++j){
-			if (i==GetFirstIdxBrs(*M) || i==GetLastIdxBrs(*M) || j==GetFirstIdxKol(*M) || j==GetLastIdxKol(*M)){
-                Elmt(*M,i,j)='*';
-			}
-			else{
-                Elmt(*M,i,j)='-';
-			}
-		}
-	}
-}
+// void MakeMAP(MATRIKS *M){
+//     MakeMATRIKS(7,7,M);
+//     for (indeks i = GetFirstIdxBrs(*M); i <= GetLastIdxBrs(*M); ++i){
+// 		for (indeks j = GetFirstIdxKol(*M); j <= GetLastIdxKol(*M); ++j){
+// 			if (i==GetFirstIdxBrs(*M) || i==GetLastIdxBrs(*M) || j==GetFirstIdxKol(*M) || j==GetLastIdxKol(*M)){
+//                 Elmt(*M,i,j)='*';
+// 			}
+// 			else{
+//                 Elmt(*M,i,j)='-';
+// 			}
+// 		}
+// 	}
+// }
 
 
-void TulisMAPFile(MATRIKS M){
-    MakeMAP(&M);
-    FILE *Mfile;
-	Mfile=fopen("matriks.txt","w");
-	for (indeks i=GetFirstIdxBrs(M);i<=GetLastIdxBrs(M);i++){
-        char a[100];
-        for (indeks j=GetFirstIdxKol(M);j<=GetLastIdxKol(M);j++){
-            a[j]=Elmt(M,i,j);
-        }
-        fprintf(Mfile,a);
-        fprintf(Mfile,"\n");
-	}
-	fclose(Mfile);
-}
+// void TulisMAPFile(MATRIKS M){
+//     MakeMAP(&M);
+//     FILE *Mfile;
+// 	Mfile=fopen("matriks.txt","w");
+// 	for (indeks i=GetFirstIdxBrs(M);i<=GetLastIdxBrs(M);i++){
+//         char a[100];
+//         for (indeks j=GetFirstIdxKol(M);j<=GetLastIdxKol(M);j++){
+//             a[j]=Elmt(M,i,j);
+//         }
+//         fprintf(Mfile,a);
+//         fprintf(Mfile,"\n");
+// 	}
+// 	fclose(Mfile);
+// }

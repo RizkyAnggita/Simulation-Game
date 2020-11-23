@@ -2,7 +2,6 @@
 #include <stdio.h>
 
 #include "mesinkata.h"
-#include "mesinbahan.h"
 #include "point.h"
 #include "jam.h"
 #include "instruction.h"
@@ -136,7 +135,11 @@ int main()
 					PrintBuyBahan(ShopBahan);
 					ENDL;
 
-					STARTBAHAN(" ");				
+					Bahan CBahan;
+					STARTKATA(" ");
+					Val(CBahan) = KataToInteger(CKata);
+					ADVKATA();
+					Name(CBahan) = CKata;				
 
 					int MoneyNeeded = PriceBuyBahan(Name(CBahan), Val(CBahan), ShopBahan);
 					if (MoneyNeeded == -999) //Nama bahan tidak ditemukan
