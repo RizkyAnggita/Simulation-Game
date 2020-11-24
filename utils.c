@@ -118,7 +118,7 @@ MATRIKS FileToMatriks(char * filename)
 	return Map;
 }
 
-void MovePlayer(MATRIKS GameMap, MATRIKS * PlayerMap, char Command, POINT * Loc)
+void MovePlayer(MATRIKS Map, char Command, POINT * Loc)
 /* I.S. Map adalah matriks map yang akan diubah posisi player nya,
         Command adalah command yg di input pengguna 'w'. 'a'. 's'. 'd'.
         PlayerLoc adalah lokasi player sebelumnya 
@@ -148,10 +148,8 @@ void MovePlayer(MATRIKS GameMap, MATRIKS * PlayerMap, char Command, POINT * Loc)
 			break;
 	}
 
-	if (ElmtM(*PlayerMap, Ordinat(NewLoc), Absis(NewLoc)) != '*')
+	if (ElmtM(Map, Ordinat(NewLoc), Absis(NewLoc)) != '*')
 	{
-		ElmtM(*PlayerMap, Ordinat(*Loc), Absis(*Loc)) = ElmtM(GameMap, Ordinat(*Loc), Absis(*Loc));
-		ElmtM(*PlayerMap, Ordinat(NewLoc), Absis(NewLoc)) = 'P';
 		*Loc = NewLoc;	
 	}
 }
@@ -294,11 +292,31 @@ void PrintMainMenu()
 	printf("// New game / load game / exit? //");
 }
 
-void PrintMap(int PlayerMap, MATRIKS Map1)
+void PrintMap(int PlayerMap, POINT PlayerLoc, MATRIKS Map1)
 /*Menampilkan map beserta legend ke layar*/
 {
+	//KAMUS
+	indeks i, j;
+	MATRIKS Map;
+	//ALGORITMA
 	//Menampilkan map 
-	TulisMATRIKS(Map1);
+
+	Map = Map1;
+
+	for (i = GetFirstIdxBrs(Map); i <= GetLastIdxBrs(Map); ++i){
+		for (j = GetFirstIdxKol(Map); j <= GetLastIdxKol(Map); ++j){
+			if ((i == Ordinat(PlayerLoc)) && (j == Absis(PlayerLoc)))
+			{
+				printf(" P");	
+			} else {
+				printf(" %c", ElmtM(Map, i, j));	
+			}
+			
+		}
+		if (i != GetLastIdxBrs(Map)){
+			printf("\n");
+		}
+	}
 	ENDL;
 
 	//Menampilkan legend
