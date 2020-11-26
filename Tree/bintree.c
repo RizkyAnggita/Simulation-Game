@@ -11,6 +11,10 @@ Deskripsi       : Implementasi ADT Tree
 #include "listrek.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "mesinkar.h"
+#include "mesinkar.c"
+#include "mesinkata.h"
+#include "mesinkata.c"
 
 #define max(a, b) a > b ? a : b
 
@@ -576,3 +580,25 @@ void DelBtree(BinTree *P, infotype X)
 /* I.S. Pohon P tidak  kosong */
 /* F.S. Nilai X yang dihapus pasti ada */
 /* Sebuah node dengan nilai X dihapus */
+
+void BuildTree(BinTree *T)
+{
+    ADV();
+    if (CC == ')')
+    {
+        (*T) = Nil;
+    }
+    else
+    {
+        (*T) = Alokasi(CC);
+        ADV();
+        BuildTree(&(Left(*T)));
+        BuildTree(&(Right(*T)));
+    }
+    ADV();
+}
+/* Dipakai jika input dari pita karakter */
+/* I.S. CC berisi ‘(‘ */
+/* F.S. T terdefinisi */
+/* Proses: Membaca isi pita karakter dan membangun pohon secara rekursif, hanya
+membutuhkan mesin karakter */
