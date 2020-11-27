@@ -1,0 +1,8 @@
+Wood
+10
+Stone
+5
+Tile
+15
+Cement
+7
