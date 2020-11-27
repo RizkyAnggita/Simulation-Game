@@ -1,8 +1,3 @@
-// Nama/NIM : Muhammad Atthaumar Rifqy/13519148
-// Nama file: stackins.h
-// Topik	: Tugas Besar
-// Tanggal  : 10 November 2020
-// Deskripsi: Header Stack of Instruction
 
 #ifndef stackins_H
 #define stackins_H
@@ -22,7 +17,7 @@ StackI adalah ADT Stack yang diimplementasikan dengan array statik
 StackI berisi info yang berupa tipe data buatan Instruction 
 (see: instruction.h)
 */
-typedef int address
+typedef int address;
 typedef struct {
 	Instruction I[MaxEl];
 	address Top;
@@ -30,7 +25,7 @@ typedef struct {
 
 // !!!======!!! Selektor !!!======!!!
 #define Top(S) (S).Top
-#define InfoTop(S) (S).T[(S).Top]
+#define InfoTop(S) (S).I[(S).Top]
 /*
 Top(S) : Index elemen terbaru/teratas (Top) dari stack
 InfoTop(S) : Instruction di index Top; Instruction terbaru di stack

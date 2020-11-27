@@ -1,8 +1,3 @@
-// Nama/NIM : Muhammad Atthaumar Rifqy/13519148
-// Nama file: instruction.c
-// Topik	: Tugas Besar
-// Tanggal  : 9 November 2020
-// Deskripsi: Header Instruction
 
 #ifndef instruction_h
 #define instruction_h
@@ -29,17 +24,20 @@ typedef struct {
 	Kata Function;
 	POINT Point;
 	Kata Detail;
+	int Qty;
+	int Map;
 } Instruction;
 
 // !!!======!!! Selektor !!!======!!!
 #define Function(I) (I).Function
 #define Point(I) (I).Point
 #define Detail(I) (I).Detail
+#define Quantity(I) (I).Qty
+#define Map(I) (I).Map
 
-// !!==!! Definisi KATA Fungsi !!==!!
-#define Build {.TabKata = {'b', 'u', 'i', 'l', 'd'}, .Length = 5}
-#define Upgrade {.TabKata = {'u', 'p', 'g', 'r', 'a', 'd', 'e'}, .Length = 7}
-#define Buy {.TabKata = {'b', 'u', 'y'}, .Length = 3}
+
+Instruction CreateInstruction(Kata command, POINT point, Kata detail, int qty, int map);
+/* Membuat instruction baru dengan komponen seperti pada parameter dan mengembalikannya*/
 
 #endif
 

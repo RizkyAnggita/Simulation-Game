@@ -4,7 +4,11 @@
 
 #include "boolean.h"
 #include "mesinkata.h"
+#include "mesinkar.h"
 #include "jam.h"
+#include "point.h"
+#include "arraybahan.h"
+#include "matriks.h"
 
 boolean IsKataSama(Kata K1, Kata K2);
 /* Mengembalikan True jika kita sama, false jika tidak */
@@ -17,13 +21,52 @@ void CopyKata(Kata K1, Kata *K2);
 void PrintKata(Kata K);
 /* Menampilkan kata K ke layar*/
 
+int KataToInteger(Kata K);
+/* Mengubah Kata menjadi integer */
+
+void GetBrsKolFileMap(int * NB, int * NK, char * filename);
+/* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map 
+   F.S. NBrs adalah jumlah baris pada filemap, begitu jg dengan NKol adalah jumlah kolom*/
+
+MATRIKS FileToMatriks(char * filename);
+/* Membaca file yang berisi matriks dan mengembalikan matriks tersebut */
+
+void MovePlayer(MATRIKS Map, char Command, POINT * Loc);
+/* I.S. Map adalah matriks map yang akan diubah posisi player nya,
+        Command adalah command yg di input pengguna 'w'. 'a'. 's'. 'd'.
+        Loc adalah lokasi player sebelumnya 
+   F.S. Posisi pemain berubah jika tidak menabrak pagar yaitu char '*',
+   		Map dan PlayerLoc akan berubah jika tidak menabrak*/
+
+TabBahan FileToListBahan(char * filename);
+/* Membaca file yang berisi nama bahan beserta harganya */
+/* Mengembalikan list bahan  */
+
+TabBahan CreateEmptyBahanPlayer(TabBahan ListBahan);
+/* Membuat inventory utk penyimpanan bahan player
+   Semua val pada elemen list diset ke 0 */
+
+void PrintBahanPlayer(TabBahan ListBahan);
+/* I.S. ListBahan terdefinisi 
+   F.S Isi dari ListBahan ditampilkan ke layar dengan format "{name}: {qty}"*/
+
+void PrintBuyBahan(TabBahan ListBahan);
+/* I.S. ListBahan terdefinisi 
+   F.S Isi dari ListBahan ditampilkan ke layar dengan format "{name}: {value}"*/
+
+int PriceBuyBahan(Kata name, int qty, TabBahan ShopBahan);
+/* Menghitung harga yang perlu dibayar untuk membeli bahan dengan quantity tertentu 
+   Mengembalikan total harga jika bahan yang ingin dibeli pengguna (name) ada di 
+   shop bahan
+   Jika tidak ada di shop bahan, akan mengembalikan total harga -999*/
+
 void PrintTitle();
 /* Menampilkan ke layar pembukaan dari game */
 
 void PrintMainMenu();
 /* Menampilkan main menu ke layar */
 
-void PrintMap();
+void PrintMap(int PlayerMap, POINT PlayerLoc, MATRIKS Map1);
 /* Menampilkan map beserta legend ke layar */
 
 void PrintPlayerStat(Kata username);
@@ -32,7 +75,8 @@ void PrintPlayerStat(Kata username);
 void PrintTime(JAM CurrentTime, JAM EndTime, boolean PrepPhase);
 /* Menampilkan waktu untuk preparation phase */
 
-void PrintPrepStat();
+void PrintPrepStat(JAM TS);
+/* TS = Time Spent */
 /* Menampilkan stat khusus preparation phase, total aksi waktu
    dan uang yang dibutuhkan */
 

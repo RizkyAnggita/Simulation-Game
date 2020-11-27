@@ -1,18 +1,36 @@
-sub/* Kumpulan command game*/
+/* Kumpulan command game*/
 
 #ifndef __COMMAND_H__
 #define __COMMAND_H__
 
 #include "mesinkata.h"
-#include <stdio.h>
 
 
-// extern Kata CNew;
-// extern Kata CLoad;
-// extern Kata CExit;
+extern Kata CNew;
+extern Kata CLoad;
+extern Kata CExit;
+extern Kata CW;
+extern Kata CA;
+extern Kata CS;
+extern Kata CD;
+extern Kata CBuild;
+extern Kata CUpgrade;
+extern Kata CBuy;
+extern Kata CUndo;
+extern Kata CExecute;
+extern Kata CMain;
+extern Kata CServe;
+extern Kata CRepair;
+extern Kata CDetail;
+extern Kata COffice;
+extern Kata CPrepare;
 
-extern int glvar;
 
+Kata MakeCommand(Kata * C, char * command, int length);
+/* Membuat command dengan TabKata = command, dan Length = length*/
 
+void InitGameCommand();
+/* I.S. Command game belum terdefinisi
+   F.S Command game terdefinisi dan dapat digunakan dimanapun*/
 
 #endif
