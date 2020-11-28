@@ -399,23 +399,23 @@ void PrintMainQueue()
 	printf("(Wangky's Universe), Kesabaran: 5");
 }
 
-void PrintWahana(ListWG ListWahana)
-/*  I.S. ListWahana terdefinisi
-    F.S. menampilkan list wahana game ke layar */
-{
-    printf("ingin membangun apa?\n");
-    printf("List:\n");
+// void PrintWahana(ListWG ListWahana)
+// /*  I.S. ListWahana terdefinisi
+//     F.S. menampilkan list wahana game ke layar */
+// {
+//     printf("ingin membangun apa?\n");
+//     printf("List:\n");
 
-    addressListWG P = FirstListWG(ListWahana);
-    while (P!=NilListWG){
-        printf("   -");
-        PrintKata(Type(Akar(InfoListWG(ListWahana))));
-        printf("\n");
-        P=NextListWG(P);
-    }
+//     addressListWG P = FirstListWG(ListWahana);
+//     while (P!=NilListWG){
+//         printf("   -");
+//         PrintKata(Type(Akar(InfoListWG(ListWahana))));
+//         printf("\n");
+//         P=NextListWG(P);
+//     }
 
 
-}
+// }
 
 TabCommand initArrayCommand(){
 	/* Mengembalikan List/Array Command yang setiap elemen bertipe Commtype */
@@ -521,7 +521,7 @@ boolean SearchNodeWG (BinTree T, Kata K){
       return true;
    }
    else{
-      return (SearchTree(Left(T), K) || SearchTree(Right(T), K));
+      return (SearchNodeWG(Left(T), K) || SearchNodeWG(Right(T), K));
    }
 }
 

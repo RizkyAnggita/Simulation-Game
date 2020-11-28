@@ -1,13 +1,13 @@
 WahanaPlayer
-1. Nama Wahana : KATA
-2. Tipe Wahana : ?
-3. Harga Wahana : int
+1. Nama Wahana : KATA 
+WG 2. Tipe Wahana : KATA
+WG 3. Harga Wahana : int
 4. Lokasi Wahana : POINT
 5. Map Wahana : int
-6. Deskripsi Wahana : KATA
-7. Kapasitas Wahana : int
+WG 6. Deskripsi Wahana : KATA
+WG 7. Kapasitas Wahana : int
 8. History upgrade wahana : Linked List of KATA
-9. Durasi wahana : int
+WG 9. Durasi wahana : int
 10. Berapa kali wahana dinaiki total : int
 11. Total Penghasilan wahana : int
 12. Wahana dinaiki hari ini : int
