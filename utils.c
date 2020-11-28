@@ -211,7 +211,7 @@ int PriceBuyBahan(Kata name, int qty, TabBahan ShopBahan)
 	return price;
 }
 
-void FileToListTreeWahana(BinTree *T, char * filename, TabBahan ListBahan)
+void PitaToTreeWahanaGame(BinTree *T, char * filename, TabBahan ListBahan)
 {
 
     //KAMUS
@@ -264,8 +264,8 @@ void FileToListTreeWahana(BinTree *T, char * filename, TabBahan ListBahan)
         (*T) = AlokNode(WGame);
 
         ADVKATA(filename);
-        FileToListTreeWahana(&(Left(*T)), filename, ListBahan);
-        FileToListTreeWahana(&(Right(*T)), filename, ListBahan);
+        PitaToTreeWahanaGame(&(Left(*T)), filename, ListBahan);
+        PitaToTreeWahanaGame(&(Right(*T)), filename, ListBahan);
     }
     ADVKATA(filename);
 }
@@ -275,6 +275,26 @@ void FileToListTreeWahana(BinTree *T, char * filename, TabBahan ListBahan)
 /* Proses: Membaca isi pita karakter dan membangun pohon secara rekursif, hanya
 membutuhkan mesin karakter */
 
+ListWG FileToListTreeWahana(char * filename, TabBahan ListBahan)
+/* Membaca file wahana yang berisi beberapa tree wahana, setiap tree wahana akan
+   di-insert ke List wahana game. Mengembalikan list wahana game */
+{
+	//KAMUS
+	BinTree T;
+	ListWG LWG;
+
+	//ALGORITMA
+
+	CreateEmptyListWG(&LWG);
+
+	while (!EndKata)
+	{
+		PitaToTreeWahanaGame(&T, filename, ListBahan);
+		InsVFirstListWG(&LWG, T);
+	}
+
+	return LWG;
+}
 
 void PrintTitle()
 /*Menampilkan ke layar pembukaan dari game*/

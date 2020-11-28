@@ -13,6 +13,7 @@
 #include "command.h"
 #include "wahanagame.h"
 #include "bintree.h"
+#include "listwahanagame.h"
 
 void GetBrsKolFileMap(int * NB, int * NK, char * filename);
 /* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map 
@@ -50,12 +51,16 @@ int PriceBuyBahan(Kata name, int qty, TabBahan ShopBahan);
    shop bahan
    Jika tidak ada di shop bahan, akan mengembalikan total harga -999*/
 
-void FileToListTreeWahana(BinTree * T, char * filename, TabBahan ListBahan);
+void PitaToTreeWahanaGame(BinTree * T, char * filename, TabBahan ListBahan);
 /* Dipakai jika input dari pita karakter */
 /* I.S. CC berisi ‘(‘ */
 /* F.S. T terdefinisi */
 /* Proses: Membaca isi pita karakter dan membangun pohon secara rekursif, hanya
 membutuhkan mesin karakter */
+
+ListWG FileToListTreeWahana(char * filename, TabBahan ListBahan);
+/* Membaca file wahana yang berisi beberapa tree wahana, setiap tree wahana akan
+   di-insert ke List wahana game. Mengembalikan list wahana game */
 
 void PrintTitle();
 /* Menampilkan ke layar pembukaan dari game */

@@ -54,23 +54,26 @@ int main()
 
 
 
-	BinTree T;
+	// BinTree T;
 
 	STARTKATA(FILE_WAHANA);
 
-	FileToListTreeWahana(&T, FILE_WAHANA, ShopBahan);
+	// FileToListTreeWahana(&T, FILE_WAHANA, ShopBahan);
 	
 
-	if (IsTreeEmpty(T))
-	{
-		printf("KOSONG\n");
-	}
+	// if (IsTreeEmpty(T))
+	// {
+	// 	printf("KOSONG\n");
+	// }
 
 	ListWG LWG1;
-	CreateEmptyListWG(&LWG1);
-	InsVFirstListWG(&LWG1, T);
+	LWG1 = FileToListTreeWahana(FILE_WAHANA, ShopBahan);
 	
 	PrintTree(InfoListWG(FirstListWG(LWG1)), 2);
+	PrintTree(InfoListWG(NextListWG(FirstListWG(LWG1))), 2);
+	printf("CC = '%c'\n", CC);
+	PrintKata(CKata);
+	ENDL;
 
 	
     // Player state
