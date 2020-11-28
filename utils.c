@@ -510,5 +510,39 @@ TabBahan AddBahan(TabBahan ListBahan1, TabBahan ListBahan2){
 	}
 
 	return Hasil;
-
 }
+
+boolean SearchNodeWG (BinTree T, Kata K){
+   /* Mengirimkan true jika ada node dari T yang memiliki info.Type = K */
+   if (IsTreeEmpty(T)){
+      return false;
+   }
+   else if (IsKataSama(Type(T->info), K)){
+      return true;
+   }
+   else{
+      return (SearchTree(Left(T), K) || SearchTree(Right(T), K));
+   }
+}
+
+addrNode findTypeBinTree(Kata TypeYangDicari, BinTree T){
+	/* Mengembalikas addrNode dari Node yang memiliki Type sama dengan
+	TypeYangDicari, kalau tidak ada return NilBinTree */
+
+	if(IsTreeEmpty(T)){
+		return NilBinTree;
+	}
+	else if(IsKataSama(Type(T->info), TypeYangDicari)){
+		return T;
+	}
+	else{
+		if(SearchNodeWG(Left(T), TypeYangDicari)){
+			return findTypeBinTree(TypeYangDicari, Left(T));
+		}
+		else{
+			return findTypeBinTree(TypeYangDicari, Right(T));
+		}
+	}
+}
+
+

@@ -107,4 +107,11 @@ TabBahan AddBahan(TabBahan ListBahan1, TabBahan ListBahan2);
 /* Menjumlahkan elemen tiap bahan pada 2 List */
 /* Asumsi panjang ListBahan1=ListBahan2 */
 
+boolean SearchNodeWG (BinTree T, Kata K);
+/* Mengirimkan true jika ada node dari T yang memiliki info.Type = K */
+
+addrNode findTypeBinTree(Kata TypeYangDicari, BinTree T);
+/* Mengembalikas addrNode dari Node yang memiliki Type sama dengan
+TypeYangDicari, kalau tidak ada return NilBinTree */
+
 #endif
