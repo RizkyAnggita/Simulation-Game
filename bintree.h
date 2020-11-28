@@ -10,14 +10,14 @@
 #include "boolean.h"
 #include "mesinkar.h"
 #include "mesinkata.h"
-
-/* #define NilBinTree NULL */ /* konstanta NilBinTree sesuai pada modul listrek */
+#include "wahanagame.h"
+#include "utils.h"
 
 #define NilBinTree NULL
 
 /* *** Definisi Type Pohon Biner *** */
 /* typedef int infotypeBinTree; */ /* type infotypeBinTree sesuai pada modul listrek */
-typedef char infotypeBinTree; 
+typedef WahanaGame infotypeBinTree; 
 typedef struct tNode *addrNode;
 typedef struct tNode
 {
@@ -81,7 +81,7 @@ A
     E
 */
 
-void BuildTree(BinTree *T);
+void BuildTree(BinTree *T, char * filename);
 /* Dipakai jika input dari pita karakter */
 /* I.S. CC berisi ‘(‘ */
 /* F.S. T terdefinisi */

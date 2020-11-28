@@ -26,8 +26,6 @@ extern Kata COffice;
 extern Kata CPrepare;
 
 
-Kata MakeCommand(Kata * C, char * command, int length);
-/* Membuat command dengan TabKata = command, dan Length = length*/
 
 void InitGameCommand();
 /* I.S. Command game belum terdefinisi

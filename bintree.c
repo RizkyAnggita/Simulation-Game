@@ -6,7 +6,7 @@
 /* Manajemen Memory */
 addrNode AlokNode(infotypeBinTree X)
 {
-    addrNode P = (addrNode)malloc(sizeof(addrNode));
+    addrNode P = malloc(sizeof(Node));
     if (P != NilBinTree)
     {
         Akar(P) = X;
@@ -74,7 +74,8 @@ void PrintTreeLevel(BinTree P, int h, int level)
         {
             printf(" ");
         }
-        printf("%c\n", Akar(P));
+        PrintKata(Type(Akar(P)));
+        printf(" %d\n", Price(Akar(P)));
 
         PrintTreeLevel(Left(P), h, level + 1);
         PrintTreeLevel(Right(P), h, level + 1);
@@ -110,21 +111,30 @@ boolean IsTreeEmpty(BinTree P)
     return (P == NilBinTree);
 }
 
-void BuildTree(BinTree *T)
+void BuildTree(BinTree *T, char * filename)
 {
-    ADV();
-    if (CC == ')')
+
+    //KAMUS
+    WahanaGame WGame;
+
+    //ALGORITMA
+    ADVKATA(filename);
+    if (CKata.TabKata[0] == ')')
     {
         (*T) = NilBinTree;
     }
     else
     {
-        (*T) = AlokNode(CC);
-        ADV();
-        BuildTree(&(Left(*T)));
-        BuildTree(&(Right(*T)));
+        Type(WGame) = CKata;
+        ADVKATA(filename);
+        Price(WGame) = KataToInteger(CKata);
+        (*T) = AlokNode(WGame);
+
+        ADVKATA(filename);
+        BuildTree(&(Left(*T)), filename);
+        BuildTree(&(Right(*T)), filename);
     }
-    ADV();
+    ADVKATA(filename);
 }
 /* Dipakai jika input dari pita karakter */
 /* I.S. CC berisi ‘(‘ */

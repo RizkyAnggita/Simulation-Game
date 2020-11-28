@@ -10,6 +10,7 @@
 #include "utils.h"
 #include "constants.h"
 #include "bintree.h"
+#include "wahanagame.h"
 
 
 #define ENDL printf("\n")
@@ -17,6 +18,36 @@
 
 int main()
 {
+
+	// STARTKALIMAT(" ");
+	// PrintKata(CKata);
+	// ENDL;
+	// ADV();
+
+
+	BinTree T;
+
+	STARTKATA("wahana.txt");
+
+	BuildTree(&T, "wahana.txt");
+	PrintTree(T, 2);
+
+	if (IsTreeEmpty(T))
+	{
+		printf("KOSONG\n");
+	}
+
+	// WahanaGame WG1;
+
+	// STARTKATA(" ");
+	// Type(WG1) = CKata;
+	// ADVKATA(" ");
+	// Price(WG1) = KataToInteger(CKata);
+
+	// PrintKata(Type(WG1));
+	// printf(" %d\n", Price(WG1));
+
+
 
 	// Initialize Game
 
