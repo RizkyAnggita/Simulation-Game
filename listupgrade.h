@@ -36,7 +36,7 @@ void CreateEmptyListU (ListU *L);
 /* F.S. Terbentuk list kosong */
 
 /****************** Manajemen Memori ******************/
-address AlokasiListU (infotypeListU X);
+addressListU AlokasiListU (infotypeListU X);
 /* Mengirimkan address hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
 /* menghasilkan P, maka info(P)=X, Next(P)=Nil */

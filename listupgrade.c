@@ -20,7 +20,7 @@ void CreateEmptyListU (ListU *L)
 }
 
 /****************** Manajemen Memori ******************/
-address AlokasiListU (infotypeListU X)
+addressListU AlokasiListU (infotypeListU X)
 /* Mengirimkan address hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
 /* menghasilkan P, maka info(P)=X, Next(P)=Nil */
@@ -30,7 +30,7 @@ address AlokasiListU (infotypeListU X)
 	if (P != NilListU)
 	{
 		NextListU(P) = NilListU;
-		InfoListU = X;
+		InfoListU(P) = X;
 	}
 	return P;
 }
