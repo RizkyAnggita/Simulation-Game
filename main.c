@@ -48,35 +48,29 @@ int main()
 
 	// Initialize Game
 
+	//Initialisasi GameCommand
 	InitGameCommand();
 
+	TabCommand ArrayCommand = InitArrayCommand();
+
+	//Initialize Materials
 	TabBahan ShopBahan = FileToListBahan(FILE_MATERIAL);
 
+	//Initialize Map
 	MATRIKS Map1 = FileToMatriks(FILE_MAP_1);
 	
 
-
-
-	// BinTree T;
-
+	//Initialize Wahana Game
 	STARTKATA(FILE_WAHANA);
 
-	// FileToListTreeWahana(&T, FILE_WAHANA, ShopBahan);
+	ListWG ListWahanaGame;
+	ListWahanaGame= FileToListTreeWahana(FILE_WAHANA, ShopBahan);
 	
-
-	// if (IsTreeEmpty(T))
-	// {
-	// 	printf("KOSONG\n");
-	// }
-
-	ListWG LWG1;
-	LWG1 = FileToListTreeWahana(FILE_WAHANA, ShopBahan);
-	
-	PrintTree(InfoListWG(FirstListWG(LWG1)), 2);
-	PrintTree(InfoListWG(NextListWG(FirstListWG(LWG1))), 2);
-	printf("CC = '%c'\n", CC);
-	PrintKata(CKata);
-	ENDL;
+	// PrintTree(InfoListWG(FirstListWG(ListWahanaGame)), 2);
+	// PrintTree(InfoListWG(NextListWG(FirstListWG(ListWahanaGame))), 2);
+	// printf("CC = '%c'\n", CC);
+	// PrintKata(CKata);
+	// ENDL;
 
 	
     // Player state
@@ -94,21 +88,17 @@ int main()
 
 	JAM PrepStartTime = MakeJAM(21, 0, 0);
 	JAM PrepEndTime = MakeJAM(9, 0, 0);
-	JAM PrepTotalTime = MakeJAM(0, 0, 0);
 
 	JAM MainStartTime = MakeJAM(9, 0, 0);
 	JAM MainEndTime = MakeJAM(21, 0, 0);
 
 	TabBahan BahanPlayer = CreateEmptyBahan(ShopBahan);
 
+	int MoneyPlayer = 99999;
+
 	POINT PlayerPosition = MakePOINT(1, 1);
 
 	int PlayerMap = 1;
-
-	// Prep state
-
-	StackI InstructionStack;
-	CreateEmpty(&InstructionStack);
 
 	// Main program 
 
@@ -137,105 +127,142 @@ int main()
 
 			if (PrepPhase)
 			{
-				printf("Preparation phase day %d\n", Day);
+				// Prep state
 
-				PrintMap(PlayerMap, PlayerPosition, Map1);
-				ENDL;
-				ENDL;
+				StackI InstructionStack;
+				CreateEmpty(&InstructionStack);
 
-				PrintPlayerStat(Username);
-				ENDL;
+				TabBahan BahanNeededTotal = CreateEmptyBahan(ShopBahan);
 
-				PrintTime(CurrentTime, PrepEndTime, true);
-				ENDL;
+				int MoneyNeededTotal = 0;
 
-				PrintPrepStat(PrepTotalTime);
-				ENDL;
-				ENDL;
+				JAM TimeNeededTotal = MakeJAM(0, 0, 0);
+				int TimeNeeded; //dalam menit (satuan waktu terkecil)
 
-				printf("Masukkan perintah:\n");
+				int AksiTotal = 0;
 
-				STARTKATA(" ");
 
-				if (IsKataSama(CKata, CW))
-				{
-					// TimeSpent = MakeJAM(0, 10, 0);
-					// PrepTotalTime = NextNDetik(PrepTotalTime, JAMToDetik(TimeSpent));
-					MovePlayer(Map1, 'w', &PlayerPosition);
 
-				} else if (IsKataSama(CKata, CA))
-				{
-					MovePlayer(Map1, 'a', &PlayerPosition);
-
-				} else if (IsKataSama(CKata, CS))
-				{
-					MovePlayer(Map1, 's', &PlayerPosition);
-
-				} else if (IsKataSama(CKata, CD))
-				{
-					MovePlayer(Map1, 'd', &PlayerPosition);
-
-				} else if (IsKataSama(CKata, CBuild))
+				while (Play && PrepPhase)
 				{
 
-					printf("Build\n");
+					printf("Preparation phase day %d\n", Day);
 
-				} else if (IsKataSama(CKata, CUpgrade))
-				{
-					printf("upgr\n");
-
-				} else if (IsKataSama(CKata, CBuy))
-				{
-					PrintBahanPlayer(BahanPlayer);
+					PrintMap(PlayerMap, PlayerPosition, Map1);
+					ENDL;
 					ENDL;
 
-					PrintBuyBahan(ShopBahan);
+					PrintPlayerStat(Username);
 					ENDL;
 
-					Bahan CBahan;
+					PrintTime(CurrentTime, PrepEndTime, true);
+					ENDL;
+
+					PrintPrepStat(AksiTotal, TimeNeededTotal, MoneyNeededTotal);
+					ENDL;
+					ENDL;
+
+					printf("Masukkan perintah:\n");
+
 					STARTKATA(" ");
-					Val(CBahan) = KataToInteger(CKata);
-					ADVKATA(" ");
-					Name(CBahan) = CKata;				
 
-					int MoneyNeeded = PriceBuyBahan(Name(CBahan), Val(CBahan), ShopBahan);
-					if (MoneyNeeded == -999) //Nama bahan tidak ditemukan
+					if (IsKataSama(CKata, CW))
 					{
-						printf("Bahan yang ingin anda beli tidak tersedia\n");
+						// TimeSpent = MakeJAM(0, 10, 0);
+						// PrepTotalTime = NextNDetik(PrepTotalTime, JAMToDetik(TimeSpent));
+						MovePlayer(Map1, 'w', &PlayerPosition);
 
-					} else
+					} else if (IsKataSama(CKata, CA))
 					{
-						Instruction NewInstruction = CreateInstruction(CBuy, PlayerPosition, Name(CBahan), Val(CBahan), PlayerMap);
+						MovePlayer(Map1, 'a', &PlayerPosition);
 
-						Push(&InstructionStack, NewInstruction);
+					} else if (IsKataSama(CKata, CS))
+					{
+						MovePlayer(Map1, 's', &PlayerPosition);
 
-						printf("You ");
-						PrintKata(Function(InfoTop(InstructionStack)));
-						printf(" %d ", Quantity(InfoTop(InstructionStack)));
-						PrintKata(Detail(InfoTop(InstructionStack)));
+					} else if (IsKataSama(CKata, CD))
+					{
+						MovePlayer(Map1, 'd', &PlayerPosition);
+
+					} else if (IsKataSama(CKata, CBuild))
+					{
+
+						printf("Build\n");
+
+					} else if (IsKataSama(CKata, CUpgrade))
+					{
+						printf("upgr\n");
+
+					} else if (IsKataSama(CKata, CBuy))
+					{
+						PrintBahanPlayer(BahanPlayer);
 						ENDL;
 
-					}
+						PrintBuyBahan(ShopBahan);
+						ENDL;
 
-				} else if (IsKataSama(CKata, CUndo))
-				{
-					printf("undo\n");
+						Bahan CBahan;
+						STARTKATA(" ");
+						Val(CBahan) = KataToInteger(CKata);
+						ADVKATA(" ");
+						Name(CBahan) = CKata;				
 
-				} else if (IsKataSama(CKata, CExecute))
-				{
-					PrepPhase = false;
-					printf("exec\n");
+						int MoneyNeeded = PriceBuyBahan(Name(CBahan), Val(CBahan), ShopBahan);
+						if (MoneyNeeded == -999) //Nama bahan tidak ditemukan
+						{
+							printf("Bahan yang ingin anda beli tidak tersedia\n");
 
-				} else if (IsKataSama(CKata, CMain))
-				{
-					PrepPhase = false;
-					printf("Main\n");
+						} else // Nama bahan ditemukan
+						{
+							if ((MoneyNeeded + MoneyNeededTotal) <= MoneyPlayer) // Uang mencukupi
+							{
 
-				} else if (IsKataSama(CKata, CExit))
-				{
-					Play = false;
+								Instruction NewInstruction = CreateInstruction(CBuy, PlayerPosition, Name(CBahan), Val(CBahan), PlayerMap);
+								Push(&InstructionStack, NewInstruction);
 
+								TimeNeeded = FindDuration(ArrayCommand, CBuy) * 60;
+								TimeNeededTotal = NextNDetik(TimeNeededTotal, TimeNeeded);
+
+								MoneyNeededTotal += MoneyNeeded;
+
+								AksiTotal += 1;
+
+								printf("You ");
+								PrintKata(Function(InfoTop(InstructionStack)));
+								printf(" %d ", Quantity(InfoTop(InstructionStack)));
+								PrintKata(Detail(InfoTop(InstructionStack)));
+								ENDL;	
+							} else // Uang tidak mencukupi
+							{
+								printf("Uang tidak mencukupi!");
+								ENDL;
+
+							}
+							
+
+						}
+
+					} else if (IsKataSama(CKata, CUndo))
+					{
+						printf("undo\n");
+
+					} else if (IsKataSama(CKata, CExecute))
+					{
+						PrepPhase = false;
+						printf("exec\n");
+
+					} else if (IsKataSama(CKata, CMain))
+					{
+						PrepPhase = false;
+						printf("Main\n");
+
+					} else if (IsKataSama(CKata, CExit))
+					{
+						Play = false;
+
+					}	
 				}
+				
 
 			} else // Main Phase
 			{

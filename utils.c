@@ -379,17 +379,17 @@ void PrintTime(JAM CurrentTime, JAM EndTime, boolean PrepPhase)
 	printf("Time Remaining: %d hour(s) %d minute(s) %d second(s)", Hour(TR), Minute(TR), Second(TR));
 }
 
-void PrintPrepStat(JAM TS)
-/* TS = Time Spent */
+void PrintPrepStat(int Aksi, JAM J, int Money)
 /* Menampilkan stat khusus preparation day, total aksi waktu
    dan uang yang dibutuhkan */
 {
-	printf("Total aksi yang akan dilakukan: 1\n");
-
-	printf("Total waktu yang dibutuhkan: %d hour(s) %d minute(s) %d second(s)", Hour(TS), Minute(TS), Second(TS));
+	printf("Total aksi yang akan dilakukan: %d", Aksi);
 	ENDL;
 
-	printf("Total uang yang dibutuhkan: 60");
+	printf("Total waktu yang dibutuhkan: %d hour(s) %d minute(s) %d second(s)", Hour(J), Minute(J), Second(J));
+	ENDL;
+
+	printf("Total uang yang dibutuhkan: %d", Money);
 }
 
 void PrintMainQueue()
@@ -417,7 +417,7 @@ void PrintMainQueue()
 
 // }
 
-TabCommand initArrayCommand(){
+TabCommand InitArrayCommand(){
 	/* Mengembalikan List/Array Command yang setiap elemen bertipe Commtype */
 	/* Commtype : < perintah : Kata, duration : integer > */
 	TabCommand T;
@@ -431,7 +431,7 @@ TabCommand initArrayCommand(){
     InsertNewCommand(&T, makeCommtype(CD, 1));
     InsertNewCommand(&T, makeCommtype(CBuild, 3));
     InsertNewCommand(&T, makeCommtype(CUpgrade, 3));
-    InsertNewCommand(&T, makeCommtype(CBuy, 3));
+    InsertNewCommand(&T, makeCommtype(CBuy, 60));
     InsertNewCommand(&T, makeCommtype(CUndo, 0));
     InsertNewCommand(&T, makeCommtype(CExecute, 0));
     InsertNewCommand(&T, makeCommtype(CMain, 0));
@@ -445,7 +445,7 @@ TabCommand initArrayCommand(){
 }
 
 
-int findDuration(TabCommand T, Kata K){
+int FindDuration(TabCommand T, Kata K){
 	/* Mengembalikan durasi sebuah command jika terdapat di TabCommand */
 	/* Jika tidak ada, return DurasiUndef=-999 */
     IdxType i = IdxMinCommand;
@@ -493,7 +493,24 @@ boolean MoneyCukup(int MoneyPlayer, int MoneyCost){
 	return MoneyPlayer >= MoneyCost;
 }
 
-TabBahan AddBahan(TabBahan ListBahan1, TabBahan ListBahan2){
+// void AddBahan(TabBahan * ListBahan, Bahan B)
+// /* Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan */
+// {
+// 	TabBahan Hasil;
+// 	IdxType i;
+
+// 	MakeEmptyListBahan(&Hasil);
+
+// 	for (i = GetFirstIdxListBahan(ListBahan); i <= GetLastIdxListBahan(ListBahan); ++i)
+// 	{
+// 		if (Name(Elmt(ListBahan, i)) == Name(B))
+// 		{
+
+// 		}
+// 	}
+// }
+
+TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2){
 	/* Menjumlahkan elemen tiap bahan pada 2 List */
 	/* Asumsi panjang ListBahan1=ListBahan2 */
 

@@ -77,8 +77,7 @@ void PrintPlayerStat(Kata username);
 void PrintTime(JAM CurrentTime, JAM EndTime, boolean PrepPhase);
 /* Menampilkan waktu untuk preparation phase */
 
-void PrintPrepStat(JAM TS);
-/* TS = Time Spent */
+void PrintPrepStat(int Aksi, JAM J, int Money);
 /* Menampilkan stat khusus preparation phase, total aksi waktu
    dan uang yang dibutuhkan */
 
@@ -89,11 +88,11 @@ void PrintWahana(ListWG ListWahana);
 /*  I.S. ListWahana terdefinisi
     F.S. menampilkan list wahana game ke layar */
 
-TabCommand initArrayCommand();
+TabCommand InitArrayCommand();
 /* Mengembalikan List/Array Command yang setiap elemen bertipe Commtype */
 /* Commtype : < perintah : Kata, duration : integer > */
 
-int findDuration(TabCommand T, Kata K);
+int FindDuration(TabCommand T, Kata K);
 	/* Mengembalikan durasi sebuah command jika terdapat di TabCommand */
 	/* Jika tidak ada, return DurasiUndef=-999 */
 
@@ -103,7 +102,10 @@ boolean BahanCukup(TabBahan BahanPlayer, TabBahan BahanCost);
 boolean MoneyCukup(int MoneyPlayer, int MoneyCost);
 /* Mengecek apakah player memiliki uang yang cukup */
 
-TabBahan AddBahan(TabBahan ListBahan1, TabBahan ListBahan2);
+// void AddBahan(TabBahan ListBahan, Bahan B);
+//  Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan 
+
+TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2);
 /* Menjumlahkan elemen tiap bahan pada 2 List */
 /* Asumsi panjang ListBahan1=ListBahan2 */
 
