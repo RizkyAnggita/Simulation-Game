@@ -545,4 +545,43 @@ addrNode findTypeBinTree(Kata TypeYangDicari, BinTree T){
 	}
 }
 
+Kata GenerateWahanaName(Kata TypeWahana, POINT PlayerLoc, int PlayerMap){
+	/* Mengenerate Nama Wahana yang unik dari Type(Nama) Wahana Standar berdasarkan
+	PlayerLoc dan Map */
+    Kata Nama_Unik;
+
+	int panjang_awal = TypeWahana.Length;
+	Nama_Unik.Length = panjang_awal + 6;
+
+	int i;
+	for (i=0; i< panjang_awal; i++){
+		Nama_Unik.TabKata[i] = TypeWahana.TabKata[i];
+	}
+
+	int a = PlayerLoc.X / 10;
+	char aC = a + '0';
+
+	int b = PlayerLoc.X % 10;
+	char bC = b + '0';
+
+	Nama_Unik.TabKata[i] = ' ';  //Spasi
+	Nama_Unik.TabKata[i+1] = aC; 
+	Nama_Unik.TabKata[i+2] = bC;
+
+	a = PlayerLoc.Y/10;
+	aC = a + '0';
+
+	b = PlayerLoc.Y % 10;
+	bC = b + '0';
+
+	char mapC = PlayerMap + '0';
+
+	Nama_Unik.TabKata[i+3] = aC;
+	Nama_Unik.TabKata[i+4] = bC;
+	Nama_Unik.TabKata[i+5] = mapC;
+
+	return Nama_Unik;
+}
+
+
 
