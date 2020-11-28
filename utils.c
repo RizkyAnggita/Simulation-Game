@@ -429,3 +429,53 @@ int findDuration(TabCommand T, Kata K){
     if (found) {return DurasiCommand(T,i);}
     else {return DurasiUndef;}
 }
+
+boolean BahanCukup(TabBahan BahanPlayer, TabBahan BahanCost){
+	/* Mengecek apakah player memiliki bahan yang cukup */
+
+	int panjangBahanPlayer = NbElmtListBahan(BahanPlayer);
+	int panjangBahanCost = NbElmtListBahan(BahanCost);
+	
+	if (panjangBahanPlayer != panjangBahanCost){
+		return false;
+	}
+	else{	
+		int i = 0;
+		boolean cukup = true;
+
+		while(i<panjangBahanPlayer && cukup){
+			if (Elmt(BahanPlayer,i).Val < Elmt(BahanCost,i).Val){
+				cukup = false;
+			}
+			else{
+				i++;
+			}
+		}
+		return cukup;
+	}
+}
+
+boolean MoneyCukup(int MoneyPlayer, int MoneyCost){
+	/* Mengecek apakah player memiliki uang yang cukup */
+	return MoneyPlayer >= MoneyCost;
+}
+
+TabBahan AddBahan(TabBahan ListBahan1, TabBahan ListBahan2){
+	/* Menjumlahkan elemen tiap bahan pada 2 List */
+	/* Asumsi panjang ListBahan1=ListBahan2 */
+
+	TabBahan Hasil;
+	MakeEmptyListBahan(&Hasil);
+	int n = NbElmtListBahan(ListBahan1);
+
+	//Me-assign Nama Bahan dan jumlah bahan ke TabBahan Hasil;
+	int i = 0;
+	while (i<n){
+		Elmt(Hasil,i).Name = Elmt(ListBahan1,i).Name;
+		Elmt(Hasil,i).Val = Elmt(ListBahan1,i).Val + Elmt(ListBahan2,i).Val;
+		i++;
+	}
+
+	return Hasil;
+
+}
