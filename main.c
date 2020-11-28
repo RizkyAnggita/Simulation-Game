@@ -12,6 +12,7 @@
 #include "constants.h"
 #include "bintree.h"
 #include "wahanagame.h"
+#include "listwahanagame.h"
 
 
 #define ENDL printf("\n")
@@ -58,13 +59,19 @@ int main()
 	STARTKATA(FILE_WAHANA);
 
 	FileToListTreeWahana(&T, FILE_WAHANA, ShopBahan);
-	PrintTree(T, 2);
+	
 
 	if (IsTreeEmpty(T))
 	{
 		printf("KOSONG\n");
 	}
+
+	ListWG LWG1;
+	CreateEmptyListWG(&LWG1);
+	InsVFirstListWG(&LWG1, T);
 	
+	PrintTree(InfoListWG(FirstListWG(LWG1)), 2);
+
 	
     // Player state
 
