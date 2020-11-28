@@ -7,6 +7,7 @@
 #include "instruction.h"
 #include "stackins.h"
 #include "command.h"
+#include "arraybahan.h"
 #include "utils.h"
 #include "constants.h"
 #include "bintree.h"
@@ -25,17 +26,9 @@ int main()
 	// ADV();
 
 
-	BinTree T;
+	
 
-	STARTKATA("wahana.txt");
 
-	BuildTree(&T, "wahana.txt");
-	PrintTree(T, 2);
-
-	if (IsTreeEmpty(T))
-	{
-		printf("KOSONG\n");
-	}
 
 	// WahanaGame WG1;
 
@@ -57,6 +50,20 @@ int main()
 
 	MATRIKS Map1 = FileToMatriks(FILE_MAP_1);
 	
+
+
+
+	BinTree T;
+
+	STARTKATA("wahana.txt");
+
+	FileToListTreeWahana(&T, "wahana.txt", ShopBahan);
+	PrintTree(T, 2);
+
+	if (IsTreeEmpty(T))
+	{
+		printf("KOSONG\n");
+	}
 	
 	
     // Player state
@@ -79,7 +86,7 @@ int main()
 	JAM MainStartTime = MakeJAM(9, 0, 0);
 	JAM MainEndTime = MakeJAM(21, 0, 0);
 
-	TabBahan BahanPlayer = CreateEmptyBahanPlayer(ShopBahan);
+	TabBahan BahanPlayer = CreateEmptyBahan(ShopBahan);
 
 	POINT PlayerPosition = MakePOINT(1, 1);
 

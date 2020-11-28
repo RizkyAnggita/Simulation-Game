@@ -11,7 +11,7 @@
 #include "mesinkar.h"
 #include "mesinkata.h"
 #include "wahanagame.h"
-#include "utils.h"
+#include "mesinkata.h"
 
 #define NilBinTree NULL
 
@@ -81,11 +81,5 @@ A
     E
 */
 
-void BuildTree(BinTree *T, char * filename);
-/* Dipakai jika input dari pita karakter */
-/* I.S. CC berisi ‘(‘ */
-/* F.S. T terdefinisi */
-/* Proses: Membaca isi pita karakter dan membangun pohon secara rekursif, hanya
-membutuhkan mesin karakter */
 
 #endif

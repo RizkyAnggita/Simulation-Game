@@ -6,6 +6,7 @@
 
 #include "boolean.h"
 #include "mesinkar.h"
+#include <stdio.h>
 
 #define NMax 50
 #define BLANK ' '
@@ -23,6 +24,20 @@ extern Kata CKata;
 
 Kata MakeKata(Kata * C, char * command, int length);
 /* Membuat command dengan TabKata = command, dan Length = length*/
+
+boolean IsKataSama(Kata K1, Kata K2);
+/* Mengembalikan True jika kita sama, false jika tidak */
+
+void CopyKata(Kata K1, Kata *K2);
+/* Menyalin kata K1 ke kata K2
+   I.S.  : K2 terdefinisi kosong
+   F.S.  : K2 memiliki tabkata dan length yang sama dengan K1*/
+
+void PrintKata(Kata K);
+/* Menampilkan kata K ke layar*/
+
+int KataToInteger(Kata K);
+/* Mengubah Kata menjadi integer */
 
 void IgnoreBlank(char * filename);
 /* Mengabaikan satu atau beberapa BLANK
