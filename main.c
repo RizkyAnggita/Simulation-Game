@@ -9,6 +9,7 @@
 #include "command.h"
 #include "utils.h"
 #include "constants.h"
+#include "bintree.h"
 
 
 #define ENDL printf("\n")

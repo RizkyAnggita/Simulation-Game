@@ -1,0 +1,31 @@
+WahanaPlayer
+1. Nama Wahana : KATA
+2. Tipe Wahana : ?
+3. Harga Wahana : int
+4. Lokasi Wahana : POINT
+5. Map Wahana : int
+6. Deskripsi Wahana : KATA
+7. Kapasitas Wahana : int
+8. History upgrade wahana : Linked List of KATA
+9. Durasi wahana : int
+10. Berapa kali wahana dinaiki total : int
+11. Total Penghasilan wahana : int
+12. Wahana dinaiki hari ini : int
+13. Total penghasilan wahana hari ini : int
+
+WahanaGame
+1. Nama Wahana : KATA
+2. Harga Wahana : int
+3. Kapasistas Wahana : int
+4. Durasi Wahana ; int 
+5. Deskripsi Wahana : KATA
+6. Money Needed : int
+7. Bahan Needed : ListBahan
+
+Cocoa Rain, 5000, 1, 5, Wahana yang akan membuat anda bermandikan coklat.
+Cocoa RollerCoaster, 15000, 1, 10, Wahana Roller Coaster yang melewati kolam coklat.
+Hazelnut Cave, 10000, 1, 7, Berpetualang di goa prasejarah yang terbuat dari Hazelnut.
+Sweet Carousel, 5000, 1, 5, Komidi putar dimana kudanya terbuat dari permen yand bisa kamu makan.
+Milky Bath, 7000, 1, 5, Menghilangkan penat dengan berendam di kolam susu.
+Greentea FerrisWheel, 10000, 1, 8, Melihat keseluruhan taman bermain Willy Wangky dari ketinggian.
+

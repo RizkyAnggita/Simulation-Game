@@ -1,6 +1,0 @@
-Cocoa Rain, 5000, 1, 5, Wahana yang akan membuat anda bermandikan coklat.
-Cocoa RollerCoaster, 15000, 1, 10, Wahana Roller Coaster yang melewati kolam coklat.
-Hazelnut Cave, 10000, 1, 7, Berpetualang di goa prasejarah yang terbuat dari Hazelnut.
-Sweet Carousel, 5000, 1, 5, Komidi putar dimana kudanya terbuat dari permen yand bisa kamu makan.
-Milky Bath, 7000, 1, 5, Menghilangkan penat dengan berendam di kolam susu.
-Greentea FerrisWheel, 10000, 1, 8, Melihat keseluruhan taman bermain Willy Wangky dari ketinggian.
