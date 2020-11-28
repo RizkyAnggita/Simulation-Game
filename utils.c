@@ -7,7 +7,7 @@
 
 
 void GetBrsKolFileMatriks(int * NB, int * NK, char * filename)
-/* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map 
+/* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map
    F.S. NBrs adalah jumlah baris pada filemap, begitu jg dengan NKol adalah jumlah kolom*/
 {
 	STARTKATA(filename);
@@ -52,7 +52,7 @@ MATRIKS FileToMatriks(char * filename)
 void MovePlayer(MATRIKS Map, char Command, POINT * Loc)
 /* I.S. Map adalah matriks map yang akan diubah posisi player nya,
         Command adalah command yg di input pengguna 'w'. 'a'. 's'. 'd'.
-        PlayerLoc adalah lokasi player sebelumnya 
+        PlayerLoc adalah lokasi player sebelumnya
    F.S. Posisi pemain berubah jika tidak menabrak pagar yaitu char '*',
    		Map dan PlayerLoc akan berubah jika tidak menabrak*/
 {
@@ -81,7 +81,7 @@ void MovePlayer(MATRIKS Map, char Command, POINT * Loc)
 
 	if (ElmtM(Map, Ordinat(NewLoc), Absis(NewLoc)) != '*')
 	{
-		*Loc = NewLoc;	
+		*Loc = NewLoc;
 	}
 }
 
@@ -113,7 +113,7 @@ TabBahan FileToListBahan(char * filename)
 		{
 			Val(CBahan) = KataToInteger(CKata);
 			ADVKATA(filename);
-			Name(CBahan) = CKata;	
+			Name(CBahan) = CKata;
 		}
 	}
 
@@ -137,7 +137,7 @@ TabBahan CreateEmptyBahan(TabBahan ListBahan)
 }
 
 void PrintBahanPlayer(TabBahan ListBahan)
-/* I.S. ListBahan terdefinisi 
+/* I.S. ListBahan terdefinisi
    F.S Isi dari ListBahan ditampilkan ke layar dengan format "{name}: {qty}"*/
 {
 	//KAMUS
@@ -157,7 +157,7 @@ void PrintBahanPlayer(TabBahan ListBahan)
 }
 
 void PrintBuyBahan(TabBahan ListBahan)
-/* I.S. ListBahan terdefinisi 
+/* I.S. ListBahan terdefinisi
    F.S Isi dari ListBahan ditampilkan ke layar dengan format "{name}: {value}"*/
 {
 	//KAMUS
@@ -177,8 +177,8 @@ void PrintBuyBahan(TabBahan ListBahan)
 }
 
 int PriceBuyBahan(Kata name, int qty, TabBahan ShopBahan)
-/* Menghitung harga yang perlu dibayar untuk membeli bahan dengan quantity tertentu 
-   Mengembalikan total harga jika bahan yang ingin dibeli pengguna (name) ada di 
+/* Menghitung harga yang perlu dibayar untuk membeli bahan dengan quantity tertentu
+   Mengembalikan total harga jika bahan yang ingin dibeli pengguna (name) ada di
    shop bahan
    Jika tidak ada di shop bahan, akan mengembalikan total harga -999*/
 {
@@ -236,7 +236,7 @@ void PitaToTreeWahanaGame(BinTree *T, char * filename, TabBahan ListBahan)
     else
     {
     	Price = KataToInteger(CKata);
-        
+
         ADVKALIMAT(filename);
         Type = CKata;
 
@@ -254,7 +254,7 @@ void PitaToTreeWahanaGame(BinTree *T, char * filename, TabBahan ListBahan)
 
         BahanCost = CreateEmptyBahan(ListBahan);
 		for (i = GetFirstIdxListBahan(BahanCost); i <= GetLastIdxListBahan(BahanCost); ++i)
-		{	
+		{
 			ADVKATA(filename);
 			Val(Elmt(BahanCost, i)) = KataToInteger(CKata);
 		}
@@ -315,7 +315,7 @@ void PrintMap(int PlayerMap, POINT PlayerLoc, MATRIKS Map1)
 	indeks i, j;
 	MATRIKS Map;
 	//ALGORITMA
-	//Menampilkan map 
+	//Menampilkan map
 
 	Map = Map1;
 
@@ -323,11 +323,11 @@ void PrintMap(int PlayerMap, POINT PlayerLoc, MATRIKS Map1)
 		for (j = GetFirstIdxKol(Map); j <= GetLastIdxKol(Map); ++j){
 			if ((i == Ordinat(PlayerLoc)) && (j == Absis(PlayerLoc)))
 			{
-				printf(" P");	
+				printf(" P");
 			} else {
-				printf(" %c", ElmtM(Map, i, j));	
+				printf(" %c", ElmtM(Map, i, j));
 			}
-			
+
 		}
 		if (i != GetLastIdxBrs(Map)){
 			printf("\n");
@@ -399,6 +399,24 @@ void PrintMainQueue()
 	printf("(Wangky's Universe), Kesabaran: 5");
 }
 
+void PrintWahana(ListWG ListWahana)
+/*  I.S. ListWahana terdefinisi
+    F.S. menampilkan list wahana game ke layar */
+{
+    printf("ingin membangun apa?\n");
+    printf("List:\n");
+
+    addressListWG P = FirstListWG(ListWahana);
+    while (P!=NilListWG){
+        printf("   -");
+        PrintKata(Type(Akar(InfoListWG(ListWahana))));
+        printf("\n");
+        P=NextListWG(P);
+    }
+
+
+}
+
 TabCommand initArrayCommand(){
 	/* Mengembalikan List/Array Command yang setiap elemen bertipe Commtype */
 	/* Commtype : < perintah : Kata, duration : integer > */
@@ -432,7 +450,7 @@ int findDuration(TabCommand T, Kata K){
 	/* Jika tidak ada, return DurasiUndef=-999 */
     IdxType i = IdxMinCommand;
     boolean found = false;
-    
+
     while (i<NbElmtCommand(T) && !found){
         if(IsKataSama(Command(T,i), K)){
             found = true;
@@ -450,11 +468,11 @@ boolean BahanCukup(TabBahan BahanPlayer, TabBahan BahanCost){
 
 	int panjangBahanPlayer = NbElmtListBahan(BahanPlayer);
 	int panjangBahanCost = NbElmtListBahan(BahanCost);
-	
+
 	if (panjangBahanPlayer != panjangBahanCost){
 		return false;
 	}
-	else{	
+	else{
 		int i = 0;
 		boolean cukup = true;
 
