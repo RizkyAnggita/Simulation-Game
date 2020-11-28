@@ -1,4 +1,5 @@
 #include "listcommand.h"
+#include "utils.h"
 #include <stdio.h>
 
 void createEmptyListCommand(TabCommand *T){
@@ -27,7 +28,7 @@ void printCommand(TabCommand T){
     int i = IdxMinCommand;
     while(DurasiCommand(T,i) != DurasiUndef ){
         printf("Command: ");
-        PrintKataC(Command(T,i));
+        PrintKata(Command(T,i));
         printf("\nDurasi: %d\n", DurasiCommand(T,i));
         i++;
         printf("\n");

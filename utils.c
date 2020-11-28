@@ -382,3 +382,69 @@ void PrintMainQueue()
 	printf("Antrian [1/5]:\n");
 	printf("(Wangky's Universe), Kesabaran: 5");
 }
+
+TabCommand initArrayCommand(){
+	/* Mengembalikan List/Array Command yang setiap elemen bertipe Commtype */
+	/* Commtype : < perintah : Kata, duration : integer > */
+	TabCommand T;
+	createEmptyListCommand(&T);
+	InitGameCommand();
+	Command(T,0) = CNew;
+    Command(T,1) = CLoad;
+    Command(T,2) = CExit;
+    Command(T,3) = CW;
+    Command(T,4) = CA;
+    Command(T,5) = CS;
+    Command(T,6) = CD;
+    Command(T,7) =  CBuild;
+    Command(T,8) =  CUpgrade;
+    Command(T,9) =  CBuy;
+    Command(T,10) =  CUndo;
+    Command(T,11) =  CExecute;
+    Command(T,12) =  CMain;
+    Command(T,13) =  CServe;
+    Command(T,14) =  CRepair;
+    Command(T,15) =  CDetail;
+    Command(T,16) =  COffice;
+    Command(T,17) =  CPrepare;
+
+    DurasiCommand(T,0) = 0;
+    DurasiCommand(T,1) = 0;
+    DurasiCommand(T,2) = 0;
+    DurasiCommand(T,3) = 1;
+    DurasiCommand(T,4) = 1;
+    DurasiCommand(T,5) = 1;
+    DurasiCommand(T,6) = 1;
+    DurasiCommand(T,7) =  3;
+    DurasiCommand(T,8) =  3;
+    DurasiCommand(T,9) =  3;
+    DurasiCommand(T,10) =  0;
+    DurasiCommand(T,11) =  0;
+    DurasiCommand(T,12) =  0;
+    DurasiCommand(T,13) =  2;
+    DurasiCommand(T,14) =  5;
+    DurasiCommand(T,15) =  0;
+    DurasiCommand(T,16) =  0;
+    DurasiCommand(T,17) =  0;
+
+	return T;
+}
+
+
+int findDuration(TabCommand T, Kata K){
+	/* Mengembalikan durasi sebuah command jika terdapat di TabCommand */
+	/* Jika tidak ada, return DurasiUndef=-999 */
+    IdxType i = IdxMinCommand;
+    boolean found = false;
+    
+    while (i<NbElmtCommand(T) && !found){
+        if(IsKataSama(Command(T,i), K)){
+            found = true;
+        }
+        else{
+            i++;
+        }
+    }
+    if (found) {return DurasiCommand(T,i);}
+    else {return DurasiUndef;}
+}

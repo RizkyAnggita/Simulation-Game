@@ -9,6 +9,8 @@
 #include "point.h"
 #include "arraybahan.h"
 #include "matriks.h"
+#include "listcommand.h"
+#include "command.h"
 
 boolean IsKataSama(Kata K1, Kata K2);
 /* Mengembalikan True jika kita sama, false jika tidak */
@@ -82,5 +84,14 @@ void PrintPrepStat(JAM TS);
 
 void PrintMainQueue();
 /* Menampilkan  antrian pengunjung saat main phase*/
+
+TabCommand initArrayCommand();
+/* Mengembalikan List/Array Command yang setiap elemen bertipe Commtype */
+/* Commtype : < perintah : Kata, duration : integer > */
+
+int findDuration(TabCommand T, Kata K);
+	/* Mengembalikan durasi sebuah command jika terdapat di TabCommand */
+	/* Jika tidak ada, return DurasiUndef=-999 */
+
 
 #endif
