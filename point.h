@@ -19,7 +19,7 @@ typedef struct
 
 /* *** DEFINISI PROTOTIPE PRIMITIF *** */
 /* *** Konstruktor membentuk POINT *** */
-POINT MakePOINT(float X, float Y);
+POINT MakePOINT(int X, int Y);
 /* Membentuk sebuah POINT dari komponen-komponennya */
 
 /* *** Kelompok operasi relasional terhadap POINT *** */
