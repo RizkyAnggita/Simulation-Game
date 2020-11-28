@@ -16,7 +16,7 @@
 #include "listwahanagame.h"
 
 void GetBrsKolFileMap(int * NB, int * NK, char * filename);
-/* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map 
+/* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map
    F.S. NBrs adalah jumlah baris pada filemap, begitu jg dengan NKol adalah jumlah kolom*/
 
 MATRIKS FileToMatriks(char * filename);
@@ -25,7 +25,7 @@ MATRIKS FileToMatriks(char * filename);
 void MovePlayer(MATRIKS Map, char Command, POINT * Loc);
 /* I.S. Map adalah matriks map yang akan diubah posisi player nya,
         Command adalah command yg di input pengguna 'w'. 'a'. 's'. 'd'.
-        Loc adalah lokasi player sebelumnya 
+        Loc adalah lokasi player sebelumnya
    F.S. Posisi pemain berubah jika tidak menabrak pagar yaitu char '*',
    		Map dan PlayerLoc akan berubah jika tidak menabrak*/
 
@@ -38,16 +38,16 @@ TabBahan CreateEmptyBahan(TabBahan ListBahan);
    Semua val pada elemen list diset ke 0 */
 
 void PrintBahanPlayer(TabBahan ListBahan);
-/* I.S. ListBahan terdefinisi 
+/* I.S. ListBahan terdefinisi
    F.S Isi dari ListBahan ditampilkan ke layar dengan format "{name}: {qty}"*/
 
 void PrintBuyBahan(TabBahan ListBahan);
-/* I.S. ListBahan terdefinisi 
+/* I.S. ListBahan terdefinisi
    F.S Isi dari ListBahan ditampilkan ke layar dengan format "{name}: {value}"*/
 
 int PriceBuyBahan(Kata name, int qty, TabBahan ShopBahan);
-/* Menghitung harga yang perlu dibayar untuk membeli bahan dengan quantity tertentu 
-   Mengembalikan total harga jika bahan yang ingin dibeli pengguna (name) ada di 
+/* Menghitung harga yang perlu dibayar untuk membeli bahan dengan quantity tertentu
+   Mengembalikan total harga jika bahan yang ingin dibeli pengguna (name) ada di
    shop bahan
    Jika tidak ada di shop bahan, akan mengembalikan total harga -999*/
 
@@ -85,6 +85,10 @@ void PrintPrepStat(JAM TS);
 void PrintMainQueue();
 /* Menampilkan  antrian pengunjung saat main phase*/
 
+void PrintWahana(ListWG ListWahana);
+/*  I.S. ListWahana terdefinisi
+    F.S. menampilkan list wahana game ke layar */
+
 TabCommand initArrayCommand();
 /* Mengembalikan List/Array Command yang setiap elemen bertipe Commtype */
 /* Commtype : < perintah : Kata, duration : integer > */
@@ -102,5 +106,12 @@ boolean MoneyCukup(int MoneyPlayer, int MoneyCost);
 TabBahan AddBahan(TabBahan ListBahan1, TabBahan ListBahan2);
 /* Menjumlahkan elemen tiap bahan pada 2 List */
 /* Asumsi panjang ListBahan1=ListBahan2 */
+
+boolean SearchNodeWG (BinTree T, Kata K);
+/* Mengirimkan true jika ada node dari T yang memiliki info.Type = K */
+
+addrNode findTypeBinTree(Kata TypeYangDicari, BinTree T);
+/* Mengembalikas addrNode dari Node yang memiliki Type sama dengan
+TypeYangDicari, kalau tidak ada return NilBinTree */
 
 #endif
