@@ -20,42 +20,27 @@ Kata CDetail;
 Kata COffice;
 Kata CPrepare;
 
-Kata MakeCommand(Kata * C, char * command, int length)
-/* Membuat command dengan TabKata = command, dan Length = length*/
-{
-	//KAMUS
-	int i;
-
-	//ALGORITMA
-
-	for (i = 0; i < length; ++i)
-	{
-		(*C).TabKata[i] = command[i];
-	}
-
-	(*C).Length = length;
-}
 
 void InitGameCommand()
 /* I.S. Command game belum terdefinisi
    F.S Command game terdefinisi dan dapat digunakan dimanapun*/
 {
-	MakeCommand(&CNew, "new", 3);
-	MakeCommand(&CLoad, "load", 4);
-	MakeCommand(&CExit, "exit", 4);
-	MakeCommand(&CW, "w", 1);
-	MakeCommand(&CA, "a", 1);
-	MakeCommand(&CS, "s", 1);
-	MakeCommand(&CD, "d", 1);
-	MakeCommand(&CBuild, "build", 5);
-	MakeCommand(&CUpgrade, "upgrade", 7);
-	MakeCommand(&CBuy, "buy", 3);
-	MakeCommand(&CUndo, "undo", 4);
-	MakeCommand(&CExecute, "execute", 7);
-	MakeCommand(&CMain, "main", 4);
-	MakeCommand(&CServe, "serve", 5);
-	MakeCommand(&CRepair, "repair", 6);
-	MakeCommand(&CDetail, "detail", 6);
-	MakeCommand(&COffice, "office", 6);
-	MakeCommand(&CPrepare, "prepare", 7);
+	MakeKata(&CNew, "new", 3);
+	MakeKata(&CLoad, "load", 4);
+	MakeKata(&CExit, "exit", 4);
+	MakeKata(&CW, "w", 1);
+	MakeKata(&CA, "a", 1);
+	MakeKata(&CS, "s", 1);
+	MakeKata(&CD, "d", 1);
+	MakeKata(&CBuild, "build", 5);
+	MakeKata(&CUpgrade, "upgrade", 7);
+	MakeKata(&CBuy, "buy", 3);
+	MakeKata(&CUndo, "undo", 4);
+	MakeKata(&CExecute, "execute", 7);
+	MakeKata(&CMain, "main", 4);
+	MakeKata(&CServe, "serve", 5);
+	MakeKata(&CRepair, "repair", 6);
+	MakeKata(&CDetail, "detail", 6);
+	MakeKata(&COffice, "office", 6);
+	MakeKata(&CPrepare, "prepare", 7);
 }
