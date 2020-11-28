@@ -382,3 +382,50 @@ void PrintMainQueue()
 	printf("Antrian [1/5]:\n");
 	printf("(Wangky's Universe), Kesabaran: 5");
 }
+
+TabCommand initArrayCommand(){
+	/* Mengembalikan List/Array Command yang setiap elemen bertipe Commtype */
+	/* Commtype : < perintah : Kata, duration : integer > */
+	TabCommand T;
+	createEmptyListCommand(&T);
+	InitGameCommand();
+	InsertNewCommand(&T, makeCommtype(CNew, 0));
+    InsertNewCommand(&T, makeCommtype(CLoad, 0));
+    InsertNewCommand(&T, makeCommtype(CExit, 0));
+    InsertNewCommand(&T, makeCommtype(CW, 1));
+    InsertNewCommand(&T, makeCommtype(CA, 1));
+    InsertNewCommand(&T, makeCommtype(CS, 1));
+    InsertNewCommand(&T, makeCommtype(CD, 1));
+    InsertNewCommand(&T, makeCommtype(CBuild, 3));
+    InsertNewCommand(&T, makeCommtype(CUpgrade, 3));
+    InsertNewCommand(&T, makeCommtype(CBuy, 3));
+    InsertNewCommand(&T, makeCommtype(CUndo, 0));
+    InsertNewCommand(&T, makeCommtype(CExecute, 0));
+    InsertNewCommand(&T, makeCommtype(CMain, 0));
+    InsertNewCommand(&T, makeCommtype(CServe, 2));
+    InsertNewCommand(&T, makeCommtype(CRepair, 5));
+    InsertNewCommand(&T, makeCommtype(CDetail, 0));
+    InsertNewCommand(&T, makeCommtype(COffice, 0));
+    InsertNewCommand(&T, makeCommtype(CPrepare, 0));
+
+	return T;
+}
+
+
+int findDuration(TabCommand T, Kata K){
+	/* Mengembalikan durasi sebuah command jika terdapat di TabCommand */
+	/* Jika tidak ada, return DurasiUndef=-999 */
+    IdxType i = IdxMinCommand;
+    boolean found = false;
+    
+    while (i<NbElmtCommand(T) && !found){
+        if(IsKataSama(Command(T,i), K)){
+            found = true;
+        }
+        else{
+            i++;
+        }
+    }
+    if (found) {return DurasiCommand(T,i);}
+    else {return DurasiUndef;}
+}
