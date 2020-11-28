@@ -235,10 +235,10 @@ void PitaToTreeWahanaGame(BinTree *T, char * filename, TabBahan ListBahan)
     }
     else
     {
+    	Price = KataToInteger(CKata);
+        
+        ADVKALIMAT(filename);
         Type = CKata;
-
-        ADVKATA(filename);
-        Price = KataToInteger(CKata);
 
         ADVKATA(filename);
         Capacity = KataToInteger(CKata);
@@ -246,7 +246,7 @@ void PitaToTreeWahanaGame(BinTree *T, char * filename, TabBahan ListBahan)
         ADVKATA(filename);
         DurationW = KataToInteger(CKata);
 
-        ADVKATA(filename);
+        ADVKALIMAT(filename);
         Description = CKata;
 
         ADVKATA(filename);

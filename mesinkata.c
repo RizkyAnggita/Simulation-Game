@@ -222,6 +222,7 @@ void SalinKalimat(char * filename)
 		}	
 		ADV();	
 	}
+	ADV();
 	//menyimpan panjang kata
 	CKata.Length = idx;
 	IgnoreBlank(filename);

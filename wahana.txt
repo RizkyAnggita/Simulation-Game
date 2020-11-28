@@ -1,3 +1,3 @@
-( Type 123 1 10 Desc1 5 1 2 3 4 5  ( ) ( )  )
-( Type4 123 1 10 Desc4 5 14 24 34 44 54  ( ) ( )  )
+( 5 Cocoa Rain; 1 5 Wahana yang akan membuat anda bermandikan coklat; 5 1 2 3 4 5  ( 15 Cocoa RollerCoaster; 1 10 Wahana RollerCoaster yang melewati kolam coklat; 5 1 2 3 4 5 ( ) ( ) ) ( 10 Hazelnut Cave; 1 7 Berpetualang di goa prasejarah yang terbuat dari Hazelnut; 5 1 2 3 4 5 ( ) ( ) )  )
+( 5 Sweet Carousel; 1 5 Komidi putar dimana kudanya terbuat dari permen yand bisa kamu makan; 5 11 12 13 14 15 ( 7 Milky Bath; 1 5 Menghilangkan penat dengan berendam di kolam susu; 5 10 10 10 10 10 ( ) ( ) ) ( 10 Greentea FerrisWheel; 1 8 Melihat keseluruhan taman bermain Willy Wangky dari ketinggian; 5 10 20 30 40 50 ( ) ( ) )  )
 .
