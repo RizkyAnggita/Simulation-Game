@@ -3,41 +3,41 @@
 
 void createEmptyListCommand(TabCommand *T){
     /* Membuat List Kosong */
-    IdxType i;
+    int i;
 
     for (i=IdxMinCommand; i< IdxMaxCommand; i++){
-        Durasi(*T,i) = DurasiUndef; 
+        DurasiCommand(*T,i) = DurasiUndef; 
     }
 }
 
 void InsertNewCommand(TabCommand *T, Commtype C){
     /* Memasukkan Command baru (Insert Last pada List Linier)*/
-    IdxType i = IdxMinCommand;
+    int i = IdxMinCommand;
 
-    while(i<IdxMaxCommand && Durasi(*T,i)!=DurasiUndef){
+    while(i<IdxMaxCommand && DurasiCommand(*T,i)!=DurasiUndef){
         i++;
     }
     
     Command(*T,i) = C.perintah;
-    Durasi(*T,i) = C.duration;
+    DurasiCommand(*T,i) = C.duration;
     
 }
 
 void printCommand(TabCommand T){
-    IdxType i = IdxMinCommand;
-    while(Durasi(T,i) != DurasiUndef ){
+    int i = IdxMinCommand;
+    while(DurasiCommand(T,i) != DurasiUndef ){
         printf("Command: ");
         PrintKataC(Command(T,i));
-        printf("\nDurasi: %d\n", Durasi(T,i));
+        printf("\nDurasi: %d\n", DurasiCommand(T,i));
         i++;
+        printf("\n");
     }
 }
 
 int NbElmtCommand(TabCommand T){
-    IdxType i = IdxMinCommand;
+    int i = IdxMinCommand;
     int count = 0;
-    while (Durasi(T,i) != DurasiUndef){
-        printf("AAA\n");
+    while (DurasiCommand(T,i) != DurasiUndef){
         count++;
         i++;
     }

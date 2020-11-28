@@ -3,7 +3,6 @@
 
 #include "mesinkata.h"
 
-typedef int IdxType;  /* type indeks */
 #define IdxMaxCommand 49
 /* Indeks maksimum array */
 #define IdxMinCommand 0
@@ -24,7 +23,7 @@ typedef struct{
 /* Selektor */
 #define ElmtCommand(T,i) (T).TI[(i)]
 #define Command(T,i) (T).TI[(i)].perintah
-#define Durasi(T,i) (T).TI[(i)].duration
+#define DurasiCommand(T,i) (T).TI[(i)].duration
 
 
 void createEmptyListCommand(TabCommand *L);
