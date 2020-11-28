@@ -13,6 +13,8 @@
 #include "bintree.h"
 #include "wahanagame.h"
 #include "listwahanagame.h"
+#include "listupgrade.h"
+#include "wahanaplayer.h"
 
 
 #define ENDL printf("\n")
