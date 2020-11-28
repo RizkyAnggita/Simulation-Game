@@ -116,4 +116,9 @@ addrNode findTypeBinTree(Kata TypeYangDicari, BinTree T);
 /* Mengembalikas addrNode dari Node yang memiliki Type sama dengan
 TypeYangDicari, kalau tidak ada return NilBinTree */
 
+Kata GenerateWahanaName(Kata TypeWahana, POINT PlayerLoc, int PlayerMap);
+/* Mengenerate Nama Wahana yang unik dari Type(Nama) Wahana Standar berdasarkan
+PlayerLoc dan Map */
+
+
 #endif
