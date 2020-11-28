@@ -75,7 +75,20 @@ void PrintTreeLevel(BinTree P, int h, int level)
             printf(" ");
         }
         PrintKata(Type(Akar(P)));
-        printf(" %d\n", Price(Akar(P)));
+        printf(" %d", Price(Akar(P)));
+        printf(" %d", Capacity(Akar(P)));
+        printf(" %d ", DurationW(Akar(P)));
+        PrintKata(Description(Akar(P)));
+        printf(" %d", MoneyCost(Akar(P)));
+
+        for (i = GetFirstIdxListBahan(BahanCost(Akar(P))); i <= GetLastIdxListBahan(BahanCost(Akar(P))); ++i)
+        {
+            printf(" ");
+            PrintKata(Name(Elmt(BahanCost(Akar(P)), i)));
+            printf(" %d", Val(Elmt(BahanCost(Akar(P)), i)));
+        }
+
+        printf("\n");
 
         PrintTreeLevel(Left(P), h, level + 1);
         PrintTreeLevel(Right(P), h, level + 1);
@@ -111,33 +124,3 @@ boolean IsTreeEmpty(BinTree P)
     return (P == NilBinTree);
 }
 
-void BuildTree(BinTree *T, char * filename)
-{
-
-    //KAMUS
-    WahanaGame WGame;
-
-    //ALGORITMA
-    ADVKATA(filename);
-    if (CKata.TabKata[0] == ')')
-    {
-        (*T) = NilBinTree;
-    }
-    else
-    {
-        Type(WGame) = CKata;
-        ADVKATA(filename);
-        Price(WGame) = KataToInteger(CKata);
-        (*T) = AlokNode(WGame);
-
-        ADVKATA(filename);
-        BuildTree(&(Left(*T)), filename);
-        BuildTree(&(Right(*T)), filename);
-    }
-    ADVKATA(filename);
-}
-/* Dipakai jika input dari pita karakter */
-/* I.S. CC berisi ‘(‘ */
-/* F.S. T terdefinisi */
-/* Proses: Membaca isi pita karakter dan membangun pohon secara rekursif, hanya
-membutuhkan mesin karakter */

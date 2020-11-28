@@ -22,6 +22,75 @@ Kata MakeKata(Kata * C, char * command, int length)
 	(*C).Length = length;
 }
 
+boolean IsKataSama(Kata K1, Kata K2)
+/*Mengembalikan True jika kita sama, false jika tidak*/
+{
+	//KAMUS
+	int i;
+	//ALGORITMA
+	if (K1.Length == K2.Length)
+	{
+		for (i = 0; i < K1.Length; ++i)
+		{
+			if (K1.TabKata[i] != K2.TabKata[i])
+			{
+				return false;
+			}
+		}
+		return true;
+	} else 
+	{
+		return false;
+	}
+}
+
+void CopyKata(Kata K1, Kata *K2)
+/* Menyalin kata K1 ke kata K2
+   I.S.  : K2 terdefinisi kosong
+   F.S.  : K2 memiliki TabKata dan Length yang sama dengan K1*/
+{
+	//KAMUS
+	int i;
+
+	//ALGORITMA
+	(*K2).Length = K1.Length;
+	for (i = 0; i < K1.Length; ++i)
+	{
+		(*K2).TabKata[i] = K1.TabKata[i];
+	}
+}
+
+void PrintKata(Kata K)
+/* Menampilkan kata K ke layar*/
+{
+	//KAMUS
+	int i;
+
+	//ALGORITMA
+	for (i = 0; i < K.Length; ++i)
+	{
+		printf("%c", K.TabKata[i]);
+	}
+}
+
+int KataToInteger(Kata K)
+/* Mengubah Kata menjadi integer */
+{
+	//KAMUS
+	int val, i, currentNum;
+
+	//ALGORITMA
+	val = 0;
+
+	for (i = 0; i < K.Length; ++i)
+	{
+		currentNum = K.TabKata[i] - '0';
+		val = (val * 10) + + currentNum;
+	}
+
+	return val;
+}
+
 void IgnoreBlank(char * filename)
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang 

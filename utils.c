@@ -6,75 +6,6 @@
 #define ENDL printf("\n")
 
 
-boolean IsKataSama(Kata K1, Kata K2)
-/*Mengembalikan True jika kita sama, false jika tidak*/
-{
-	//KAMUS
-	int i;
-	//ALGORITMA
-	if (K1.Length == K2.Length)
-	{
-		for (i = 0; i < K1.Length; ++i)
-		{
-			if (K1.TabKata[i] != K2.TabKata[i])
-			{
-				return false;
-			}
-		}
-		return true;
-	} else 
-	{
-		return false;
-	}
-}
-
-void CopyKata(Kata K1, Kata *K2)
-/* Menyalin kata K1 ke kata K2
-   I.S.  : K2 terdefinisi kosong
-   F.S.  : K2 memiliki TabKata dan Length yang sama dengan K1*/
-{
-	//KAMUS
-	int i;
-
-	//ALGORITMA
-	(*K2).Length = K1.Length;
-	for (i = 0; i < K1.Length; ++i)
-	{
-		(*K2).TabKata[i] = K1.TabKata[i];
-	}
-}
-
-void PrintKata(Kata K)
-/* Menampilkan kata K ke layar*/
-{
-	//KAMUS
-	int i;
-
-	//ALGORITMA
-	for (i = 0; i < K.Length; ++i)
-	{
-		printf("%c", K.TabKata[i]);
-	}
-}
-
-int KataToInteger(Kata K)
-/* Mengubah Kata menjadi integer */
-{
-	//KAMUS
-	int val, i, currentNum;
-
-	//ALGORITMA
-	val = 0;
-
-	for (i = 0; i < K.Length; ++i)
-	{
-		currentNum = K.TabKata[i] - '0';
-		val = (val * 10) + + currentNum;
-	}
-
-	return val;
-}
-
 void GetBrsKolFileMatriks(int * NB, int * NK, char * filename)
 /* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map 
    F.S. NBrs adalah jumlah baris pada filemap, begitu jg dengan NKol adalah jumlah kolom*/
@@ -189,7 +120,7 @@ TabBahan FileToListBahan(char * filename)
 	return ListBahan;
 }
 
-TabBahan CreateEmptyBahanPlayer(TabBahan ListBahan)
+TabBahan CreateEmptyBahan(TabBahan ListBahan)
 /* Membuat inventory utk penyimpanan bahan player
    Semua val pada elemen list diset ke 0 */
 {
@@ -279,6 +210,71 @@ int PriceBuyBahan(Kata name, int qty, TabBahan ShopBahan)
 
 	return price;
 }
+
+void FileToListTreeWahana(BinTree *T, char * filename, TabBahan ListBahan)
+{
+
+    //KAMUS
+    WahanaGame WGame;
+    Kata Type;
+    int Price;
+    int Capacity;
+    int DurationW;
+    Kata Description;
+    int MoneyCost;
+    TabBahan BahanCost;
+
+    int i;
+
+
+    //ALGORITMA
+    ADVKATA(filename);
+    if (CKata.TabKata[0] == ')')
+    {
+        (*T) = NilBinTree;
+    }
+    else
+    {
+        Type = CKata;
+
+        ADVKATA(filename);
+        Price = KataToInteger(CKata);
+
+        ADVKATA(filename);
+        Capacity = KataToInteger(CKata);
+
+        ADVKATA(filename);
+        DurationW = KataToInteger(CKata);
+
+        ADVKATA(filename);
+        Description = CKata;
+
+        ADVKATA(filename);
+        MoneyCost = KataToInteger(CKata);
+
+        BahanCost = CreateEmptyBahan(ListBahan);
+		for (i = GetFirstIdxListBahan(BahanCost); i <= GetLastIdxListBahan(BahanCost); ++i)
+		{	
+			ADVKATA(filename);
+			Val(Elmt(BahanCost, i)) = KataToInteger(CKata);
+		}
+
+
+        WGame = MakeWahanaGame(Type, Price, Capacity, DurationW, Description, MoneyCost, BahanCost);
+        (*T) = AlokNode(WGame);
+
+        ADVKATA(filename);
+        FileToListTreeWahana(&(Left(*T)), filename, ListBahan);
+        FileToListTreeWahana(&(Right(*T)), filename, ListBahan);
+    }
+    ADVKATA(filename);
+}
+/* Dipakai jika input dari pita karakter */
+/* I.S. CC berisi ‘(‘ */
+/* F.S. T terdefinisi */
+/* Proses: Membaca isi pita karakter dan membangun pohon secara rekursif, hanya
+membutuhkan mesin karakter */
+
 
 void PrintTitle()
 /*Menampilkan ke layar pembukaan dari game*/
@@ -388,7 +384,6 @@ TabCommand initArrayCommand(){
 	/* Commtype : < perintah : Kata, duration : integer > */
 	TabCommand T;
 	createEmptyListCommand(&T);
-	InitGameCommand();
 	InsertNewCommand(&T, makeCommtype(CNew, 0));
     InsertNewCommand(&T, makeCommtype(CLoad, 0));
     InsertNewCommand(&T, makeCommtype(CExit, 0));

@@ -11,20 +11,8 @@
 #include "matriks.h"
 #include "listcommand.h"
 #include "command.h"
-
-boolean IsKataSama(Kata K1, Kata K2);
-/* Mengembalikan True jika kita sama, false jika tidak */
-
-void CopyKata(Kata K1, Kata *K2);
-/* Menyalin kata K1 ke kata K2
-   I.S.  : K2 terdefinisi kosong
-   F.S.  : K2 memiliki tabkata dan length yang sama dengan K1*/
-
-void PrintKata(Kata K);
-/* Menampilkan kata K ke layar*/
-
-int KataToInteger(Kata K);
-/* Mengubah Kata menjadi integer */
+#include "wahanagame.h"
+#include "bintree.h"
 
 void GetBrsKolFileMap(int * NB, int * NK, char * filename);
 /* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map 
@@ -44,7 +32,7 @@ TabBahan FileToListBahan(char * filename);
 /* Membaca file yang berisi nama bahan beserta harganya */
 /* Mengembalikan list bahan  */
 
-TabBahan CreateEmptyBahanPlayer(TabBahan ListBahan);
+TabBahan CreateEmptyBahan(TabBahan ListBahan);
 /* Membuat inventory utk penyimpanan bahan player
    Semua val pada elemen list diset ke 0 */
 
@@ -61,6 +49,13 @@ int PriceBuyBahan(Kata name, int qty, TabBahan ShopBahan);
    Mengembalikan total harga jika bahan yang ingin dibeli pengguna (name) ada di 
    shop bahan
    Jika tidak ada di shop bahan, akan mengembalikan total harga -999*/
+
+void FileToListTreeWahana(BinTree * T, char * filename, TabBahan ListBahan);
+/* Dipakai jika input dari pita karakter */
+/* I.S. CC berisi ‘(‘ */
+/* F.S. T terdefinisi */
+/* Proses: Membaca isi pita karakter dan membangun pohon secara rekursif, hanya
+membutuhkan mesin karakter */
 
 void PrintTitle();
 /* Menampilkan ke layar pembukaan dari game */
