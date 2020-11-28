@@ -5,6 +5,7 @@
 
 #define FILE_MATERIAL "materials.txt"
 #define FILE_MAP_1 "map1.txt"
+#define FILE_WAHANA "wahana.txt"
 
 
 #endif

@@ -55,9 +55,9 @@ int main()
 
 	BinTree T;
 
-	STARTKATA("wahana.txt");
+	STARTKATA(FILE_WAHANA);
 
-	FileToListTreeWahana(&T, "wahana.txt", ShopBahan);
+	FileToListTreeWahana(&T, FILE_WAHANA, ShopBahan);
 	PrintTree(T, 2);
 
 	if (IsTreeEmpty(T))
