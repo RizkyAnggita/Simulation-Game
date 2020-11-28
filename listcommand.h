@@ -32,6 +32,9 @@ void createEmptyListCommand(TabCommand *L);
 void InsertNewCommand(TabCommand *L, Commtype C);
 /* Memasukkan Command baru (Insert Last pada List Linier)*/
 
+Commtype makeCommtype(Kata K, int dur);
+/* Membut tipe bentukan Comm */
+
 void printCommand(TabCommand L);
 /* Mencetak daftar command yang ada */
 

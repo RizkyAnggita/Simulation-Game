@@ -24,6 +24,14 @@ void InsertNewCommand(TabCommand *T, Commtype C){
     
 }
 
+Commtype makeCommtype(Kata K, int dur){
+    /* Membut tipe bentukan Comm */
+    Commtype C;
+    C.perintah = K;
+    C.duration = dur;
+    return C;
+}
+
 void printCommand(TabCommand T){
     int i = IdxMinCommand;
     while(DurasiCommand(T,i) != DurasiUndef ){
