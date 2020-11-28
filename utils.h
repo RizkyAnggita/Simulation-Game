@@ -88,5 +88,14 @@ int findDuration(TabCommand T, Kata K);
 	/* Mengembalikan durasi sebuah command jika terdapat di TabCommand */
 	/* Jika tidak ada, return DurasiUndef=-999 */
 
+boolean BahanCukup(TabBahan BahanPlayer, TabBahan BahanCost);
+/* Mengecek apakah player memiliki bahan yang cukup */
+
+boolean MoneyCukup(int MoneyPlayer, int MoneyCost);
+/* Mengecek apakah player memiliki uang yang cukup */
+
+TabBahan AddBahan(TabBahan ListBahan1, TabBahan ListBahan2);
+/* Menjumlahkan elemen tiap bahan pada 2 List */
+/* Asumsi panjang ListBahan1=ListBahan2 */
 
 #endif
