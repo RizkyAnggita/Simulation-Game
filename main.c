@@ -18,6 +18,7 @@
 #include "wahanaplayer.h"
 #include "arraywahanaplayer.h"
 #include "pengunjung.h"
+#include "graph.h"
 
 
 #define ENDL printf("\n")
@@ -25,6 +26,8 @@
 
 int main()
 {
+	
+	
 	// Initialize Game
 
 	//Initialisasi GameCommand
@@ -36,15 +39,13 @@ int main()
 	TabBahan ShopBahan = FileToListBahan(FILE_MATERIAL);
 
 	//Initialize Map
-	MATRIKS Map1 = FileToMatriks(FILE_MAP_1);
+	Graph G = InitMapGraph();
 
 	//Initialize Wahana Game
 	STARTKATA(FILE_WAHANA);
 
 	ListWG ListWahanaGame;
 	ListWahanaGame = FileToListTreeWahana(FILE_WAHANA, ShopBahan);
-	
-
 
     // Player state
 
@@ -77,6 +78,7 @@ int main()
 	POINT PlayerPosition = MakePOINT(1, 1);
 
 	int PlayerMap = 1;
+	int PlayerMapPrev;
 
 	TabWahanaPlayer ArrWahanaPlayer;
 	MakeEmptyListWP(&ArrWahanaPlayer);
@@ -126,16 +128,16 @@ int main()
 				TabBahan ListBahanNeededTotal = CreateEmptyBahan(ShopBahan);
 				TabBahan ListBahanNeeded;
 
-				MATRIKS Map1Prep = Map1;
+				Graph GPrep = G;
 
 
 
 				while (Play && PrepPhase)
 				{
-					
+
 					printf("Preparation phase day %d\n", Day);
 
-					PrintMap(PlayerMap, PlayerPosition, Map1);
+					PrintMap(PlayerMap, PlayerPosition, MapG(SearchNodeG(G, PlayerMap)));
 					ENDL;
 					ENDL;
 
@@ -155,19 +157,43 @@ int main()
 
 					if (IsKataSama(CKata, CW))
 					{
-						MovePlayer(Map1, 'w', &PlayerPosition);
+						MovePlayer(MapG(SearchNodeG(G, PlayerMap)), 'w', &PlayerPosition);
+						if (PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(GPrep, PlayerMap)), PlayerPosition)) != -1)
+						{
+							PlayerMapPrev = PlayerMap;
+							PlayerMap = PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(GPrep, PlayerMap)), PlayerPosition));
+							PlayerPosition = MakePOINT(1,1);
+						}						
 
 					} else if (IsKataSama(CKata, CA))
 					{
-						MovePlayer(Map1, 'a', &PlayerPosition);
+						MovePlayer(MapG(SearchNodeG(G, PlayerMap)), 'a', &PlayerPosition);
+						if (PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(GPrep, PlayerMap)), PlayerPosition)) != -1)
+						{
+							PlayerMapPrev = PlayerMap;
+							PlayerMap = PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(GPrep, PlayerMap)), PlayerPosition));
+							PlayerPosition = MakePOINT(1,1);
+						}						
 
 					} else if (IsKataSama(CKata, CS))
 					{
-						MovePlayer(Map1, 's', &PlayerPosition);
+						MovePlayer(MapG(SearchNodeG(G, PlayerMap)), 's', &PlayerPosition);
+						if (PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(GPrep, PlayerMap)), PlayerPosition)) != -1)
+						{
+							PlayerMapPrev = PlayerMap;
+							PlayerMap = PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(GPrep, PlayerMap)), PlayerPosition));
+							PlayerPosition = MakePOINT(1,1);
+						}						
 
 					} else if (IsKataSama(CKata, CD))
 					{
-						MovePlayer(Map1, 'd', &PlayerPosition);
+						MovePlayer(MapG(SearchNodeG(G, PlayerMap)), 'd', &PlayerPosition);
+						if (PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(GPrep, PlayerMap)), PlayerPosition)) != -1)
+						{
+							PlayerMapPrev = PlayerMap;
+							PlayerMap = PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(GPrep, PlayerMap)), PlayerPosition));
+							PlayerPosition = MakePOINT(1,1);
+						}						
 
 					} else if (IsKataSama(CKata, CBuild))
 					{
@@ -208,9 +234,9 @@ int main()
 
 							if (SuccesBuild) // Bahan dan uang cukup untuk membangun
 							{
-								if (GetElementMap(Map1Prep, PlayerPosition) == '-') // Lahan kosong
+								if (GetElementMap(MapG(SearchNodeG(GPrep, PlayerMap)), PlayerPosition) == '-') // Lahan kosong
 								{
-									SetElementMap(&Map1Prep, PlayerPosition, 'W');
+									SetElementMap(&MapG(SearchNodeG(GPrep, PlayerMap)), PlayerPosition, 'W');
 
 									NewInstruction = CreateInstruction(CBuild, PlayerPosition, Type(WahanaGameBasic), 1, PlayerMap, MoneyNeeded, ListBahanNeeded);
 									Push(&InstructionStack, NewInstruction);
@@ -253,7 +279,7 @@ int main()
 
 					} else if (IsKataSama(CKata, CUpgrade))
 					{
-						FindAround(PlayerPosition, Map1, 1, ArrWahanaPlayer);
+						FindAround(PlayerPosition, MapG(SearchNodeG(G, PlayerMap)), 1, ArrWahanaPlayer);
 
 						WahanaPlayer WPUpgrade = SearchWahanaPlayerName(CKata, ArrWahanaPlayer);
 
@@ -321,9 +347,9 @@ int main()
 
 									if (SuccesUpgrade) // Bahan dan uang cukup untuk membangun
 									{
-										if (GetElementMap(Map1Prep, LocW(WPUpgrade)) == 'W') // Lahan kosong
+										if (GetElementMap(MapG(SearchNodeG(GPrep, PlayerMap)), LocW(WPUpgrade)) == 'W') // Lahan kosong
 										{
-											SetElementMap(&Map1Prep, LocW(WPUpgrade), 'U');
+											SetElementMap(&MapG(SearchNodeG(GPrep, PlayerMap)), LocW(WPUpgrade), 'U');
 
 											NewInstruction = CreateInstruction(CUpgrade, LocW(WPUpgrade), Type(WahanaGameUpgrade), 1, MapW(WPUpgrade), MoneyNeeded, ListBahanNeeded);
 											Push(&InstructionStack, NewInstruction);
@@ -436,7 +462,7 @@ int main()
 							if (IsKataSama(CBuild, Function(NewInstruction)))
 							{
 
-								SetElementMap(&Map1Prep, Point(NewInstruction), '-');
+								SetElementMap(&MapG(SearchNodeG(GPrep, PlayerMap)), Point(NewInstruction), '-');
 
 								TimeNeeded = FindDuration(ArrayCommand, CBuild) * 60;
 								TimeNeededTotal = PrevNDetik(TimeNeededTotal, TimeNeeded);
@@ -457,7 +483,7 @@ int main()
 
 							} else if (IsKataSama(CUpgrade, Function(NewInstruction)))
 							{
-								SetElementMap(&Map1Prep, Point(NewInstruction), 'W');
+								SetElementMap(&MapG(SearchNodeG(GPrep, PlayerMap)), Point(NewInstruction), 'W');
 
 								TimeNeeded = FindDuration(ArrayCommand, CUpgrade) * 60;
 								TimeNeededTotal = PrevNDetik(TimeNeededTotal, TimeNeeded);
@@ -483,7 +509,7 @@ int main()
 
 							if (IsKataSama(CBuild, Function(NewInstruction)))
 							{
-								SetElementMap(&Map1, Point(NewInstruction), 'W');
+								SetElementMap(&MapG(SearchNodeG(G, PlayerMap)), Point(NewInstruction), 'W');
 
 								MoneyPlayer -= MCost(NewInstruction);
 
@@ -603,7 +629,7 @@ int main()
 
 					printf("Main phase day %d\n", Day);
 
-					PrintMap(PlayerMap, PlayerPosition, Map1);
+					PrintMap(PlayerMap, PlayerPosition, MapG(SearchNodeG(G, PlayerMap)));
 					ENDL;
 					ENDL;
 
@@ -631,7 +657,7 @@ int main()
 					if (IsKataSama(CKata, CServe))
 					{
 						MainCommandSucces = true;
-						if (IsAround(PlayerPosition, Map1, 'A'))
+						if (IsAround(PlayerPosition, MapG(SearchNodeG(G, PlayerMap)), 'A'))
 						{
 							if (!IsEmptyPQ(QueueP))
 							{
@@ -723,23 +749,45 @@ int main()
 
 						if (IsKataSama(CKata, CW))
 						{
-							MovePlayer(Map1, 'w', &PlayerPosition);
+							MovePlayer(MapG(SearchNodeG(G, PlayerMap)), 'w', &PlayerPosition);
+							if (PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(G, PlayerMap)), PlayerPosition)) != -1)
+							{
+								PlayerMapPrev = PlayerMap;
+								PlayerMap = PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(G, PlayerMap)), PlayerPosition));
+								PlayerPosition = MakePOINT(1,1);
+							}
 
 						} else if (IsKataSama(CKata, CA))
 						{
-							MovePlayer(Map1, 'a', &PlayerPosition);
+							MovePlayer(MapG(SearchNodeG(G, PlayerMap)), 'a', &PlayerPosition);
+							if (PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(G, PlayerMap)), PlayerPosition)) != -1)
+							{
+								PlayerMapPrev = PlayerMap;
+								PlayerMap = PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(G, PlayerMap)), PlayerPosition));
+								PlayerPosition = MakePOINT(1,1);
+							}
 
 						} else if (IsKataSama(CKata, CS))
 						{
-							MovePlayer(Map1, 's', &PlayerPosition);
-
+							MovePlayer(MapG(SearchNodeG(G, PlayerMap)), 's', &PlayerPosition);
+							if (PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(G, PlayerMap)), PlayerPosition)) != -1)
+							{
+								PlayerMapPrev = PlayerMap;
+								PlayerMap = PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(G, PlayerMap)), PlayerPosition));
+								PlayerPosition = MakePOINT(1,1);
+							}
 						} else if (IsKataSama(CKata, CD))
 						{
-							MovePlayer(Map1, 'd', &PlayerPosition);
-
+							MovePlayer(MapG(SearchNodeG(G, PlayerMap)), 'd', &PlayerPosition);
+							if (PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(G, PlayerMap)), PlayerPosition)) != -1)
+							{
+								PlayerMapPrev = PlayerMap;
+								PlayerMap = PlayerTunnel(PlayerMap, GetElementMap(MapG(SearchNodeG(G, PlayerMap)), PlayerPosition));
+								PlayerPosition = MakePOINT(1,1);
+							}
 						} else if (IsKataSama(CKata, CRepair))
 						{
-							if (IsAround(PlayerPosition, Map1, 'W'))
+							if (IsAround(PlayerPosition, MapG(SearchNodeG(G, PlayerMap)), 'W'))
 							{
 								boolean FoundBroken;
 								POINT Up, Down, Left, Right;
@@ -822,7 +870,7 @@ int main()
 						} else if (IsKataSama(CKata, CDetail))
 						{
 							printf("Detail\n");
-							FindAroundDetail(PlayerPosition, Map1, 1, ArrWahanaPlayer);
+							FindAroundDetail(PlayerPosition, MapG(SearchNodeG(G, PlayerMap)), 1, ArrWahanaPlayer);
 
 						} else if (IsKataSama(CKata, COffice))
 						{

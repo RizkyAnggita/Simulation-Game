@@ -4,67 +4,68 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-adrNode AlokNode(int X)
+adrNodeG AlokNodeG(int X, MATRIKS M)
 {
-    adrNode P = (adrNode)malloc(sizeof(adrNode));
-    if (P != Nil)
+    adrNodeG P = (adrNodeG)malloc(sizeof(NodeG));
+    if (P != NilG)
     {
         Id(P) = X;
+        MapG(P) = M;
         Npred(P) = 0;
-        Trail(P) = Nil;
-        Next(P) = Nil;
+        Trail(P) = NilG;
+        Next(P) = NilG;
     }
 
     return P;
 }
 /* Mengembalikan address hasil alokasi Simpul X.*/
-/* Jika alokasi berhasil, maka address tidak Nil, misalnya
-menghasilkan P, maka Id(P)=X, Npred(P)=0, Trail(P)=Nil,
-dan Next(P)=Nil. Jika alokasi gagal, mengembalikan Nil. */
+/* Jika alokasi berhasil, maka address tidak NilG, misalnya
+menghasilkan P, maka Id(P)=X, Npred(P)=0, Trail(P)=NilG,
+dan Next(P)=NilG. Jika alokasi gagal, mengembalikan NilG. */
 
 /* *** Konstruktor *** */
-Graph CreateGraph(int X)
+Graph CreateGraph(int X, MATRIKS M)
 {
     Graph P;
-    First(P) = AlokNode(X);
+    First(P) = AlokNodeG(X, M);
 
     return P;
 }
 /* I.S. Sembarang; F.S. Terbentuk Graph dengan satu simpul dengan Id=X */
-void DealokNode(adrNode P)
+void DealokNodeG(adrNodeG P)
 {
     free(P);
 }
 /*I.S. P terdefinisi; F.S. P dikembalikan ke sistem*/
 
 /* *** Manajemen Memory List Successor (Trailer) *** */
-adrSuccNode AlokSuccNode(adrNode Pn)
+adrSuccNodeG AlokSuccNodeG(adrNodeG Pn)
 {
-    adrSuccNode P = (adrSuccNode)malloc(sizeof(adrSuccNode));
-    if (Pn != Nil)
+    adrSuccNodeG P = (adrSuccNodeG)malloc(sizeof(adrSuccNodeG));
+    if (Pn != NilG)
     {
         Succ(P) = Pn;
-        Next(P) = Nil;
+        Next(P) = NilG;
     }
 
     return P;
 }
 /* Mengembalikan address hasil alokasi. */
-/* Jika alokasi berhasil, maka address tidak Nil, misalnya
-menghasilkan Pt, maka Succ(Pt)=Pn dan Next(Pt)=Nil. Jika
-alokasi gagal, mengembalikan Nil. */
-void DealokSuccNode(adrSuccNode P)
+/* Jika alokasi berhasil, maka address tidak NilG, misalnya
+menghasilkan Pt, maka Succ(Pt)=Pn dan Next(Pt)=NilG. Jika
+alokasi gagal, mengembalikan NilG. */
+void DealokSuccNodeG(adrSuccNodeG P)
 {
     free(P);
 }
 /* I.S. P terdefinisi; F.S. P dikembalikan ke sistem */
-adrNode SearchNode(Graph G, int X)
+adrNodeG SearchNodeG(Graph G, int X)
 {
-    adrNode P;
+    adrNodeG P;
     boolean found = false;
 
     P = First(G);
-    while (P != Nil && !found)
+    while (P != NilG && !found)
     {
         if (Id(P) == X)
         {
@@ -82,30 +83,30 @@ adrNode SearchNode(Graph G, int X)
     }
     else
     {
-        return Nil;
+        return NilG;
     }
 }
 /*  mengembalikan address simpul dengan Id=X jika sudah ada pada graph G,
-Nil jika belum */
-adrSuccNode SearchEdge(Graph G, int prec, int succ)
+NilG jika belum */
+adrSuccNodeG SearchEdge(Graph G, int prec, int succ)
 {
-    adrNode P;
-    adrSuccNode T;
+    adrNodeG P;
+    adrSuccNodeG T;
     boolean found = false;
 
-    P = SearchNode(G, prec);
+    P = SearchNodeG(G, prec);
 
-    if (P == Nil)
+    if (P == NilG)
     {
-        return Nil;
+        return NilG;
     }
     else
     {
         T = Trail(P);
         // di notal dosen harusnya codenya
-        // while (Id(T) != prec && T != Nil)
-        // tapi T (adrSuccNode) ga punya field Id, jadi gw ganti ke P
-        while ((T != Nil) && !found)
+        // while (Id(T) != prec && T != NilG)
+        // tapi T (adrSuccNodeG) ga punya field Id, jadi gw ganti ke P
+        while ((T != NilG) && !found)
         {
             if (Id(Succ(T)) != prec)
             {
@@ -120,15 +121,15 @@ adrSuccNode SearchEdge(Graph G, int prec, int succ)
     }
 }
 /* mengembalikan address trailer yang menyimpan info busur (prec,succ)
-jika sudah ada pada graph G, Nil jika belum */
-adrNode InsertNode(Graph G, int X)
+jika sudah ada pada graph G, NilG jika belum */
+adrNodeG InsertNodeG(Graph G, int X, MATRIKS M)
 {
-    adrNode Pn = AlokNode(X);
-    adrNode P = First(G);
+    adrNodeG Pn = AlokNodeG(X, M);
+    adrNodeG P = First(G);
 
-    if (Pn != Nil)
+    if (Pn != NilG)
     {
-        while (Next(P) != Nil)
+        while (Next(P) != NilG)
         {
             P = Next(P);
         }
@@ -140,42 +141,31 @@ adrNode InsertNode(Graph G, int X)
 /* Menambahkan simpul X ke dalam graph, jika alokasi X berhasil. */
 /* I.S. G terdefinisi, X terdefinisi dan belum ada pada G. */
 /*  F.S. Jika alokasi berhasil, X menjadi elemen terakhir G, Pn berisi
-address simpul X. Jika alokasi gagal, G tetap, Pn berisi Nil */
+address simpul X. Jika alokasi gagal, G tetap, Pn berisi NilG */
 Graph InsertEdge(Graph G, int prec, int succ)
 {
-    adrNode precNode, succNode;
-    adrSuccNode trail;
+    adrNodeG precNodeG, succNodeG;
+    adrSuccNodeG trail;
 
-    if (SearchEdge(G, prec, succ) == Nil)
+    if (SearchEdge(G, prec, succ) == NilG)
     {
-        precNode = SearchNode(G, prec);
-        if (precNode == Nil)
+        
+
+        trail = Trail(precNodeG);
+
+        if (trail == NilG)
         {
-            precNode = InsertNode(G, prec);
-        }
-
-        succNode = SearchNode(G, succ);
-
-        if (succNode == Nil)
-        {
-            succNode = InsertNode(G, succ);
-        }
-
-        trail = Trail(precNode);
-
-        if (trail == Nil)
-        {
-            trail = AlokSuccNode(succNode);
+            trail = AlokSuccNodeG(succNodeG);
         } else
         {
-            while (Next(trail) != Nil)
+            while (Next(trail) != NilG)
             {
                 trail = Next(trail);
             }    
-            Next(trail) = AlokSuccNode(succNode);
+            Next(trail) = AlokSuccNodeG(succNodeG);
         }
         
-        Npred(succNode) = Npred(succNode) + 1;
+        Npred(succNodeG) = Npred(succNodeG) + 1;
     }
 
     return G;

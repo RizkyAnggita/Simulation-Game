@@ -765,36 +765,43 @@ int PlayerTunnel(int MapIdPlayer, char Symbol)
 /* Menghasilkan perpindahan player dari symbol yang dimasukkan */
 /* Jika input invalid maka akan mengembalikan nilai Nil (-1) */
 {
-	if ((MapIdPlayer == 1) && (Symbol = '>'))
+	if ((MapIdPlayer == 1) && (Symbol == '>'))
 	{
 		return 2;
 	}
-	else if ((MapIdPlayer == 1) && (Symbol = 'v'))
+	else if ((MapIdPlayer == 1) && (Symbol == 'v'))
 	{
+	
 		return 3;
 	}
-	else if ((MapIdPlayer == 2) && (Symbol = '<'))
+	else if ((MapIdPlayer == 2) && (Symbol == '<'))
 	{
+	
 		return 1;
 	}
-	else if ((MapIdPlayer == 2) && (Symbol = 'v'))
+	else if ((MapIdPlayer == 2) && (Symbol == 'v'))
 	{
+	
 		return 4;
 	}
-	else if ((MapIdPlayer == 3) && (Symbol = '>'))
+	else if ((MapIdPlayer == 3) && (Symbol == '>'))
 	{
+	
 		return 4;
 	}
-	else if ((MapIdPlayer == 3) && (Symbol = '^'))
+	else if ((MapIdPlayer == 3) && (Symbol == '^'))
 	{
+	
 		return 1;
 	}
-	else if ((MapIdPlayer == 4) && (Symbol = '<'))
+	else if ((MapIdPlayer == 4) && (Symbol == '<'))
 	{
+	
 		return 3;
 	}
-	else if ((MapIdPlayer == 4) && (Symbol = '^'))
+	else if ((MapIdPlayer == 4) && (Symbol == '^'))
 	{
+	
 		return 2;
 	}
 	else
@@ -802,6 +809,50 @@ int PlayerTunnel(int MapIdPlayer, char Symbol)
 		return -1;
 	}
 }
+
+POINT MoveMap(int MapIdPlayer, char Symbol)
+{
+	if ((MapIdPlayer == 1) && (Symbol == '>'))
+	{
+		return MakePOINT(3,0);
+	}
+	else if ((MapIdPlayer == 1) && (Symbol == 'v'))
+	{
+		return MakePOINT(0,3);
+
+	}
+	else if ((MapIdPlayer == 2) && (Symbol == '<'))
+	{
+		return MakePOINT(3,6);
+	
+	}
+	else if ((MapIdPlayer == 2) && (Symbol == 'v'))
+	{
+		return MakePOINT(0,3);
+	
+	}
+	else if ((MapIdPlayer == 3) && (Symbol == '>'))
+	{
+		return MakePOINT(3,0);
+
+	}
+	else if ((MapIdPlayer == 3) && (Symbol == '^'))
+	{
+		return MakePOINT(6,3);
+
+	}
+	else if ((MapIdPlayer == 4) && (Symbol == '<'))
+	{
+		return MakePOINT(3,6);
+	
+	}
+	else if ((MapIdPlayer == 4) && (Symbol == '^'))
+	{
+		return MakePOINT(6,3);
+	
+	}
+}
+
 WahanaPlayer SearchWahanaPlayer(int Map, POINT Loc, TabWahanaPlayer ArrayWP)
 /*  I.S. Wahana Player pasti ada
     F.S. Mencari Wahana Player yang memiliki Map dan Loc sama dengan input */
@@ -1045,4 +1096,22 @@ void Printdetail(WahanaPlayer WP){
 		printf("Berfungsi");
 	}
 	ENDL; ENDL;
+}
+
+Graph InitMapGraph()
+/* Meng return graph dengan node node nya merupakan id dan map, yang sudah terhubungkan */
+{
+
+	MATRIKS Map1 = FileToMatriks(FILE_MAP_1);
+	MATRIKS Map2 = FileToMatriks(FILE_MAP_2);
+	MATRIKS Map3 = FileToMatriks(FILE_MAP_3);
+	MATRIKS Map4 = FileToMatriks(FILE_MAP_4);
+
+	Graph G = CreateGraph(1, Map1);
+
+	InsertNodeG(G, 2, Map2);
+	InsertNodeG(G, 3, Map3);
+	InsertNodeG(G, 4, Map4);
+
+	return G;
 }

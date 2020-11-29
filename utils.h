@@ -19,6 +19,8 @@
 #include "stackins.h"
 #include "pengunjung.h"
 #include "prioqueuechar.h"
+#include "graph.h"
+#include "constants.h"
 
 void GetBrsKolFileMap(int *NB, int *NK, char *filename);
 /* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map
@@ -148,6 +150,8 @@ PlayerLoc dan Map */
 int PlayerTunnel(int MapIdPlayer, char Symbol);
 /* Menghasilkan perpindahan player dari symbol yang dimasukkan */
 
+POINT MoveMap(int MapIdPlayer, char Symbol);
+
 WahanaPlayer SearchWahanaPlayer(int Map, POINT Loc, TabWahanaPlayer ArrayWP);
 /*  I.S. Wahana Player pasti ada
     F.S. Mencari Wahana Player yang memiliki Map dan Loc sama dengan input */
@@ -181,5 +185,8 @@ void PrintKataListU(ListU L);
 
 void Printdetail(WahanaPlayer WP);
 /* Mencetak Detail Wahana Player untuk command detail */
+
+Graph InitMapGraph();
+/* Meng return graph dengan node node nya merupakan id dan map, yang sudah terhubungkan */
 
 #endif

@@ -8,29 +8,29 @@
 #include "boolean.h"
 #include "matriks.h"
 
-#define Nil NULL
+#define NilG NULL
 
 /* Definisi Type */
-typedef struct Node *adrNode;
-typedef struct SuccNode *adrSuccNode;
-typedef struct Node
+typedef struct NodeG *adrNodeG;
+typedef struct SuccNodeG *adrSuccNodeG;
+typedef struct NodeG
 {
     int Id;
     int NPred;
     MATRIKS Map;
-    adrSuccNode Trail;
-    adrNode Next;
-} Node;
+    adrSuccNodeG Trail;
+    adrNodeG Next;
+} NodeG;
 
-typedef struct SuccNode
+typedef struct SuccNodeG
 {
-    adrNode Succ;
-    adrSuccNode Next;
-} SuccNode;
+    adrNodeG Succ;
+    adrSuccNodeG Next;
+} SuccNodeG;
 
 typedef struct Graph
 {
-    adrNode First;
+    adrNodeG First;
 } Graph;
 
 /* *** Selektor *** */
@@ -40,37 +40,38 @@ typedef struct Graph
 #define Trail(Pn) Pn->Trail
 #define Next(Pn) Pn->Next
 #define Succ(Pt) Pt->Succ
+#define MapG(Pn) Pn->Map
 
 /* *** Konstruktor *** */
-Graph CreateGraph(int X);
+Graph CreateGraph(int X, MATRIKS M);
 /* I.S. Sembarang; F.S. Terbentuk Graph dengan satu simpul dengan Id=X */
-adrNode AlokNode(int X);
+adrNodeG AlokNodeG(int X, MATRIKS M);
 /* Mengembalikan address hasil alokasi Simpul X.*/
-/* Jika alokasi berhasil, maka address tidak Nil, misalnya
-menghasilkan P, maka Id(P)=X, Npred(P)=0, Trail(P)=Nil,
-dan Next(P)=Nil. Jika alokasi gagal, mengembalikan Nil. */
-void DealokNode(adrNode P);
+/* Jika alokasi berhasil, maka address tidak NilG, misalnya
+menghasilkan P, maka Id(P)=X, Npred(P)=0, Trail(P)=NilG,
+dan Next(P)=NilG. Jika alokasi gagal, mengembalikan NilG. */
+void DealokNodeG(adrNodeG P);
 /*I.S. P terdefinisi; F.S. P dikembalikan ke sistem*/
 
 /* *** Manajemen Memory List Successor (Trailer) *** */
-adrSuccNode AlokSuccNode(adrNode Pn);
+adrSuccNodeG AlokSuccNodeG(adrNodeG Pn);
 /* Mengembalikan address hasil alokasi. */
-/* Jika alokasi berhasil, maka address tidak Nil, misalnya
-menghasilkan Pt, maka Succ(Pt)=Pn dan Next(Pt)=Nil. Jika
-alokasi gagal, mengembalikan Nil. */
-void DealokSuccNode(adrSuccNode P);
+/* Jika alokasi berhasil, maka address tidak NilG, misalnya
+menghasilkan Pt, maka Succ(Pt)=Pn dan Next(Pt)=NilG. Jika
+alokasi gagal, mengembalikan NilG. */
+void DealokSuccNodeG(adrSuccNodeG P);
 /* I.S. P terdefinisi; F.S. P dikembalikan ke sistem */
-adrNode SearchNode(Graph G, int X);
+adrNodeG SearchNodeG(Graph G, int X);
 /*  mengembalikan address simpul dengan Id=X jika sudah ada pada graph G,
-Nil jika belum */
-adrSuccNode SearchEdge(Graph G, int prec, int succ);
+NilG jika belum */
+adrSuccNodeG SearchEdge(Graph G, int prec, int succ);
 /* mengembalikan address trailer yang menyimpan info busur (prec,succ)
-jika sudah ada pada graph G, Nil jika belum */
-adrNode InsertNode(Graph G, int X);
+jika sudah ada pada graph G, NilG jika belum */
+adrNodeG InsertNodeG(Graph G, int X, MATRIKS M);
 /* Menambahkan simpul X ke dalam graph, jika alokasi X berhasil. */
 /* I.S. G terdefinisi, X terdefinisi dan belum ada pada G. */
 /*  F.S. Jika alokasi berhasil, X menjadi elemen terakhir G, Pn berisi
-address simpul X. Jika alokasi gagal, G tetap, Pn berisi Nil */
+address simpul X. Jika alokasi gagal, G tetap, Pn berisi NilG */
 Graph InsertEdge(Graph G, int prec, int succ);
 /*  Menambahkan busur dari prec menuju succ ke dalam G  */
 /*  I.S. G, prec, succ terdefinisi */
