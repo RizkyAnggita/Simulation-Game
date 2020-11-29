@@ -6,6 +6,8 @@ timeskip
 
 ---------------------------------------
 
+resetwahanaplayercount
+emptyqueue
 timeskip = max
 
 while Mainphase and play do
