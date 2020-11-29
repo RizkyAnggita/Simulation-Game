@@ -160,6 +160,9 @@ void FindAround(POINT P, MATRIKS MapMat, int MapInt, TabWahanaPlayer ArrayWP);
     F.S. Output daftar semua wahana di sekitar Player
     Jika tidak ada wahana di sekitar player, output pesan "Tidak ada wahana di sekitar anda" */
 
+void FindAroundDetail(POINT P, MATRIKS MapMat, int MapInt, TabWahanaPlayer ArrayWP);
+/*  Sama kayak FindAround cuman untuk command detail*/
+
 JAM TimeSkip(JAM Sekarang, TabCommand T, Kata K);
 /* Mengembalikan JAM yang sudah di-timeskip setelah menjalankan command */
 

@@ -770,7 +770,7 @@ int main()
 						} else if (IsKataSama(CKata, CDetail))
 						{
 							printf("Detail\n");
-							FindAround(PlayerPosition, Map1, 1, ArrWahanaPlayer);
+							FindAroundDetail(PlayerPosition, Map1, 1, ArrWahanaPlayer);
 
 						} else if (IsKataSama(CKata, COffice))
 						{
@@ -834,7 +834,7 @@ int main()
 								ENDL;
 
 							}
-							
+
 							else if(IsKataSama(CKata, CExit))
 							{
 								printf("Anda Keluar dari Office\n\n");
