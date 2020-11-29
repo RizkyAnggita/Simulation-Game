@@ -4,6 +4,7 @@
 
 #include "point.h"
 #include "mesinkata.h"
+#include "arraybahan.h"
 
 // Definisi Instruction
 /*
@@ -26,6 +27,8 @@ typedef struct {
 	Kata Detail;
 	int Qty;
 	int Map;
+	int MCost;
+	TabBahan BCost;
 } Instruction;
 
 // !!!======!!! Selektor !!!======!!!
@@ -34,9 +37,11 @@ typedef struct {
 #define Detail(I) (I).Detail
 #define Quantity(I) (I).Qty
 #define Map(I) (I).Map
+#define MCost(I) (I).MCost
+#define BCost(I) (I).BCost
 
 
-Instruction CreateInstruction(Kata command, POINT point, Kata detail, int qty, int map);
+Instruction CreateInstruction(Kata command, POINT point, Kata detail, int qty, int map, int mcost, TabBahan bcost);
 /* Membuat instruction baru dengan komponen seperti pada parameter dan mengembalikannya*/
 
 #endif

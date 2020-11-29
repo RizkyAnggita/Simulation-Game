@@ -237,7 +237,7 @@ int main()
 								{
 									SetElementMap(&Map1Prep, PlayerPosition, 'W');
 
-									NewInstruction = CreateInstruction(CBuild, PlayerPosition, Type(WahanaGameBasic), 1, PlayerMap);
+									NewInstruction = CreateInstruction(CBuild, PlayerPosition, Type(WahanaGameBasic), 1, PlayerMap, MoneyNeeded, ListBahanNeeded);
 									Push(&InstructionStack, NewInstruction);
 
 									TimeNeeded = FindDuration(ArrayCommand, CBuild) * 60;
@@ -304,7 +304,7 @@ int main()
 							if ((MoneyNeeded + MoneyNeededTotal) <= MoneyPlayer) // Uang mencukupi
 							{
 
-								NewInstruction = CreateInstruction(CBuy, PlayerPosition, Name(CBahan), Val(CBahan), PlayerMap);
+								NewInstruction = CreateInstruction(CBuy, PlayerPosition, Name(CBahan), Val(CBahan), PlayerMap, MoneyNeeded, ListBahanNeeded);
 								Push(&InstructionStack, NewInstruction);
 
 								TimeNeeded = FindDuration(ArrayCommand, CBuy) * 60;
@@ -339,9 +339,28 @@ int main()
 						} else
 						{
 							Pop(&InstructionStack, &NewInstruction);
-							
+
+							if (IsKataSama(CBuild, Function(NewInstruction)))
+							{
+
+								// SetElementMap(&Map1Prep, Point(NewInstruction), '-');
+
+								// TimeNeeded = FindDuration(ArrayCommand, CBuild) * 60;
+								// TimeNeededTotal = PrevNDetik(TimeNeededTotal, TimeNeeded);
+
+								// MoneyNeededTotal += MoneyNeeded;
+
+								// ListBahanNeededTotal = AddListBahan(ListBahanNeededTotal, ListBahanNeeded);
+
+								// AksiTotal += 1;
+								// printf("undo build\n");
+							} else if (IsKataSama(CBuy, Function(NewInstruction)))
+							{
+								printf("undo buy\n");
+							}
+
 						}
-						printf("undo\n");
+		
 
 					} else if (IsKataSama(CKata, CExecute))
 					{

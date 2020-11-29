@@ -2,7 +2,7 @@
 #include "instruction.h"
 
 
-Instruction CreateInstruction(Kata command, POINT point, Kata detail, int qty, int map)
+Instruction CreateInstruction(Kata command, POINT point, Kata detail, int qty, int map, int mcost, TabBahan bcost)
 /* Membuat instruction baru dengan komponen seperti pada parameter dan mengembalikannya*/
 {
 	//KAMUS
@@ -14,6 +14,8 @@ Instruction CreateInstruction(Kata command, POINT point, Kata detail, int qty, i
 	Detail(NewIns) = detail;
 	Quantity(NewIns) = qty;
 	Map(NewIns) = map;
+	MCost(NewIns) = mcost;
+	BCost(NewIns) = bcost;
 
 	return NewIns;
 }
