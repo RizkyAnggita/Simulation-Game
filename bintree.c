@@ -42,6 +42,8 @@ BinTree Tree(infotypeBinTree Akar, BinTree L, BinTree R)
     {
         P = NilBinTree;
     }
+
+    return P;
 }
 /* Menghasilkan sebuah pohon biner dari A, L, dan R, jika alokasi berhasil */
 /* Menghasilkan pohon kosong (NilBinTree) jika alokasi gagal */

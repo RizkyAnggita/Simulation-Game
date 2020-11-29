@@ -28,6 +28,8 @@ addressListWG AlokasiListWG (infotypeListWG X)
 	addressListWG P = malloc(sizeof(addressListWG));
 	NextListWG(P) = NilListWG;
 	InfoListWG(P) = X;
+
+	return P;
 }
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/

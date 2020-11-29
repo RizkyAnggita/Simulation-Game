@@ -14,6 +14,8 @@
 #include "wahanagame.h"
 #include "bintree.h"
 #include "listwahanagame.h"
+#include "wahanaplayer.h"
+#include "arraywahanaplayer.h"
 
 void GetBrsKolFileMap(int *NB, int *NK, char *filename);
 /* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map
@@ -84,7 +86,7 @@ void PrintPlayerStat(Kata username);
 void PrintTime(JAM CurrentTime, JAM EndTime, boolean PrepPhase);
 /* Menampilkan waktu untuk preparation phase */
 
-void PrintPrepStat(int Aksi, JAM J, int Money);
+void PrintPrepStat(int Aksi, JAM J, int Money, TabBahan ListBahan);
 /* Menampilkan stat khusus preparation phase, total aksi waktu
    dan uang yang dibutuhkan */
 
@@ -112,14 +114,21 @@ boolean BahanCukup(TabBahan BahanPlayer, TabBahan BahanCost);
 boolean MoneyCukup(int MoneyPlayer, int MoneyCost);
 /* Mengecek apakah player memiliki uang yang cukup */
 
-// void AddBahan(TabBahan ListBahan, Bahan B);
-//  Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan
+TabBahan AddBahan(TabBahan ListBahan, Bahan B);
+// Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan 
 
 TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2);
 /* Menjumlahkan elemen tiap bahan pada 2 List */
 /* Asumsi panjang ListBahan1=ListBahan2 */
 
-boolean SearchNodeWG(BinTree T, Kata K);
+TabBahan MinusBahan(TabBahan ListBahan, Bahan B);
+// Menagurangi bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan 
+
+TabBahan MinusListBahan(TabBahan ListBahan1, TabBahan ListBahan2);
+/* Mengurangi elemen tiap bahan pada  List 1 dengan List 2 */
+/* Asumsi panjang ListBahan1=ListBahan2 */
+
+boolean SearchNodeWG (BinTree T, Kata K);
 /* Mengirimkan true jika ada node dari T yang memiliki info.Type = K */
 
 addrNode findTypeBinTree(Kata TypeYangDicari, BinTree T);

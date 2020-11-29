@@ -1,0 +1,43 @@
+ada timeskip
+
+generate pengunjung di setiap timeskip
+kemungkinan dapat pengunjung nya bertambah besar seusia dengan lama time skip
+timeskip
+
+---------------------------------------
+
+timeskip = max
+
+while Mainphase and play do
+
+	if pengunjung terakhir blm selesai
+	enqueue pengunjung terakhir
+	pengunjung = generate(timeskip)
+	enqueue pengunjung
+
+	if (W a s d, office, detail, dan lainnya selain serve )
+		proses
+
+		timeskip = findduration
+
+	else if (serve)
+
+		random rusak apa ngga
+
+		if ruask
+			random kapan rusaknya
+
+			timeskip = kapan rusaknya
+			dequeue
+			pengunjung + priority
+			pengunjung terakhir = hasil dequeue yang blm dikurangin list wahana yg ingin dinaikin
+		else
+			timeskip = duration wahana
+			dequeue
+			pengunjung terakhir = hasil dequeue yang udh dikurangin list wahana yg ingin dinaikin
+
+	currentime = nextndetik(currenttime, timeskip * 60)
+
+
+
+

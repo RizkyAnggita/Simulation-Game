@@ -66,11 +66,11 @@ int main()
 	ListWG ListWahanaGame;
 	ListWahanaGame= FileToListTreeWahana(FILE_WAHANA, ShopBahan);
 	
-	// PrintTree(InfoListWG(FirstListWG(ListWahanaGame)), 2);
-	// PrintTree(InfoListWG(NextListWG(FirstListWG(ListWahanaGame))), 2);
-	// printf("CC = '%c'\n", CC);
-	// PrintKata(CKata);
-	// ENDL;
+	PrintTree(InfoListWG(FirstListWG(ListWahanaGame)), 2);
+	PrintTree(InfoListWG(NextListWG(FirstListWG(ListWahanaGame))), 2);
+	printf("CC = '%c'\n", CC);
+	PrintKata(CKata);
+	ENDL;
 
 	
     // Player state
@@ -179,8 +179,6 @@ int main()
 
 					if (IsKataSama(CKata, CW))
 					{
-						// TimeSpent = MakeJAM(0, 10, 0);
-						// PrepTotalTime = NextNDetik(PrepTotalTime, JAMToDetik(TimeSpent));
 						MovePlayer(Map1, 'w', &PlayerPosition);
 
 					} else if (IsKataSama(CKata, CA))
@@ -413,7 +411,23 @@ int main()
 
 					STARTKATA(" ");
 
-					if (IsKataSama(CKata, CServe))
+					if (IsKataSama(CKata, CW))
+					{
+						MovePlayer(Map1, 'w', &PlayerPosition);
+
+					} else if (IsKataSama(CKata, CA))
+					{
+						MovePlayer(Map1, 'a', &PlayerPosition);
+
+					} else if (IsKataSama(CKata, CS))
+					{
+						MovePlayer(Map1, 's', &PlayerPosition);
+
+					} else if (IsKataSama(CKata, CD))
+					{
+						MovePlayer(Map1, 'd', &PlayerPosition);
+
+					} else if (IsKataSama(CKata, CServe))
 					{
 						printf("serve\n");
 

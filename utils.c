@@ -394,10 +394,14 @@ void PrintTime(JAM CurrentTime, JAM EndTime, boolean PrepPhase)
 	printf("Time Remaining: %d hour(s) %d minute(s) %d second(s)", Hour(TR), Minute(TR), Second(TR));
 }
 
-void PrintPrepStat(int Aksi, JAM J, int Money)
+void PrintPrepStat(int Aksi, JAM J, int Money, TabBahan ListBahan)
 /* Menampilkan stat khusus preparation day, total aksi waktu
    dan uang yang dibutuhkan */
 {
+	//KAMUS
+	IdxType i;
+
+	//ALGORITMA
 	printf("Total aksi yang akan dilakukan: %d", Aksi);
 	ENDL;
 
@@ -405,6 +409,16 @@ void PrintPrepStat(int Aksi, JAM J, int Money)
 	ENDL;
 
 	printf("Total uang yang dibutuhkan: %d", Money);
+	ENDL;
+
+	printf("List bahan yang dibutuhkan: (Nama) (Harga)\n");
+
+	for (i = GetFirstIdxListBahan(ListBahan); i <= GetLastIdxListBahan(ListBahan); ++i)
+	{
+		printf("    - ");
+		PrintKata(Name(Elmt(ListBahan, i)));
+		printf(": %d\n", Val(Elmt(ListBahan, i)));
+	}
 }
 
 void PrintMainQueue()
@@ -555,22 +569,20 @@ boolean MoneyCukup(int MoneyPlayer, int MoneyCost)
 	return MoneyPlayer >= MoneyCost;
 }
 
-// void AddBahan(TabBahan * ListBahan, Bahan B)
-// /* Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan */
-// {
-// 	TabBahan Hasil;
-// 	IdxType i;
-
+TabBahan AddBahan(TabBahan ListBahan, Bahan B)
+/* Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan */
+{
+	IdxType i;
 // 	MakeEmptyListBahan(&Hasil);
 
-// for (i = GetFirstIdxListBahan(ListBahan); i <= GetLastIdxListBahan(ListBahan); ++i)
-// {
-// 	if (Name(Elmt(ListBahan, i)) == Name(B))
-// 	{
-
-// 	}
-// }
-// }
+	for (i = GetFirstIdxListBahan(ListBahan); i <= GetLastIdxListBahan(ListBahan); ++i)
+	{
+		if (IsKataSama(Name(Elmt(ListBahan, i)), Name(B)))
+		{
+			Val(Elmt(ListBahan, i)) += Val(B);
+		}
+	}
+}
 
 TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2)
 {
@@ -589,6 +601,37 @@ TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2)
 	}
 
 	return Hasil;
+}
+
+TabBahan MinusBahan(TabBahan ListBahan, Bahan B)
+// Menagurangi bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan 
+{
+	IdxType i;
+
+	for (i = GetFirstIdxListBahan(ListBahan); i <= GetLastIdxListBahan(ListBahan); ++i)
+	{
+		if (IsKataSama(Name(Elmt(ListBahan, i)), Name(B)))
+		{
+			Val(Elmt(ListBahan, i)) -= Val(B);
+		}
+	}
+}
+
+TabBahan MinusListBahan(TabBahan ListBahan1, TabBahan ListBahan2)
+/* Mengurangi elemen tiap bahan pada  List 1 dengan List 2 */
+/* Asumsi panjang ListBahan1=ListBahan2 */
+{
+	TabBahan Hasil;
+	MakeEmptyListBahan(&Hasil);
+	IdxType i;
+
+	//Me-assign Nama Bahan dan jumlah bahan ke TabBahan Hasil;
+	for (i = GetFirstIdxListBahan(ListBahan1); i <= GetLastIdxListBahan(ListBahan1); ++i)
+	{
+
+		Elmt(Hasil,i).Name = Elmt(ListBahan1,i).Name;
+		Elmt(Hasil,i).Val = Elmt(ListBahan1,i).Val - Elmt(ListBahan2,i).Val;
+	}
 }
 
 boolean SearchNodeWG(BinTree T, Kata K)
@@ -719,6 +762,7 @@ WahanaPlayer SearchWahanaPlayer(int Map, POINT Loc, TabWahanaPlayer ArrayWP)
 /*  I.S. Wahana Player pasti ada
     F.S. Mencari Wahana Player yang memiliki Map dan Loc sama dengan input */
 {
+	int i;
     i=GetFirstIdxListWP(ArrayWP);
     while(i<=GetLastIdxListWP(ArrayWP)){
         if (EQ(LocW(ElmtWP(ArrayWP,i)),Loc)&& MapW(ElmtWP(ArrayWP,i))==Map){
