@@ -770,10 +770,75 @@ int main()
 						} else if (IsKataSama(CKata, CDetail))
 						{
 							printf("Detail\n");
+							FindAround(PlayerPosition, Map1, 1, ArrWahanaPlayer);
 
 						} else if (IsKataSama(CKata, COffice))
 						{
-							printf("Office\n");
+							printf("Anda memasuki Office\n");
+							printf("Masukkan command Details, Report, atau exit: ");
+							STARTKATA(" ");
+							ENDL; ENDL;
+
+							if(IsKataSama(CKata, CDetails)) 
+							{
+								//Details
+								int i;
+								WahanaPlayer WP;
+
+								printf("List Wahana : \n");
+								for (i=0; i<NbElmtListWP(ArrWahanaPlayer); i++){
+									printf("  -");
+									PrintKata(ElmtWP(ArrWahanaPlayer,i).NamaW);
+									printf("\n");
+								}
+
+								printf("\nAkhiri command dengan ';' !\n");
+								printf("Masukkan Nama Wahana yang ingin dilihat detailnya: ");
+								STARTKALIMAT(" ");
+
+								WP =  SearchWahanaPlayerName(CKata, ArrWahanaPlayer);
+								//Asumsi inputan selalu benar 
+								printf("Nama      : "); PrintKata(NamaW(WP)); 					ENDL;
+								printf("Tipe      : "); PrintKata(Akar(StatW(WP)).Type); 		ENDL;
+								printf("Harga     : %d", Akar(StatW(WP)).Price); 				ENDL; 
+								printf("Lokasi    : (%d,%d)", LocW(WP).X, LocW(WP).Y);			ENDL;
+								printf("Deskripsi : "); PrintKata(Akar(StatW(WP)).Description);	ENDL;
+								printf("Kapasitas : %d", Akar(StatW(WP)).Capacity); 			ENDL;
+								printf("History Upgrade : "); PrintKataListU(HUpgradeW(WP));	ENDL;
+								printf("Durasi Wahana: %d", Akar(StatW(WP)).DurationW); 		ENDL;
+
+							}
+
+							else if (IsKataSama(CKata, CReport))
+							{
+								//Report
+								int i;
+								WahanaPlayer WP;
+
+								printf("Report Wahana\n");
+								printf("List Wahana : \n");
+								for (i=0; i<NbElmtListWP(ArrWahanaPlayer); i++){
+									printf("  -");
+									PrintKata(ElmtWP(ArrWahanaPlayer,i).NamaW);
+									printf("\n");
+								}
+								
+								printf("\nAkhiri command dengan ';' !\n");
+								printf("Masukkan Nama Wahana yang ingin dilihat reportnya: ");
+								STARTKALIMAT(" ");
+								WP = SearchWahanaPlayerName(CKata, ArrWahanaPlayer);
+								printf("Jumlah wahana dinaiki:  %d\n", TotalPlayW(WP));
+								printf("Total penghasilan dari wahana ini : %d\n", TotalMoneyW(WP));
+								printf("Jumlah wahana dinaiki hari ini: %d\n", TotalPlayDayW(WP));
+								printf("Total Penghasilan dari wahana hari ini: %d\n", TotalMoneyDayW(WP));
+								ENDL;
+
+							}
+							
+							else if(IsKataSama(CKata, CExit))
+							{
+								printf("Anda Keluar dari Office\n\n");
+							}
 
 						} else if (IsKataSama(CKata, CPrepare))
 						{

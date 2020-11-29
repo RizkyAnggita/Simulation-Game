@@ -176,5 +176,7 @@ boolean IsAround(POINT Loc, MATRIKS Map, char C);
 void PrintKataListU(ListU L);
 	/* Mencetak elemen ListU (Kata) pada setiap node */
 
+void Printdetail(WahanaPlayer WP);
+/* Mencetak Detail Wahana Player untuk command detail */
 
 #endif

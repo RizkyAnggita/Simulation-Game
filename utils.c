@@ -855,33 +855,29 @@ void FindAround(POINT P, MATRIKS MapMat, int MapInt, TabWahanaPlayer ArrayWP){
 	if ((CUp != 'W') && (CRight != 'W') && (CDown != 'W')  && (CLeft != 'W')) {
 		printf("Tidak ada wahana di sekitar anda\n");
 	} else {
+		WahanaPlayer WP;
 		printf("List:\n");
 		if (CUp == 'W') {
 			Nama = NamaW(SearchWahanaPlayer(MapInt, Up, ArrayWP));
-			printf("- ");
-			PrintKata(Nama);
-			printf("\n");
+			WP = SearchWahanaPlayerName(Nama, ArrayWP);
+			Printdetail(WP);
+
 		}
 		if (CRight == 'W') {
 			Nama = NamaW(SearchWahanaPlayer(MapInt, Right, ArrayWP));
-			printf("- ");
-			PrintKata(Nama);
-			printf("\n");
+			WP = SearchWahanaPlayerName(Nama, ArrayWP);
+			Printdetail(WP);
 		}
 		if (CDown == 'W') {
 			Nama = NamaW(SearchWahanaPlayer(MapInt, Down, ArrayWP));
-			printf("- ");
-			PrintKata(Nama);
-			printf("\n");
+			WP = SearchWahanaPlayerName(Nama, ArrayWP);
+			Printdetail(WP);
 		}
 		if (CLeft == 'W') {
 			Nama = NamaW(SearchWahanaPlayer(MapInt, Left, ArrayWP));
-			printf("- ");
-			PrintKata(Nama);
-			printf("\n");
+			WP = SearchWahanaPlayerName(Nama, ArrayWP);
+			Printdetail(WP);
 		}
-		printf("Akhiri command dengan ';' !\n");
-		STARTKALIMAT(" ");
 	}
 }
 
@@ -966,4 +962,37 @@ void PrintKataListU(ListU L){
 		P = NextListU(P);
 	}
 	
+}
+
+void Printdetail(WahanaPlayer WP){
+/* Mencetak Detail Wahana Player untuk command detail */
+	printf("Nama      : "); PrintKata(NamaW(WP)); ENDL;
+	printf("Lokasi    : (%d,%d)", LocW(WP).X, LocW(WP).Y);	ENDL;
+	printf("Upgrade(s): [");
+	
+	if (Left(StatW(WP)) != NilBinTree)
+	{
+		PrintKata(Akar(Left(StatW(WP))).Type);
+	}
+
+	if ( (Left(StatW(WP)) != NilBinTree) && (Right(StatW(WP)) != NilBinTree) )
+	{
+		printf(",");
+	}
+	
+	if (Right(StatW(WP)) != NilBinTree)
+	{
+		PrintKata(Akar(Right(StatW(WP))).Type);
+	}
+	printf("]\n");
+
+	printf("History   : "); PrintKataListU(HUpgradeW(WP));	ENDL;
+	printf("Status    : ");
+	if (BrokenW(WP)){
+		printf("Tidak berfungsi");
+	}
+	else{
+		printf("Berfungsi");
+	}
+	ENDL; ENDL;
 }
