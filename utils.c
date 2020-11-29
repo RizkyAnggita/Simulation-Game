@@ -869,6 +869,7 @@ void FindAround(POINT P, MATRIKS MapMat, int MapInt, TabWahanaPlayer ArrayWP){
 			PrintKata(Nama);
 			printf("\n");
 		}
+		STARTKALIMAT(" ");
 	}
 }
 

@@ -285,8 +285,6 @@ int main()
 					{
 						FindAround(PlayerPosition, Map1, 1, ArrWahanaPlayer);
 
-						STARTKALIMAT(" ");
-
 						WahanaPlayer WPUpgrade = SearchWahanaPlayerName(CKata, ArrWahanaPlayer);
 
 						if (TotalPlayW(WPUpgrade) != TotalPlayW(MakeWahanaPlayerUndef()))
@@ -491,6 +489,18 @@ int main()
 
 								printf("undo buy\n");
 
+							} else if (IsKataSama(CUpgrade, Function(NewInstruction)))
+							{
+								SetElementMap(&Map1Prep, Point(NewInstruction), 'W');
+
+								TimeNeeded = FindDuration(ArrayCommand, CUpgrade) * 60;
+								TimeNeededTotal = PrevNDetik(TimeNeededTotal, TimeNeeded);
+
+								MoneyNeededTotal -= MCost(NewInstruction);
+
+								ListBahanNeededTotal = MinusListBahan(ListBahanNeededTotal, BCost(NewInstruction));
+							
+								printf("undo upgrade\n");
 							}
 							AksiTotal -= 1;
 
