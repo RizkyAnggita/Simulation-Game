@@ -2,10 +2,12 @@
 #ifndef __PENGUNJUNG_H__
 #define __PENGUNJUNG_H__
 
+#include "mesinkata.h"
+
 typedef struct 
 {
 	int Prio;
-	Kata[] ListWPeng;
+	Kata * ListWPeng;
 	int TotalWPeng;
 	int CurrWPeng;
 	int Kesabaran;
@@ -18,4 +20,5 @@ typedef struct
 #define CurrWPeng(P) (P).CurrWPeng
 #define Kesabaran(P) (P).Kesabaran
 
+#endif
 
