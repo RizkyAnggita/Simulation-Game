@@ -4,7 +4,7 @@
 #define __WAHANAPLAYER_H__
 
 /* Modul lain yang digunakan */
-#include "wahanagame.h"
+#include "bintree.h"
 #include "mesinkata.h"
 #include "point.h"
 #include "boolean.h"
@@ -13,7 +13,7 @@
 
 
 typedef struct {
-	WahanaGame StatW;
+	BinTree StatW;
 	Kata NamaW;
 	POINT LocW;
 	int MapW;
@@ -40,7 +40,7 @@ typedef struct {
 
 /* Pembuatan WahanaPlayer */
 
-WahanaPlayer MakeWahanaPlayer(WahanaGame StatW, Kata NamaW, POINT LocW, int MapW, ListU HUpgradeW, int TotalPlayW, int TotalPlayDayW, int TotalMoneyW, int TotalMoneyDayW, boolean BrokenW);
+WahanaPlayer MakeWahanaPlayer(BinTree StatW, Kata NamaW, POINT LocW, int MapW, ListU HUpgradeW, int TotalPlayW, int TotalPlayDayW, int TotalMoneyW, int TotalMoneyDayW, boolean BrokenW);
 //Membuat Wahana player dengan atribut yang ada pada parameter
 
 WahanaPlayer MakeWahanaPlayerUndef();

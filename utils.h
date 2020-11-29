@@ -150,6 +150,9 @@ WahanaPlayer SearchWahanaPlayer(int Map, POINT Loc, TabWahanaPlayer ArrayWP);
 /*  I.S. Wahana Player pasti ada
     F.S. Mencari Wahana Player yang memiliki Map dan Loc sama dengan input */
 
+WahanaPlayer SearchWahanaPlayerName(Kata Name, TabWahanaPlayer ArrayWP);
+/* Mengreturn elemen wahanaplayer mempunyain nama Name. jika tidak adaa, akan mengembalikan wahanaundef */
+
 void FindAround(POINT P, MATRIKS MapMat, int MapInt, TabWahanaPlayer ArrayWP);
 /*  I.S. Player ada di posisi P di Map MapInt dengan Matriks MapMat 
     F.S. Output daftar semua wahana di sekitar Player

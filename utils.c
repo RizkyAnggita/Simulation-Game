@@ -803,6 +803,23 @@ WahanaPlayer SearchWahanaPlayer(int Map, POINT Loc, TabWahanaPlayer ArrayWP)
         }
         i++;
     }
+
+    return ElmtWP(ArrayWP,i);
+}
+
+WahanaPlayer SearchWahanaPlayerName(Kata Name, TabWahanaPlayer ArrayWP)
+/* Mengreturn elemen wahanaplayer mempunyain nama Name. jika tidak adaa, akan mengembalikan wahanaundef */
+{
+	int i;
+    i=GetFirstIdxListWP(ArrayWP);
+    while(i<=GetLastIdxListWP(ArrayWP)){
+        if (IsKataSama(Name, NamaW(ElmtWP(ArrayWP,i)))){
+            return ElmtWP(ArrayWP,i);
+        }
+        i++;
+    }
+
+    return ElmtWP(ArrayWP,i);
 }
 
 

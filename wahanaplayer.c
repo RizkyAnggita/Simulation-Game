@@ -4,7 +4,7 @@
 
 /* Pembuatan WahanaPlayer */
 
-WahanaPlayer MakeWahanaPlayer(WahanaGame StatW, Kata NamaW, POINT LocW, int MapW, ListU HUpgradeW, int TotalPlayW, int TotalPlayDayW, int TotalMoneyW, int TotalMoneyDayW, boolean BrokenW)
+WahanaPlayer MakeWahanaPlayer(BinTree StatW, Kata NamaW, POINT LocW, int MapW, ListU HUpgradeW, int TotalPlayW, int TotalPlayDayW, int TotalMoneyW, int TotalMoneyDayW, boolean BrokenW)
 //Membuat Wahana player dengan atribut yang ada pada parameter
 {
 	WahanaPlayer W;

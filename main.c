@@ -161,6 +161,8 @@ int main()
 
 				while (Play && PrepPhase)
 				{
+					printf("Last idx wp %d\n", GetLastIdxListWP(ArrWahanaPlayer));
+
 
 					printf("Preparation phase day %d\n", Day);
 
@@ -281,6 +283,128 @@ int main()
 
 					} else if (IsKataSama(CKata, CUpgrade))
 					{
+						FindAround(PlayerPosition, Map1, 1, ArrWahanaPlayer);
+
+						STARTKALIMAT(" ");
+
+						WahanaPlayer WPUpgrade = SearchWahanaPlayerName(CKata, ArrWahanaPlayer);
+
+						if (TotalPlayW(WPUpgrade) != TotalPlayW(MakeWahanaPlayerUndef()))
+						{
+							BinTree LeftWPUpgrade = Left(StatW(WPUpgrade));
+							BinTree RightWPUpgrade = Right(StatW(WPUpgrade));
+
+							if ((LeftWPUpgrade != NilBinTree) || (RightWPUpgrade != NilBinTree))
+							{
+
+								printf("Pilihan upgrade: ");
+								ENDL;
+								if (LeftWPUpgrade != NilBinTree)
+								{
+									printf("- ");
+									PrintKata(Type(Akar(LeftWPUpgrade)));
+									ENDL;
+								}
+
+								if (RightWPUpgrade != NilBinTree)
+								{
+									printf("- ");
+									PrintKata(Type(Akar(RightWPUpgrade)));
+									ENDL;
+								}
+
+								STARTKALIMAT(" ");
+
+								if ((IsKataSama(CKata, Type(Akar(LeftWPUpgrade)))) || (IsKataSama(CKata, Type(Akar(RightWPUpgrade)))))
+								{
+
+									BinTree WPUpgradeNow;
+
+									if (IsKataSama(CKata, Type(Akar(LeftWPUpgrade))))
+									{
+										WPUpgradeNow = LeftWPUpgrade;
+									} else
+									{
+										WPUpgradeNow = RightWPUpgrade;
+									}
+
+
+									WahanaGame WahanaGameUpgrade = Akar(WPUpgradeNow);
+
+									MoneyNeeded = MoneyCost(WahanaGameUpgrade);
+									ListBahanNeeded = BahanCost(WahanaGameUpgrade);
+
+									boolean SuccesUpgrade = true;
+
+									if (!(MoneyCukup(MoneyPlayer, (MoneyNeeded + MoneyNeededTotal))))
+									{
+										SuccesUpgrade = false;
+										printf("Uang anda tidak mencukupi!");
+										ENDL;
+									}
+
+									if (!(BahanCukup(BahanPlayer, AddListBahan(ListBahanNeededTotal, ListBahanNeeded))))
+									{
+										SuccesUpgrade = false;
+										printf("Bahan anda tidak mencukupi!");
+										ENDL;
+									}
+
+									if (SuccesUpgrade) // Bahan dan uang cukup untuk membangun
+									{
+										if (GetElementMap(Map1Prep, LocW(WPUpgrade)) == 'W') // Lahan kosong
+										{
+											SetElementMap(&Map1Prep, LocW(WPUpgrade), 'U');
+
+											NewInstruction = CreateInstruction(CUpgrade, LocW(WPUpgrade), Type(WahanaGameUpgrade), 1, MapW(WPUpgrade), MoneyNeeded, ListBahanNeeded);
+											Push(&InstructionStack, NewInstruction);
+
+											TimeNeeded = FindDuration(ArrayCommand, CUpgrade) * 60;
+											TimeNeededTotal = NextNDetik(TimeNeededTotal, TimeNeeded);
+
+											MoneyNeededTotal += MoneyNeeded;
+
+											ListBahanNeededTotal = AddListBahan(ListBahanNeededTotal, ListBahanNeeded);
+
+											AksiTotal += 1;
+
+										} else 
+										{
+
+											printf("Anda sudah merencanakan untuk upgrade wahana disini!");
+											ENDL;
+										}
+										
+
+									} else
+									{
+										printf("Upgrade gagal dilakukan!");
+										ENDL;
+									}
+
+								} else
+								{
+									printf("Type upgrade tidak ditemukan!");
+									ENDL;
+								}
+
+							} else
+							{
+								printf("Tidak ada pilihan upgrade lagi");
+								ENDL;
+
+							}
+
+						} else
+						{
+
+							printf("Nama wahana tidak ditemukan!");
+							ENDL;
+
+						}
+
+
+
 						printf("upgr\n");
 
 					} else if (IsKataSama(CKata, CBuy))
@@ -391,10 +515,10 @@ int main()
 								BahanPlayer = MinusListBahan(BahanPlayer, BCost(NewInstruction));
 
 
-								WahanaGame WGBuild;
-								WGBuild = Akar(FindListWahana(Detail(NewInstruction), ListWahanaGame));
+								BinTree WGBuild;
+								WGBuild = FindListWahana(Detail(NewInstruction), ListWahanaGame);
 
-								Kata NamaWBuild = GenerateWahanaName(Type(WGBuild), Point(NewInstruction), Map(NewInstruction));
+								Kata NamaWBuild = GenerateWahanaName(Type(Akar(WGBuild)), Point(NewInstruction), Map(NewInstruction));
 
 								PrintKata(NamaWBuild);
 
@@ -406,7 +530,7 @@ int main()
 								NewWP = MakeWahanaPlayer(WGBuild, NamaWBuild, Point(NewInstruction), Map(NewInstruction), ListUBuild, 0, 0, 0, 0, false);
 
 
-								ElmtWP(ArrWahanaPlayer, GetLastIdxListWP(ArrWahanaPlayer)) = NewWP;
+								ElmtWP(ArrWahanaPlayer, GetLastIdxListWP(ArrWahanaPlayer) + 1) = NewWP;
 
 								printf(" exec build\n");
 

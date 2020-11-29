@@ -9,7 +9,7 @@
 #include "boolean.h"
 #include "mesinkata.h"
 
-#define NilPrioQ -1
+#define NilPQ -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
 /* Definisi elemen dan address */
@@ -17,7 +17,7 @@ typedef struct {
     int prio;  /* [1..100], prioritas dengan nilai 1..100 (1 adalah prioritas tertinggi) */
     Kata[] list_wahana;
     int kesabaran;
-} Pengunjung; // Infotype = pengunjung
+} infotype; // Infotype = pengunjung
 typedef int address;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype PrioQueueChar : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
@@ -31,7 +31,6 @@ typedef struct {
 
 /* ********* AKSES (Selektor) ********* */
 /* Jika e adalah infotype dan Q adalah PrioQueueChar, maka akses elemen : */
-#define Prio(e)     (e).prio
 #define Info(e)     (e).info
 #define Head(Q)     (Q).HEAD
 #define Tail(Q)     (Q).TAIL
