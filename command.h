@@ -24,6 +24,8 @@ extern Kata CRepair;
 extern Kata CDetail;
 extern Kata COffice;
 extern Kata CPrepare;
+extern Kata CDetails;
+extern Kata CReport;
 
 
 
