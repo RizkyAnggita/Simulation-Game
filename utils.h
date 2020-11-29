@@ -16,6 +16,7 @@
 #include "listwahanagame.h"
 #include "wahanaplayer.h"
 #include "arraywahanaplayer.h"
+#include "stackins.h"
 
 void GetBrsKolFileMap(int *NB, int *NK, char *filename);
 /* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map
@@ -145,5 +146,14 @@ int PlayerTunnel(int MapIdPlayer, char Symbol);
 WahanaPlayer SearchWahanaPlayer(int Map, POINT Loc, TabWahanaPlayer ArrayWP);
 /*  I.S. Wahana Player pasti ada
     F.S. Mencari Wahana Player yang memiliki Map dan Loc sama dengan input */
+
+StackI ReverseStack(StackI SPrev);
+/*  Mengembalikan Stack of Instruction kebalikan dari SPrev
+    Top dari SPrev menjadi elemen pertama Stack baru dan seterusnya*/
+
+void FindAround(POINT P, MATRIKS MapMat, int MapInt, TabWahanaPlayer ArrayWP);
+/*  I.S. Player ada di posisi P di Map MapInt dengan Matriks MapMat 
+    F.S. Output daftar semua wahana di sekitar Player
+    Jika tidak ada wahana di sekitar player, output pesan "Tidak ada wahana di sekitar anda" */
 
 #endif

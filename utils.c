@@ -771,3 +771,68 @@ WahanaPlayer SearchWahanaPlayer(int Map, POINT Loc, TabWahanaPlayer ArrayWP)
         i++;
     }
 }
+
+StackI ReverseStack(StackI SPrev){
+/*	Mengembalikan Stack of Instruction kebalikan dari SPrev
+	Top dari SPrev menjadi elemen pertama Stack baru dan seterusnya*/
+	StackI SNew;
+	Instruction I;
+
+	CreateEmpty(&SNew);
+	
+	while (!(IsEmpty(SPrev))) {
+		Pop(&SPrev, &I);
+		Push(&SNew, I);;
+	}
+
+	return SNew;
+}
+
+void FindAround(POINT P, MATRIKS MapMat, int MapInt, TabWahanaPlayer ArrayWP){
+/*	I.S. Player ada di posisi P di Map MapInt dengan Matriks MapMat 
+	F.S. Output daftar semua wahana di sekitar Player
+		 Jika tidak ada wahana di sekitar player, output pesan "Tidak ada wahana di sekitar anda" */
+	POINT Up, Down, Left, Right;
+	char CUp, CDown, CLeft, CRight;
+	Kata Nama;
+
+	Up = NextY(P);
+	Left = PrevX(P);
+	Down = PrevY(P);
+	Right = NextX(P);
+
+	CUp = GetElementMap(MapMat, Up);
+	CLeft = GetElementMap(MapMat, Left);
+	CDown = GetElementMap(MapMat, Down);
+	CRight = GetElementMap(MapMat, Right);
+
+	if ((CUp != 'W') && (CRight != 'W') && (CDown != 'W')  && (CLeft != 'W')) {
+		printf("Tidak ada wahana di sekitar anda\n");
+	} else {
+		printf("List:\n");
+		if (CUp == 'W') {
+			Nama = NamaW(SearchWahanaPlayer(MapInt, Up, ArrayWP));
+			printf("- ");
+			PrintKata(Nama);
+			printf("\n");
+		}
+		if (CRight == 'W') {
+			Nama = NamaW(SearchWahanaPlayer(MapInt, Right, ArrayWP));
+			printf("- ");
+			PrintKata(Nama);
+			printf("\n");
+		}
+		if (CDown == 'W') {
+			Nama = NamaW(SearchWahanaPlayer(MapInt, Down, ArrayWP));
+			printf("- ");
+			PrintKata(Nama);
+			printf("\n");
+		}
+		if (CLeft == 'W') {
+			Nama = NamaW(SearchWahanaPlayer(MapInt, Left, ArrayWP));
+			printf("- ");
+			PrintKata(Nama);
+			printf("\n");
+		}
+	}
+}
