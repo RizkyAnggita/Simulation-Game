@@ -778,21 +778,6 @@ WahanaPlayer SearchWahanaPlayer(int Map, POINT Loc, TabWahanaPlayer ArrayWP)
     }
 }
 
-StackI ReverseStack(StackI SPrev){
-/*	Mengembalikan Stack of Instruction kebalikan dari SPrev
-	Top dari SPrev menjadi elemen pertama Stack baru dan seterusnya*/
-	StackI SNew;
-	Instruction I;
-
-	CreateEmpty(&SNew);
-	
-	while (!(IsEmpty(SPrev))) {
-		Pop(&SPrev, &I);
-		Push(&SNew, I);;
-	}
-
-	return SNew;
-}
 
 void FindAround(POINT P, MATRIKS MapMat, int MapInt, TabWahanaPlayer ArrayWP){
 /*	I.S. Player ada di posisi P di Map MapInt dengan Matriks MapMat 
@@ -840,5 +825,18 @@ void FindAround(POINT P, MATRIKS MapMat, int MapInt, TabWahanaPlayer ArrayWP){
 			PrintKata(Nama);
 			printf("\n");
 		}
+	}
+}
+
+JAM TimeSkip(JAM Sekarang, TabCommand T, Kata K){
+	/* Mengembalikan JAM yang sudah di-timeskip setelah menjalankan command */
+	int durasi  = FindDuration(T,K);
+
+	if(durasi!=-999){	//ketemu
+		int durasi2detik = durasi * 60;
+		return NextNDetik(Sekarang, durasi2detik);
+	}
+	else{
+		return Sekarang;
 	}
 }

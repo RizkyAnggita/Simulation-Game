@@ -83,4 +83,7 @@ F.S. Elemen sebelum I menjadi Top (Seakan-akan I tidak ada di stack)
 Proses: Top(S) berkurang 1
 */
 
+StackI ReverseStack(StackI SPrev);
+/*  Mengembalikan Stack of Instruction kebalikan dari SPrev
+    Top dari SPrev menjadi elemen pertama Stack baru dan seterusnya*/
 #endif
