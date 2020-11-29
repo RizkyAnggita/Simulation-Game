@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "mesinkata.h"
 #include "point.h"
@@ -599,22 +600,29 @@ int main()
 
 				Pengunjung P;
 
+				boolean MainCommandSucces = true;
+
+				boolean FailServe = false;
+
 
 				while (!PrepPhase && Play)
 				{
-					QueueP = MinusKesabaranQueue(QueueP, TimeSkipVal);
-
-					if (NbElmtListWP(ArrWahanaPlayer) > 0)
+					if (MainCommandSucces)
 					{
-						if (!IsFullPQ(QueueP))
-						{
-							if (GenerateP(TimeSkipVal))
-							{
+						QueueP = MinusKesabaranQueue(QueueP, TimeSkipVal);
 
-								P = GeneratePengunjung(ArrWahanaPlayer);
-								Enqueue(&QueueP, P);	
-							}	
-						}
+						if (NbElmtListWP(ArrWahanaPlayer) > 0)
+						{
+							if (!IsFullPQ(QueueP))
+							{
+								if (GenerateP(TimeSkipVal))
+								{
+
+									P = GeneratePengunjung(ArrWahanaPlayer);
+									Enqueue(&QueueP, P);	
+								}	
+							}
+						}	
 					}
 
 					printf("Main phase day %d\n", Day);
@@ -631,6 +639,14 @@ int main()
 
 					PrintMainQueue(QueueP);
 					ENDL;
+
+					if (FailServe)
+					{
+						printf("Broken: ");
+						PrintKata(ElmtWPengunjung(P, CurrWPeng(P)));
+						ENDL;
+					}
+
 					ENDL;
 
 					printf("Masukkan perintah:\n");
@@ -638,12 +654,99 @@ int main()
 					STARTKATA(" ");
 					if (IsKataSama(CKata, CServe))
 					{
+						MainCommandSucces = true;
+						if (IsAround(PlayerPosition, Map1, 'A'))
+						{
+							if (!IsEmptyPQ(QueueP))
+							{
+								// random rusak atau tidak
+								if ((rand() % 1) < 1) //rusak
+								{
+									Dequeue(&QueueP, &P);
+
+									WahanaPlayer WPeng = SearchWahanaPlayerName(ElmtWPengunjung(P, CurrWPeng(P)), ArrWahanaPlayer);
+
+									int i;
+									i = GetFirstIdxListWP(ArrWahanaPlayer);
+									while(i <= GetLastIdxListWP(ArrWahanaPlayer))
+									{
+								        if (IsKataSama(NamaW(ElmtWP(ArrWahanaPlayer,i)), ElmtWPengunjung(P, CurrWPeng(P))));
+								        {
+								    		BrokenW(ElmtWP(ArrWahanaPlayer, i)) = true;
+								        }
+								        i++;
+								    }
+
+								    Prio(P) += 1;
+									Enqueue(&QueueP, P);
+
+									TimeSkipVal = (rand() % DurationW(Akar(StatW(WPeng)))) + 1;
+									CurrentTime = NextNDetik(CurrentTime, TimeSkipVal * 60);
+
+									FailServe = true;
+
+								} else
+								{
+									if (!FailServe)
+									{
+										Dequeue(&QueueP, &P);
+
+										WahanaPlayer WPeng = SearchWahanaPlayerName(ElmtWPengunjung(P, CurrWPeng(P)), ArrWahanaPlayer);
+
+										int i;
+										i = GetFirstIdxListWP(ArrWahanaPlayer);
+										while(i <= GetLastIdxListWP(ArrWahanaPlayer))
+										{
+									        if (IsKataSama(NamaW(ElmtWP(ArrWahanaPlayer,i)), ElmtWPengunjung(P, CurrWPeng(P))));
+									        {
+									    		TotalPlayW(ElmtWP(ArrWahanaPlayer,i)) += 1;
+									    		TotalPlayDayW(ElmtWP(ArrWahanaPlayer,i)) += 1;
+									    		TotalMoneyW(ElmtWP(ArrWahanaPlayer,i)) += Price(Akar(StatW(ElmtWP(ArrWahanaPlayer,i))));
+									    		TotalMoneyDayW(ElmtWP(ArrWahanaPlayer,i)) += Price(Akar(StatW(ElmtWP(ArrWahanaPlayer,i))));
+									        }
+									        i++;
+									    }
+
+										CurrWPeng(P) += 1;
+
+										if (CurrWPeng(P) != TotalWPeng(P))
+										{
+											Prio(P) += 1;
+											Enqueue(&QueueP, P);
+										}
+
+
+										TimeSkipVal = DurationW(Akar(StatW(WPeng)));
+										CurrentTime = NextNDetik(CurrentTime, TimeSkipVal * 60);	
+									} else
+									{
+										printf("Wahana rusak, perbaiki dahulu!");
+										ENDL;
+										MainCommandSucces = false;
+									}
+
+								}		
+							} else
+							{
+								printf("Tidak ada pengunjung!");
+								MainCommandSucces = false;
+								ENDL;
+							}
+							
+						} else
+						{
+
+							printf("Anda jauh dari antrian!");
+							MainCommandSucces = false;
+							ENDL;
+						}
+						
 						printf("serve\n");
 
 					} else 
 					{
-						CurrentTime = TimeSkip(CurrentTime, ArrayCommand, CKata);
-						TimeSkipVal = FindDuration(ArrayCommand, CKata);
+						MainCommandSucces = true;
+
 						if (IsKataSama(CKata, CW))
 						{
 							MovePlayer(Map1, 'w', &PlayerPosition);
@@ -682,6 +785,12 @@ int main()
 						{
 							Play = false;
 
+						}
+
+						if (MainCommandSucces)
+						{
+							CurrentTime = TimeSkip(CurrentTime, ArrayCommand, CKata);
+							TimeSkipVal = FindDuration(ArrayCommand, CKata);
 						}	
 					}
 										

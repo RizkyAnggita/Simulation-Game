@@ -494,10 +494,10 @@ TabCommand InitArrayCommand()
 	InsertNewCommand(&T, makeCommtype(CNew, 0));
 	InsertNewCommand(&T, makeCommtype(CLoad, 0));
 	InsertNewCommand(&T, makeCommtype(CExit, 0));
-	InsertNewCommand(&T, makeCommtype(CW, 2));
-	InsertNewCommand(&T, makeCommtype(CA, 2));
-	InsertNewCommand(&T, makeCommtype(CS, 2));
-	InsertNewCommand(&T, makeCommtype(CD, 2));
+	InsertNewCommand(&T, makeCommtype(CW, 1));
+	InsertNewCommand(&T, makeCommtype(CA, 1));
+	InsertNewCommand(&T, makeCommtype(CS, 1));
+	InsertNewCommand(&T, makeCommtype(CD, 1));
 	InsertNewCommand(&T, makeCommtype(CBuild, 75));
 	InsertNewCommand(&T, makeCommtype(CUpgrade, 3));
 	InsertNewCommand(&T, makeCommtype(CBuy, 60));
@@ -930,4 +930,24 @@ boolean GenerateP(int TimeSkipVal)
 
 	Maks = 10;
 	return (rand() % 10) < TimeSkipVal;
+}
+
+boolean IsAround(POINT Loc, MATRIKS Map, char C)
+/* return true jika disekitar (atas bawah krii kanan) Loc terdapat C pada Map */
+{
+	POINT Up, Down, Left, Right;
+	char CUp, CDown, CLeft, CRight;
+	Kata Nama;
+
+	Up = NextY(Loc);
+	Left = PrevX(Loc);
+	Down = PrevY(Loc);
+	Right = NextX(Loc);
+
+	CUp = GetElementMap(Map, Up);
+	CLeft = GetElementMap(Map, Left);
+	CDown = GetElementMap(Map, Down);
+	CRight = GetElementMap(Map, Right);
+
+	return !((CUp != C) && (CRight != C) && (CDown != C)  && (CLeft != C)) ;
 }

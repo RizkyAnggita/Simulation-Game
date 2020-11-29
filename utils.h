@@ -170,4 +170,7 @@ PrioQueueChar MinusKesabaranQueue(PrioQueueChar Q, int X);
 boolean GenerateP(int TimeSkipVal);
 /* Menentukan apakah akan digenerate pengunjung atau tidak, dengan random */
 
+boolean IsAround(POINT Loc, MATRIKS Map, char C);
+/* return true jika disekitar (atas bawah krii kanan) Loc terdapat C pada Map */
+
 #endif
