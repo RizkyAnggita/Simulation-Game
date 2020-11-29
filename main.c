@@ -107,6 +107,9 @@ int main()
 
 	int PlayerMap = 1;
 
+	TabWahanaPlayer ArrWahanaPlayer;
+	MakeEmptyListWP(&ArrWahanaPlayer);
+
 	// Main program 
 
 	PrintTitle();
@@ -381,7 +384,31 @@ int main()
 
 							if (IsKataSama(CBuild, Function(NewInstruction)))
 							{
-								printf("exec build\n");
+								SetElementMap(&Map1, Point(NewInstruction), 'W');
+
+								MoneyPlayer -= MCost(NewInstruction);
+
+								BahanPlayer = MinusListBahan(BahanPlayer, BCost(NewInstruction));
+
+
+								WahanaGame WGBuild;
+								WGBuild = Akar(FindListWahana(Detail(NewInstruction), ListWahanaGame));
+
+								Kata NamaWBuild = GenerateWahanaName(Type(WGBuild), Point(NewInstruction), Map(NewInstruction));
+
+								PrintKata(NamaWBuild);
+
+								WahanaPlayer NewWP;
+
+								ListU ListUBuild;
+								CreateEmptyListU(&ListUBuild);
+
+								NewWP = MakeWahanaPlayer(WGBuild, NamaWBuild, Point(NewInstruction), Map(NewInstruction), ListUBuild, 0, 0, 0, 0, false);
+
+
+								ElmtWP(ArrWahanaPlayer, GetLastIdxListWP(ArrWahanaPlayer)) = NewWP;
+
+								printf(" exec build\n");
 
 							} else if (IsKataSama(CBuy, Function(NewInstruction)))
 							{
@@ -391,8 +418,6 @@ int main()
 								Bahan NewBahan;
 								Name(NewBahan) = Detail(NewInstruction);
 								Val(NewBahan) = Quantity(NewInstruction);
-								PrintKata(Name(NewBahan));
-								printf(" %d ", Val(NewBahan));
 								BahanPlayer = AddBahan(BahanPlayer, NewBahan);
 
 								printf("exec buy\n");

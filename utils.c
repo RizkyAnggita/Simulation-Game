@@ -683,6 +683,33 @@ addrNode findTypeBinTree(Kata TypeYangDicari, BinTree T)
 	}
 }
 
+addrNode FindListWahana(Kata K, ListWG ListWahanaGame)
+/* Mencari tree wahana game tertentu dengan type = T, pada suatu list of wahanagame */
+{
+	addressListWG P;
+	boolean found;
+	addrNode T;
+
+
+	P = FirstListWG(ListWahanaGame);
+	found = false;
+
+	while ((P != NilListWG) && (!found))
+	{
+		T = findTypeBinTree(K, InfoListWG(P));
+
+		if (T != NilBinTree)
+		{
+			found = true;
+		}
+
+		P = NextListWG(P);
+	}
+
+	return T;
+
+}
+
 Kata GenerateWahanaName(Kata TypeWahana, POINT PlayerLoc, int PlayerMap)
 {
 	/* Mengenerate Nama Wahana yang unik dari Type(Nama) Wahana Standar berdasarkan

@@ -68,7 +68,7 @@ IdxTypeWP GetLastIdxListWP (TabWahanaPlayer T)
 
 	WUndef = MakeWahanaPlayerUndef();
 	i = IdxMaxWP;
-	while((TotalPlayW(ElmtWP(T, i)) != TotalPlayW(WUndef)) && (i >= IdxMinWP))
+	while((TotalPlayW(ElmtWP(T, i)) != TotalPlayW(WUndef)) && (i > IdxMinWP))
 	{
 		i -= 1;
 	}
