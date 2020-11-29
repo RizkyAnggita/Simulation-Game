@@ -60,11 +60,13 @@ int main()
 	MATRIKS Map1 = FileToMatriks(FILE_MAP_1);
 	
 
+	printf("11111111111111111111\n");
+
 	//Initialize Wahana Game
 	STARTKATA(FILE_WAHANA);
 
 	ListWG ListWahanaGame;
-	ListWahanaGame= FileToListTreeWahana(FILE_WAHANA, ShopBahan);
+	ListWahanaGame = FileToListTreeWahana(FILE_WAHANA, ShopBahan);
 	
 	PrintTree(InfoListWG(FirstListWG(ListWahanaGame)), 2);
 	PrintTree(InfoListWG(NextListWG(FirstListWG(ListWahanaGame))), 2);

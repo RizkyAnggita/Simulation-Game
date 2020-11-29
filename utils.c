@@ -615,6 +615,8 @@ TabBahan MinusBahan(TabBahan ListBahan, Bahan B)
 			Val(Elmt(ListBahan, i)) -= Val(B);
 		}
 	}
+
+	return ListBahan;
 }
 
 TabBahan MinusListBahan(TabBahan ListBahan1, TabBahan ListBahan2)
@@ -632,6 +634,8 @@ TabBahan MinusListBahan(TabBahan ListBahan1, TabBahan ListBahan2)
 		Elmt(Hasil,i).Name = Elmt(ListBahan1,i).Name;
 		Elmt(Hasil,i).Val = Elmt(ListBahan1,i).Val - Elmt(ListBahan2,i).Val;
 	}
+
+	return Hasil;
 }
 
 boolean SearchNodeWG(BinTree T, Kata K)

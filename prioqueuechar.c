@@ -11,9 +11,6 @@ Deskripsi : Fungsi dan Prosedur prioqueuechar
 #include <stdio.h>
 #include <stdlib.h>
 
-#define IncIdx(i, Q) ((i + 1) % MaxEl(Q))
-#define DecIdx(i, Q) ((i - 1) + (((int) i < 0)) * MaxEl(Q))
-
 
 /* ********* Prototype ********* */
 boolean IsEmpty (PrioQueueChar Q){
@@ -28,10 +25,20 @@ boolean IsFull (PrioQueueChar Q){
 /* yaitu mengandung elemen sebanyak MaxEl */
 	//KAMUS
 	//ALGORITMA
-	if (IsEmpty(Q)){
+	if (IsEmpty(Q))
+	{
 		return false;
+	} else
+	{
+		if (Head(Q) < Tail(Q))
+		{
+			return (Tail(Q) - Head(Q) + 1) == MaxEl(Q);
+		} else
+		{
+			return (Head(Q) - Tail(Q)) == 1;
+		}
 	}
-	return ((Tail(Q) + (((int) (Tail(Q) < Head(Q))) * MaxEl(Q)) - Head(Q) + 1) == MaxEl(Q));
+	
 
 }
 int NBElmt (PrioQueueChar Q){
@@ -41,7 +48,20 @@ int NBElmt (PrioQueueChar Q){
 	if (IsEmpty(Q)){ 
 		return 0;
 	}
-	return (Tail(Q) + (((int) (Tail(Q) < Head(Q))) * MaxEl(Q)) - Head(Q) + 1);
+	else if (Head(Q) == Tail(Q))
+	{
+		return 1;
+	}
+	else
+	{
+		if (Head(Q) < Tail(Q))
+		{
+			return (Tail(Q) - Head(Q) + 1);
+		} else
+		{
+			return (MaxEl(Q) - Head(Q)) + (Tail(Q) + 1);
+		}
+	}
 
 }
 
@@ -71,6 +91,28 @@ void DeAlokasi(PrioQueueChar * Q){
 	free((*Q).T);
 }
 
+int IncIdx(int Idx, PrioQueueChar Q)
+{
+	if (Idx + 1 == MaxEl(Q))
+	{
+		return 0;
+	} else
+	{
+		return Idx + 1;
+	}
+}
+
+int DecIdx(int Idx, PrioQueueChar Q)
+{
+	if (Idx == 0)
+	{
+		return MaxEl(Q) - 1;
+	} else
+	{
+		return Idx - 1;
+	}
+}
+
 /* *** Primitif Add/Delete *** */
 void Enqueue (PrioQueueChar * Q, infotype X){
 /* Proses: Menambahkan X pada Q dengan aturan priority queue, terurut mengecil berdasarkan prio */
@@ -87,9 +129,8 @@ void Enqueue (PrioQueueChar * Q, infotype X){
 		InfoHead(*Q) = X;
 	}
 	else {
-
 		pos = Tail(*Q);
-		while ((Prio(Elmt(*Q, pos)) < Prio(X)) && (pos != Head(*Q) - 1)){
+		while ((Prio(Elmt(*Q, pos)) < Prio(X)) && (pos != DecIdx(Head(*Q), Q))){
 			incpos = IncIdx(pos, *Q);
 			Elmt(*Q, incpos) = Elmt(*Q, pos);
 			pos = DecIdx(pos, *Q);
@@ -98,7 +139,6 @@ void Enqueue (PrioQueueChar * Q, infotype X){
 		Tail(*Q) = IncIdx(Tail(*Q), *Q);
 		incpos = IncIdx(pos, *Q);
 		Elmt(*Q, incpos) = X;
-
 	}
 }
 
