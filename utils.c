@@ -855,6 +855,56 @@ void FindAround(POINT P, MATRIKS MapMat, int MapInt, TabWahanaPlayer ArrayWP){
 	if ((CUp != 'W') && (CRight != 'W') && (CDown != 'W')  && (CLeft != 'W')) {
 		printf("Tidak ada wahana di sekitar anda\n");
 	} else {
+		printf("List:\n");
+		if (CUp == 'W') {
+			Nama = NamaW(SearchWahanaPlayer(MapInt, Up, ArrayWP));
+			printf("- ");
+			PrintKata(Nama);
+			printf("\n");
+		}
+		if (CRight == 'W') {
+			Nama = NamaW(SearchWahanaPlayer(MapInt, Right, ArrayWP));
+			printf("- ");
+			PrintKata(Nama);
+			printf("\n");
+		}
+		if (CDown == 'W') {
+			Nama = NamaW(SearchWahanaPlayer(MapInt, Down, ArrayWP));
+			printf("- ");
+			PrintKata(Nama);
+			printf("\n");
+		}
+		if (CLeft == 'W') {
+			Nama = NamaW(SearchWahanaPlayer(MapInt, Left, ArrayWP));
+			printf("- ");
+			PrintKata(Nama);
+			printf("\n");
+		}
+		printf("Akhiri command dengan ';' !\n");
+		STARTKALIMAT(" ");
+	}
+}
+
+
+void FindAroundDetail(POINT P, MATRIKS MapMat, int MapInt, TabWahanaPlayer ArrayWP){
+/*  Sama kayak FindAround cuman untuk command detail*/
+	POINT Up, Down, Left, Right;
+	char CUp, CDown, CLeft, CRight;
+	Kata Nama;
+
+	Up = NextY(P);
+	Left = PrevX(P);
+	Down = PrevY(P);
+	Right = NextX(P);
+
+	CUp = GetElementMap(MapMat, Up);
+	CLeft = GetElementMap(MapMat, Left);
+	CDown = GetElementMap(MapMat, Down);
+	CRight = GetElementMap(MapMat, Right);
+
+	if ((CUp != 'W') && (CRight != 'W') && (CDown != 'W')  && (CLeft != 'W')) {
+		printf("Tidak ada wahana di sekitar anda\n");
+	} else {
 		WahanaPlayer WP;
 		printf("List:\n");
 		if (CUp == 'W') {
@@ -969,7 +1019,7 @@ void Printdetail(WahanaPlayer WP){
 	printf("Nama      : "); PrintKata(NamaW(WP)); ENDL;
 	printf("Lokasi    : (%d,%d)", LocW(WP).X, LocW(WP).Y);	ENDL;
 	printf("Upgrade(s): [");
-	
+
 	if (Left(StatW(WP)) != NilBinTree)
 	{
 		PrintKata(Akar(Left(StatW(WP))).Type);
