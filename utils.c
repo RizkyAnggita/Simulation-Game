@@ -5,8 +5,7 @@
 
 #define ENDL printf("\n")
 
-
-void GetBrsKolFileMatriks(int * NB, int * NK, char * filename)
+void GetBrsKolFileMatriks(int *NB, int *NK, char *filename)
 /* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map
    F.S. NBrs adalah jumlah baris pada filemap, begitu jg dengan NKol adalah jumlah kolom*/
 {
@@ -21,7 +20,7 @@ void GetBrsKolFileMatriks(int * NB, int * NK, char * filename)
 	}
 }
 
-MATRIKS FileToMatriks(char * filename)
+MATRIKS FileToMatriks(char *filename)
 /* Membaca file yang berisi matriks dan mengembalikan matriks tersebut */
 {
 	//KAMUS
@@ -55,14 +54,14 @@ char GetElementMap(MATRIKS Map, POINT Loc)
 	return ElmtM(Map, Ordinat(Loc), Absis(Loc));
 }
 
-void SetElementMap(MATRIKS * Map, POINT Loc, char el)
+void SetElementMap(MATRIKS *Map, POINT Loc, char el)
 /* I.S. Map, Loc, el terdefinisi
    F.S. Map pada koordinat Loc, di set element nya menjadi el */
 {
-	ElmtM(*Map, Ordinat(Loc), Absis(Loc)) = el;	
+	ElmtM(*Map, Ordinat(Loc), Absis(Loc)) = el;
 }
 
-void MovePlayer(MATRIKS Map, char Command, POINT * Loc)
+void MovePlayer(MATRIKS Map, char Command, POINT *Loc)
 /* I.S. Map adalah matriks map yang akan diubah posisi player nya,
         Command adalah command yg di input pengguna 'w'. 'a'. 's'. 'd'.
         PlayerLoc adalah lokasi player sebelumnya
@@ -73,32 +72,32 @@ void MovePlayer(MATRIKS Map, char Command, POINT * Loc)
 	POINT NewLoc;
 
 	//ALGORITMA
-	switch(Command)
+	switch (Command)
 	{
-		case 'w':
-			NewLoc = PrevY(*Loc);
-			break;
+	case 'w':
+		NewLoc = PrevY(*Loc);
+		break;
 
-		case 'a':
-			NewLoc = PrevX(*Loc);
-			break;
+	case 'a':
+		NewLoc = PrevX(*Loc);
+		break;
 
-		case 's':
-			NewLoc = NextY(*Loc);
-			break;
+	case 's':
+		NewLoc = NextY(*Loc);
+		break;
 
-		case 'd':
-			NewLoc = NextX(*Loc);
-			break;
+	case 'd':
+		NewLoc = NextX(*Loc);
+		break;
 	}
 
-	if ((GetElementMap(Map, NewLoc) != '*') && (GetElementMap(Map, NewLoc) != 'W') )
+	if ((GetElementMap(Map, NewLoc) != '*') && (GetElementMap(Map, NewLoc) != 'W'))
 	{
 		*Loc = NewLoc;
 	}
 }
 
-TabBahan FileToListBahan(char * filename)
+TabBahan FileToListBahan(char *filename)
 /* Membaca file yang berisi nama bahan beserta harganya */
 /* Mengembalikan list bahan  */
 {
@@ -224,63 +223,61 @@ int PriceBuyBahan(Kata name, int qty, TabBahan ShopBahan)
 	return price;
 }
 
-void PitaToTreeWahanaGame(BinTree *T, char * filename, TabBahan ListBahan)
+void PitaToTreeWahanaGame(BinTree *T, char *filename, TabBahan ListBahan)
 {
 
-    //KAMUS
-    WahanaGame WGame;
-    Kata Type;
-    int Price;
-    int Capacity;
-    int DurationW;
-    Kata Description;
-    int MoneyCost;
-    TabBahan BahanCost;
+	//KAMUS
+	WahanaGame WGame;
+	Kata Type;
+	int Price;
+	int Capacity;
+	int DurationW;
+	Kata Description;
+	int MoneyCost;
+	TabBahan BahanCost;
 
-    int i;
+	int i;
 
+	//ALGORITMA
+	ADVKATA(filename);
+	if (CKata.TabKata[0] == ')')
+	{
+		(*T) = NilBinTree;
+	}
+	else
+	{
+		Price = KataToInteger(CKata);
 
-    //ALGORITMA
-    ADVKATA(filename);
-    if (CKata.TabKata[0] == ')')
-    {
-        (*T) = NilBinTree;
-    }
-    else
-    {
-    	Price = KataToInteger(CKata);
+		ADVKALIMAT(filename);
+		Type = CKata;
 
-        ADVKALIMAT(filename);
-        Type = CKata;
+		ADVKATA(filename);
+		Capacity = KataToInteger(CKata);
 
-        ADVKATA(filename);
-        Capacity = KataToInteger(CKata);
+		ADVKATA(filename);
+		DurationW = KataToInteger(CKata);
 
-        ADVKATA(filename);
-        DurationW = KataToInteger(CKata);
+		ADVKALIMAT(filename);
+		Description = CKata;
 
-        ADVKALIMAT(filename);
-        Description = CKata;
+		ADVKATA(filename);
+		MoneyCost = KataToInteger(CKata);
 
-        ADVKATA(filename);
-        MoneyCost = KataToInteger(CKata);
-
-        BahanCost = CreateEmptyBahan(ListBahan);
+		BahanCost = CreateEmptyBahan(ListBahan);
 		for (i = GetFirstIdxListBahan(BahanCost); i <= GetLastIdxListBahan(BahanCost); ++i)
 		{
 			ADVKATA(filename);
 			Val(Elmt(BahanCost, i)) = KataToInteger(CKata);
 		}
 
+		WGame = MakeWahanaGame(Type, Price, Capacity, DurationW, Description, MoneyCost, BahanCost);
+		(*T) = AlokNode(WGame);
 
-        WGame = MakeWahanaGame(Type, Price, Capacity, DurationW, Description, MoneyCost, BahanCost);
-        (*T) = AlokNode(WGame);
-
-        ADVKATA(filename);
-        PitaToTreeWahanaGame(&(Left(*T)), filename, ListBahan);
-        PitaToTreeWahanaGame(&(Right(*T)), filename, ListBahan);
-    }
-    ADVKATA(filename);
+		ADVKATA(filename);
+		PitaToTreeWahanaGame(&(Left(*T)), filename, ListBahan);
+		PitaToTreeWahanaGame(&(Right(*T)), filename, ListBahan);
+	}
+	ADVKATA(filename);
 }
 /* Dipakai jika input dari pita karakter */
 /* I.S. CC berisi ‘(‘ */
@@ -288,7 +285,7 @@ void PitaToTreeWahanaGame(BinTree *T, char * filename, TabBahan ListBahan)
 /* Proses: Membaca isi pita karakter dan membangun pohon secara rekursif, hanya
 membutuhkan mesin karakter */
 
-ListWG FileToListTreeWahana(char * filename, TabBahan ListBahan)
+ListWG FileToListTreeWahana(char *filename, TabBahan ListBahan)
 /* Membaca file wahana yang berisi beberapa tree wahana, setiap tree wahana akan
    di-insert ke List wahana game. Mengembalikan list wahana game */
 {
@@ -332,17 +329,21 @@ void PrintMap(int PlayerMap, POINT PlayerLoc, MATRIKS Map1)
 
 	Map = Map1;
 
-	for (i = GetFirstIdxBrs(Map); i <= GetLastIdxBrs(Map); ++i){
-		for (j = GetFirstIdxKol(Map); j <= GetLastIdxKol(Map); ++j){
+	for (i = GetFirstIdxBrs(Map); i <= GetLastIdxBrs(Map); ++i)
+	{
+		for (j = GetFirstIdxKol(Map); j <= GetLastIdxKol(Map); ++j)
+		{
 			if ((i == Ordinat(PlayerLoc)) && (j == Absis(PlayerLoc)))
 			{
 				printf(" P");
-			} else {
+			}
+			else
+			{
 				printf(" %c", ElmtM(Map, i, j));
 			}
-
 		}
-		if (i != GetLastIdxBrs(Map)){
+		if (i != GetLastIdxBrs(Map))
+		{
 			printf("\n");
 		}
 	}
@@ -381,7 +382,8 @@ void PrintTime(JAM CurrentTime, JAM EndTime, boolean PrepPhase)
 	if (PrepPhase)
 	{
 		printf("Opening Time: ");
-	} else
+	}
+	else
 	{
 		printf("Closing Time: ");
 	}
@@ -430,17 +432,17 @@ void PrintBuildWahana(ListWG ListWahanaGame)
 /*  I.S. ListWahana terdefinisi
     F.S. menampilkan list wahana game ke layar */
 {
-    printf("ingin membangun apa?\n");
-    printf("List:\n");
+	printf("ingin membangun apa?\n");
+	printf("List:\n");
 
-    addressListWG P = FirstListWG(ListWahanaGame);
-    while (P != NilListWG)
-    {
-        printf("   -");
-        PrintKata(Type(Akar(InfoListWG(P))));
-        printf("\n");
-        P = NextListWG(P);
-    }
+	addressListWG P = FirstListWG(ListWahanaGame);
+	while (P != NilListWG)
+	{
+		printf("   -");
+		PrintKata(Type(Akar(InfoListWG(P))));
+		printf("\n");
+		P = NextListWG(P);
+	}
 }
 
 BinTree FindBasicWahana(ListWG ListWahanaGame, Kata K)
@@ -449,94 +451,111 @@ BinTree FindBasicWahana(ListWG ListWahanaGame, Kata K)
 {
 	boolean found;
 	BinTree T;
-	addressListWG P ;
+	addressListWG P;
 
 	P = FirstListWG(ListWahanaGame);
 	found = false;
 
-    while ((P != NilListWG) && (!found))
-    {
-        if (IsKataSama(Type(Akar(InfoListWG(P))), K))
-        {
-        	T = InfoListWG(P);
-        	found = true;
-        }
-        P = NextListWG(P);
-    }
+	while ((P != NilListWG) && (!found))
+	{
+		if (IsKataSama(Type(Akar(InfoListWG(P))), K))
+		{
+			T = InfoListWG(P);
+			found = true;
+		}
+		P = NextListWG(P);
+	}
 
-    if (found)
-    {
- 		return T;   	
-    } else
-    {
-    	return NilBinTree;
-    }
+	if (found)
+	{
+		return T;
+	}
+	else
+	{
+		return NilBinTree;
+	}
 }
 
-TabCommand InitArrayCommand(){
+TabCommand InitArrayCommand()
+{
 	/* Mengembalikan List/Array Command yang setiap elemen bertipe Commtype */
 	/* Commtype : < perintah : Kata, duration : integer > */
 	TabCommand T;
 	createEmptyListCommand(&T);
 	InsertNewCommand(&T, makeCommtype(CNew, 0));
-    InsertNewCommand(&T, makeCommtype(CLoad, 0));
-    InsertNewCommand(&T, makeCommtype(CExit, 0));
-    InsertNewCommand(&T, makeCommtype(CW, 1));
-    InsertNewCommand(&T, makeCommtype(CA, 1));
-    InsertNewCommand(&T, makeCommtype(CS, 1));
-    InsertNewCommand(&T, makeCommtype(CD, 1));
-    InsertNewCommand(&T, makeCommtype(CBuild, 75));
-    InsertNewCommand(&T, makeCommtype(CUpgrade, 3));
-    InsertNewCommand(&T, makeCommtype(CBuy, 60));
-    InsertNewCommand(&T, makeCommtype(CUndo, 0));
-    InsertNewCommand(&T, makeCommtype(CExecute, 0));
-    InsertNewCommand(&T, makeCommtype(CMain, 0));
-    InsertNewCommand(&T, makeCommtype(CServe, 2));
-    InsertNewCommand(&T, makeCommtype(CRepair, 5));
-    InsertNewCommand(&T, makeCommtype(CDetail, 0));
-    InsertNewCommand(&T, makeCommtype(COffice, 0));
-    InsertNewCommand(&T, makeCommtype(CPrepare, 0));
+	InsertNewCommand(&T, makeCommtype(CLoad, 0));
+	InsertNewCommand(&T, makeCommtype(CExit, 0));
+	InsertNewCommand(&T, makeCommtype(CW, 1));
+	InsertNewCommand(&T, makeCommtype(CA, 1));
+	InsertNewCommand(&T, makeCommtype(CS, 1));
+	InsertNewCommand(&T, makeCommtype(CD, 1));
+	InsertNewCommand(&T, makeCommtype(CBuild, 75));
+	InsertNewCommand(&T, makeCommtype(CUpgrade, 3));
+	InsertNewCommand(&T, makeCommtype(CBuy, 60));
+	InsertNewCommand(&T, makeCommtype(CUndo, 0));
+	InsertNewCommand(&T, makeCommtype(CExecute, 0));
+	InsertNewCommand(&T, makeCommtype(CMain, 0));
+	InsertNewCommand(&T, makeCommtype(CServe, 2));
+	InsertNewCommand(&T, makeCommtype(CRepair, 5));
+	InsertNewCommand(&T, makeCommtype(CDetail, 0));
+	InsertNewCommand(&T, makeCommtype(COffice, 0));
+	InsertNewCommand(&T, makeCommtype(CPrepare, 0));
 
 	return T;
 }
 
-
-int FindDuration(TabCommand T, Kata K){
+int FindDuration(TabCommand T, Kata K)
+{
 	/* Mengembalikan durasi sebuah command jika terdapat di TabCommand */
 	/* Jika tidak ada, return DurasiUndef=-999 */
-    IdxType i = IdxMinCommand;
-    boolean found = false;
+	IdxType i = IdxMinCommand;
+	boolean found = false;
 
-    while (i<NbElmtCommand(T) && !found){
-        if(IsKataSama(Command(T,i), K)){
-            found = true;
-        }
-        else{
-            i++;
-        }
-    }
-    if (found) {return DurasiCommand(T,i);}
-    else {return DurasiUndef;}
+	while (i < NbElmtCommand(T) && !found)
+	{
+		if (IsKataSama(Command(T, i), K))
+		{
+			found = true;
+		}
+		else
+		{
+			i++;
+		}
+	}
+	if (found)
+	{
+		return DurasiCommand(T, i);
+	}
+	else
+	{
+		return DurasiUndef;
+	}
 }
 
-boolean BahanCukup(TabBahan BahanPlayer, TabBahan BahanCost){
+boolean BahanCukup(TabBahan BahanPlayer, TabBahan BahanCost)
+{
 	/* Mengecek apakah player memiliki bahan yang cukup */
 
 	int panjangBahanPlayer = NbElmtListBahan(BahanPlayer);
 	int panjangBahanCost = NbElmtListBahan(BahanCost);
 
-	if (panjangBahanPlayer != panjangBahanCost){
+	if (panjangBahanPlayer != panjangBahanCost)
+	{
 		return false;
 	}
-	else{
+	else
+	{
 		int i = 0;
 		boolean cukup = true;
 
-		while(i<panjangBahanPlayer && cukup){
-			if (Elmt(BahanPlayer,i).Val < Elmt(BahanCost,i).Val){
+		while (i < panjangBahanPlayer && cukup)
+		{
+			if (Elmt(BahanPlayer, i).Val < Elmt(BahanCost, i).Val)
+			{
 				cukup = false;
 			}
-			else{
+			else
+			{
 				i++;
 			}
 		}
@@ -544,11 +563,13 @@ boolean BahanCukup(TabBahan BahanPlayer, TabBahan BahanCost){
 	}
 }
 
-boolean MoneyCukup(int MoneyPlayer, int MoneyCost){
+boolean MoneyCukup(int MoneyPlayer, int MoneyCost)
+{
 	/* Mengecek apakah player memiliki uang yang cukup */
 	return MoneyPlayer >= MoneyCost;
 }
 
+<<<<<<< HEAD
 TabBahan AddBahan(TabBahan ListBahan, Bahan B)
 /* Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan */
 {
@@ -562,8 +583,27 @@ TabBahan AddBahan(TabBahan ListBahan, Bahan B)
 		}
 	}
 }
+=======
+// void AddBahan(TabBahan * ListBahan, Bahan B)
+// /* Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan */
+// {
+// 	TabBahan Hasil;
+// 	IdxType i;
 
-TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2){
+// 	MakeEmptyListBahan(&Hasil);
+
+// for (i = GetFirstIdxListBahan(ListBahan); i <= GetLastIdxListBahan(ListBahan); ++i)
+// {
+// 	if (Name(Elmt(ListBahan, i)) == Name(B))
+// 	{
+
+// 	}
+// }
+// }
+>>>>>>> 99b7b26079b3763a04bc50ff783abc85dbf76237
+
+TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2)
+{
 	/* Menjumlahkan elemen tiap bahan pada 2 List */
 	/* Asumsi panjang ListBahan1=ListBahan2 */
 
@@ -574,13 +614,14 @@ TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2){
 	//Me-assign Nama Bahan dan jumlah bahan ke TabBahan Hasil;
 	for (i = GetFirstIdxListBahan(ListBahan1); i <= GetLastIdxListBahan(ListBahan1); ++i)
 	{
-		Elmt(Hasil,i).Name = Elmt(ListBahan1,i).Name;
-		Elmt(Hasil,i).Val = Elmt(ListBahan1,i).Val + Elmt(ListBahan2,i).Val;
+		Elmt(Hasil, i).Name = Elmt(ListBahan1, i).Name;
+		Elmt(Hasil, i).Val = Elmt(ListBahan1, i).Val + Elmt(ListBahan2, i).Val;
 	}
 
 	return Hasil;
 }
 
+<<<<<<< HEAD
 TabBahan MinusBahan(TabBahan ListBahan, Bahan B)
 // Menagurangi bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan 
 {
@@ -624,38 +665,63 @@ boolean SearchNodeWG (BinTree T, Kata K){
    else{
       return (SearchNodeWG(Left(T), K) || SearchNodeWG(Right(T), K));
    }
+=======
+boolean SearchNodeWG(BinTree T, Kata K)
+{
+	/* Mengirimkan true jika ada node dari T yang memiliki info.Type = K */
+	if (IsTreeEmpty(T))
+	{
+		return false;
+	}
+	else if (IsKataSama(Type(T->info), K))
+	{
+		return true;
+	}
+	else
+	{
+		return (SearchNodeWG(Left(T), K) || SearchNodeWG(Right(T), K));
+	}
+>>>>>>> 99b7b26079b3763a04bc50ff783abc85dbf76237
 }
 
-addrNode findTypeBinTree(Kata TypeYangDicari, BinTree T){
+addrNode findTypeBinTree(Kata TypeYangDicari, BinTree T)
+{
 	/* Mengembalikas addrNode dari Node yang memiliki Type sama dengan
 	TypeYangDicari, kalau tidak ada return NilBinTree */
 
-	if(IsTreeEmpty(T)){
+	if (IsTreeEmpty(T))
+	{
 		return NilBinTree;
 	}
-	else if(IsKataSama(Type(T->info), TypeYangDicari)){
+	else if (IsKataSama(Type(T->info), TypeYangDicari))
+	{
 		return T;
 	}
-	else{
-		if(SearchNodeWG(Left(T), TypeYangDicari)){
+	else
+	{
+		if (SearchNodeWG(Left(T), TypeYangDicari))
+		{
 			return findTypeBinTree(TypeYangDicari, Left(T));
 		}
-		else{
+		else
+		{
 			return findTypeBinTree(TypeYangDicari, Right(T));
 		}
 	}
 }
 
-Kata GenerateWahanaName(Kata TypeWahana, POINT PlayerLoc, int PlayerMap){
+Kata GenerateWahanaName(Kata TypeWahana, POINT PlayerLoc, int PlayerMap)
+{
 	/* Mengenerate Nama Wahana yang unik dari Type(Nama) Wahana Standar berdasarkan
 	PlayerLoc dan Map */
-    Kata Nama_Unik;
+	Kata Nama_Unik;
 
 	int panjang_awal = TypeWahana.Length;
 	Nama_Unik.Length = panjang_awal + 6;
 
 	int i;
-	for (i=0; i< panjang_awal; i++){
+	for (i = 0; i < panjang_awal; i++)
+	{
 		Nama_Unik.TabKata[i] = TypeWahana.TabKata[i];
 	}
 
@@ -665,11 +731,11 @@ Kata GenerateWahanaName(Kata TypeWahana, POINT PlayerLoc, int PlayerMap){
 	int b = PlayerLoc.X % 10;
 	char bC = b + '0';
 
-	Nama_Unik.TabKata[i] = ' ';  //Spasi
-	Nama_Unik.TabKata[i+1] = aC; 
-	Nama_Unik.TabKata[i+2] = bC;
+	Nama_Unik.TabKata[i] = ' '; //Spasi
+	Nama_Unik.TabKata[i + 1] = aC;
+	Nama_Unik.TabKata[i + 2] = bC;
 
-	a = PlayerLoc.Y/10;
+	a = PlayerLoc.Y / 10;
 	aC = a + '0';
 
 	b = PlayerLoc.Y % 10;
@@ -677,12 +743,51 @@ Kata GenerateWahanaName(Kata TypeWahana, POINT PlayerLoc, int PlayerMap){
 
 	char mapC = PlayerMap + '0';
 
-	Nama_Unik.TabKata[i+3] = aC;
-	Nama_Unik.TabKata[i+4] = bC;
-	Nama_Unik.TabKata[i+5] = mapC;
+	Nama_Unik.TabKata[i + 3] = aC;
+	Nama_Unik.TabKata[i + 4] = bC;
+	Nama_Unik.TabKata[i + 5] = mapC;
 
 	return Nama_Unik;
 }
 
-
-
+int PlayerTunnel(int MapIdPlayer, char Symbol)
+/* Menghasilkan perpindahan player dari symbol yang dimasukkan */
+/* Jika input invalid maka akan mengembalikan nilai Nil (-1) */
+{
+	if ((MapIdPlayer == 1) && (Symbol = '>'))
+	{
+		return 2;
+	}
+	else if ((MapIdPlayer == 1) && (Symbol = 'v'))
+	{
+		return 3;
+	}
+	else if ((MapIdPlayer == 2) && (Symbol = '<'))
+	{
+		return 1;
+	}
+	else if ((MapIdPlayer == 2) && (Symbol = 'v'))
+	{
+		return 4;
+	}
+	else if ((MapIdPlayer == 3) && (Symbol = '>'))
+	{
+		return 4;
+	}
+	else if ((MapIdPlayer == 3) && (Symbol = '^'))
+	{
+		return 1;
+	}
+	else if ((MapIdPlayer == 4) && (Symbol = '<'))
+	{
+		return 3;
+	}
+	else if ((MapIdPlayer == 4) && (Symbol = '^'))
+	{
+		return 2;
+	}
+	else
+	{
+		return -1;
+	}
+}
