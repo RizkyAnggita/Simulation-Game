@@ -351,13 +351,21 @@ int main()
 								MoneyNeededTotal -= MCost(NewInstruction);
 
 								ListBahanNeededTotal = MinusListBahan(ListBahanNeededTotal, BCost(NewInstruction));
-
-								AksiTotal -= 1;
+							
 								printf("undo build\n");
+
 							} else if (IsKataSama(CBuy, Function(NewInstruction)))
 							{
+
+								TimeNeeded = FindDuration(ArrayCommand, CBuy) * 60;
+								TimeNeededTotal = PrevNDetik(TimeNeededTotal, TimeNeeded);
+
+								MoneyNeededTotal -= MCost(NewInstruction);
+
 								printf("undo buy\n");
+
 							}
+							AksiTotal -= 1;
 
 						}
 		
