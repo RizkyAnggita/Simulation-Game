@@ -6,7 +6,7 @@
 boolean EndKata;
 Kata CKata;
 
-Kata MakeKata(Kata * C, char * command, int length)
+void MakeKata(Kata * C, char * command, int length)
 /* Membuat command dengan TabKata = command, dan Length = length*/
 {
 	//KAMUS
