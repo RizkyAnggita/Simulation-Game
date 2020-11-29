@@ -170,7 +170,7 @@ int main()
 					ENDL;
 					ENDL;
 
-					PrintPlayerStat(Username);
+					PrintPlayerStat(Username, MoneyPlayer);
 					ENDL;
 
 					PrintTime(CurrentTime, PrepEndTime, true);
@@ -555,6 +555,35 @@ int main()
 								BahanPlayer = AddBahan(BahanPlayer, NewBahan);
 
 								printf("exec buy\n");
+							} else if (IsKataSama(CUpgrade, Function(NewInstruction)))
+							{
+
+								MoneyPlayer -= MCost(NewInstruction);
+
+								BahanPlayer = MinusListBahan(BahanPlayer, BCost(NewInstruction));
+
+								int i;
+								i = GetFirstIdxListWP(ArrWahanaPlayer);
+								while(i <= GetLastIdxListWP(ArrWahanaPlayer))
+								{
+							        if (EQ(LocW(ElmtWP(ArrWahanaPlayer,i)), Point(NewInstruction)) && MapW(ElmtWP(ArrWahanaPlayer,i)) == Map(NewInstruction))
+							        {
+							    		
+							    		BinTree WGUpgrade;
+										WGUpgrade = FindListWahana(Detail(NewInstruction), ListWahanaGame);
+										StatW(ElmtWP(ArrWahanaPlayer,i)) = WGUpgrade;
+
+										InsVFirstListU(&HUpgradeW(ElmtWP(ArrWahanaPlayer,i)), NamaW(ElmtWP(ArrWahanaPlayer,i)));
+
+										Kata NamaWUpgrade = GenerateWahanaName(Type(Akar(WGUpgrade)), Point(NewInstruction), Map(NewInstruction));
+										PrintKata(NamaWUpgrade);
+										ENDL;
+										NamaW(ElmtWP(ArrWahanaPlayer,i)) = NamaWUpgrade;
+
+							        }
+							        i++;
+							    }
+
 							}
 						}
 
@@ -587,7 +616,7 @@ int main()
 					ENDL;
 					ENDL;
 
-					PrintPlayerStat(Username);
+					PrintPlayerStat(Username, MoneyPlayer);
 					ENDL;
 
 					PrintTime(CurrentTime, MainEndTime, false);
@@ -660,18 +689,4 @@ int main()
 		printf("exit\n");
 	}
 
-
-
-
-
-
-	// int i;
-
-	// STARTKATA();
-	// for (i = 0; i < CKata.Length; ++i)
-	// {
-	// 	printf("%c", CKata.TabKata[i]);
-	// }
-
-	// printf("\n");
 }

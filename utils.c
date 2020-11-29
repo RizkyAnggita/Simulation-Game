@@ -358,14 +358,14 @@ void PrintMap(int PlayerMap, POINT PlayerLoc, MATRIKS Map1)
 	printf("<, ^, >, v = Gerbang");
 }
 
-void PrintPlayerStat(Kata username)
+void PrintPlayerStat(Kata username, int money)
 /* Menampilkan stat utama pemain seperti nama, money, dan time */
 {
 	printf("Name: ");
 	PrintKata(username);
 	ENDL;
 
-	printf("Money: 1000");
+	printf("Money: %d", money);
 }
 
 void PrintTime(JAM CurrentTime, JAM EndTime, boolean PrepPhase)

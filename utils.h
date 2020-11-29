@@ -81,7 +81,7 @@ void PrintMainMenu();
 void PrintMap(int PlayerMap, POINT PlayerLoc, MATRIKS Map1);
 /* Menampilkan map beserta legend ke layar */
 
-void PrintPlayerStat(Kata username);
+void PrintPlayerStat(Kata username, int money);
 /* Menampilkan stat utama pemain seperti nama dan money */
 
 void PrintTime(JAM CurrentTime, JAM EndTime, boolean PrepPhase);
