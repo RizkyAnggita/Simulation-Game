@@ -12,11 +12,11 @@ jumlah wahana dan wahana apa saja yang dinaiki pengunjung tersebut */
     
     //Random Wahana yang didapatkan
     int i;
+    P.ListWPeng = (Kata *) malloc (NWahana * sizeof(Kata));
     for (i=0; i<NWahana; i++){
         int idxWahanaRandom = (rand() % NbElmtListWP(T));
         ElmtWPengunjung(P, i) = Elmt(T, idxWahanaRandom).NamaW;
     }
-
     Prio(P) = 5;
     TotalWPeng(P) = NWahana;
     CurrWPeng(P) = 0;
@@ -37,5 +37,5 @@ void PrintPengunjung(Pengunjung P){
             printf(",");
         }
     }
-    printf("), kesabaran: %d\n", Kesabaran(P));
+    printf("), kesabaran: %d", Kesabaran(P));
 }

@@ -16,6 +16,7 @@
 #include "listupgrade.h"
 #include "wahanaplayer.h"
 #include "arraywahanaplayer.h"
+#include "pengunjung.h"
 
 
 #define ENDL printf("\n")
@@ -587,8 +588,30 @@ int main()
 
 			} else // Main Phase
 			{
+
+				int TimeSkipVal;
+				TimeSkipVal = 10;
+
+				PrioQueueChar QueueP;
+				MakeEmptyPQ(&QueueP, 10);
+
+				Pengunjung P;
+
+
 				while (!PrepPhase && Play)
 				{
+
+					if (NbElmtListWP(ArrWahanaPlayer) > 0)
+					{
+
+						if (GenerateP(TimeSkipVal))
+						{
+
+							P = GeneratePengunjung(ArrWahanaPlayer);
+							Enqueue(&QueueP, P);	
+						}
+					}
+
 					printf("Main phase day %d\n", Day);
 
 					PrintMap(PlayerMap, PlayerPosition, Map1);
@@ -601,57 +624,60 @@ int main()
 					PrintTime(CurrentTime, MainEndTime, false);
 					ENDL;
 
-					PrintMainQueue();
+					PrintMainQueue(QueueP);
 					ENDL;
 					ENDL;
 
 					printf("Masukkan perintah:\n");
 
 					STARTKATA(" ");
-
-					if (IsKataSama(CKata, CW))
-					{
-						MovePlayer(Map1, 'w', &PlayerPosition);
-
-					} else if (IsKataSama(CKata, CA))
-					{
-						MovePlayer(Map1, 'a', &PlayerPosition);
-
-					} else if (IsKataSama(CKata, CS))
-					{
-						MovePlayer(Map1, 's', &PlayerPosition);
-
-					} else if (IsKataSama(CKata, CD))
-					{
-						MovePlayer(Map1, 'd', &PlayerPosition);
-
-					} else if (IsKataSama(CKata, CServe))
+					if (IsKataSama(CKata, CServe))
 					{
 						printf("serve\n");
 
-					} else if (IsKataSama(CKata, CRepair))
+					} else 
 					{
-						printf("repair\n");
+						if (IsKataSama(CKata, CW))
+						{
+							MovePlayer(Map1, 'w', &PlayerPosition);
 
-					} else if (IsKataSama(CKata, CDetail))
-					{
-						printf("Detail\n");
+						} else if (IsKataSama(CKata, CA))
+						{
+							MovePlayer(Map1, 'a', &PlayerPosition);
 
-					} else if (IsKataSama(CKata, COffice))
-					{
-						printf("Office\n");
+						} else if (IsKataSama(CKata, CS))
+						{
+							MovePlayer(Map1, 's', &PlayerPosition);
 
-					} else if (IsKataSama(CKata, CPrepare))
-					{
-						PrepPhase = true;
-						Day += 1;
-						printf("Prepare\n");
-					
-					} else if (IsKataSama(CKata, CExit))
-					{
-						Play = false;
+						} else if (IsKataSama(CKata, CD))
+						{
+							MovePlayer(Map1, 'd', &PlayerPosition);
 
-					}					
+						} else if (IsKataSama(CKata, CRepair))
+						{
+							printf("repair\n");
+
+						} else if (IsKataSama(CKata, CDetail))
+						{
+							printf("Detail\n");
+
+						} else if (IsKataSama(CKata, COffice))
+						{
+							printf("Office\n");
+
+						} else if (IsKataSama(CKata, CPrepare))
+						{
+							PrepPhase = true;
+							Day += 1;
+							printf("Prepare\n");
+						
+						} else if (IsKataSama(CKata, CExit))
+						{
+							Play = false;
+
+						}	
+					}
+										
 				}
 				
 			}

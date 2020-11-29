@@ -6,7 +6,7 @@
 #include "instruction.h"
 
 #define Nil -1
-#define MaxEl 30
+#define MaxElS 30
 /*
 Nil   : Nilai Top(S) yang kosong (index di luar batas array)
 MaxEl : Nilai sementara max number of instructions
@@ -19,7 +19,7 @@ StackI berisi info yang berupa tipe data buatan Instruction
 */
 typedef int address;
 typedef struct {
-	Instruction I[MaxEl];
+	Instruction I[MaxElS];
 	address Top;
 } StackI;
 

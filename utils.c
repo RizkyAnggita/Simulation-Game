@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "utils.h"
 
@@ -421,11 +422,19 @@ void PrintPrepStat(int Aksi, JAM J, int Money, TabBahan ListBahan)
 	}
 }
 
-void PrintMainQueue()
+void PrintMainQueue(PrioQueueChar Q)
 /* Menampilkan  antrian pengunjung saat main phase*/
 {
-	printf("Antrian [1/5]:\n");
-	printf("(Wangky's Universe), Kesabaran: 5");
+	Pengunjung P;
+
+	printf("Antrian [%d/%d]:\n", NBElmtPQ(Q), MaxElPQ(Q));
+
+	while (!IsEmptyPQ(Q))
+	{
+		Dequeue(&Q, &P);
+		PrintPengunjung(P);
+		ENDL;
+	}
 }
 
 void PrintBuildWahana(ListWG ListWahanaGame)
@@ -885,4 +894,40 @@ JAM TimeSkip(JAM Sekarang, TabCommand T, Kata K){
 	else{
 		return Sekarang;
 	}
+}
+
+PrioQueueChar MinusKesabaranQueue(PrioQueueChar Q, int X)
+/* Mengurangi nilai kesabaran dari setiap pengunjung pada antrian sebanyak X
+   jika nilai kesabaran kurang dari 0, maka pengunjung akan keluar*/
+{
+	//KAMUS
+	PrioQueueChar QNew;
+	Pengunjung P;
+
+
+	//ALGORITMA
+	MakeEmptyPQ(&QNew, MaxElPQ(Q));
+
+	while (!IsEmptyPQ(Q))
+	{
+		Dequeue(&Q, &P);
+		Kesabaran(P) -= X;
+
+		if (Kesabaran(P) > 0)
+		{
+			Enqueue(&QNew, P);
+		}
+	}
+
+	return QNew;
+
+}
+
+boolean GenerateP(int TimeSkipVal)
+/* Menentukan apakah akan digenerate pengunjung atau tidak, dengan random */
+{
+	int Maks;
+
+	Maks = 10;
+	return (rand() % 10) < TimeSkipVal;
 }

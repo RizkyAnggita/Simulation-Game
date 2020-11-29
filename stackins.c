@@ -27,7 +27,7 @@ boolean IsFull(StackI S){
 Returns true jika S penuh, false jika tidak
 S penuh : Top = MaxEl - 1
 */
-	return Top(S) == (MaxEl - 1);
+	return Top(S) == (MaxElS - 1);
 }
 
 // === Menambahkan elemen ke stack ===
