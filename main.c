@@ -23,29 +23,6 @@
 
 int main()
 {
-
-	// STARTKALIMAT(" ");
-	// PrintKata(CKata);
-	// ENDL;
-	// ADV();
-
-
-	
-
-
-
-	// WahanaGame WG1;
-
-	// STARTKATA(" ");
-	// Type(WG1) = CKata;
-	// ADVKATA(" ");
-	// Price(WG1) = KataToInteger(CKata);
-
-	// PrintKata(Type(WG1));
-	// printf(" %d\n", Price(WG1));
-
-
-
 	// Initialize Game
 
 	//Initialisasi GameCommand
@@ -209,6 +186,7 @@ int main()
 						PrintBuildWahana(ListWahanaGame);
 						ENDL;
 
+						printf("Akhiri command dengan ';' !\n");
 						STARTKALIMAT(" ");
 
 						WahanaGameBasicTree = FindBasicWahana(ListWahanaGame, CKata);
@@ -311,6 +289,7 @@ int main()
 									ENDL;
 								}
 
+								printf("Akhiri command dengan ';' !\n");
 								STARTKALIMAT(" ");
 
 								if ((IsKataSama(CKata, Type(Akar(LeftWPUpgrade)))) || (IsKataSama(CKata, Type(Akar(RightWPUpgrade)))))
