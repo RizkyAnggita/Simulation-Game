@@ -569,7 +569,7 @@ boolean MoneyCukup(int MoneyPlayer, int MoneyCost)
 	return MoneyPlayer >= MoneyCost;
 }
 
-<<<<<<< HEAD
+
 TabBahan AddBahan(TabBahan ListBahan, Bahan B)
 /* Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan */
 {
@@ -583,24 +583,6 @@ TabBahan AddBahan(TabBahan ListBahan, Bahan B)
 		}
 	}
 }
-=======
-// void AddBahan(TabBahan * ListBahan, Bahan B)
-// /* Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan */
-// {
-// 	TabBahan Hasil;
-// 	IdxType i;
-
-// 	MakeEmptyListBahan(&Hasil);
-
-// for (i = GetFirstIdxListBahan(ListBahan); i <= GetLastIdxListBahan(ListBahan); ++i)
-// {
-// 	if (Name(Elmt(ListBahan, i)) == Name(B))
-// 	{
-
-// 	}
-// }
-// }
->>>>>>> 99b7b26079b3763a04bc50ff783abc85dbf76237
 
 TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2)
 {
@@ -621,7 +603,6 @@ TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2)
 	return Hasil;
 }
 
-<<<<<<< HEAD
 TabBahan MinusBahan(TabBahan ListBahan, Bahan B)
 // Menagurangi bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan 
 {
@@ -665,23 +646,6 @@ boolean SearchNodeWG (BinTree T, Kata K){
    else{
       return (SearchNodeWG(Left(T), K) || SearchNodeWG(Right(T), K));
    }
-=======
-boolean SearchNodeWG(BinTree T, Kata K)
-{
-	/* Mengirimkan true jika ada node dari T yang memiliki info.Type = K */
-	if (IsTreeEmpty(T))
-	{
-		return false;
-	}
-	else if (IsKataSama(Type(T->info), K))
-	{
-		return true;
-	}
-	else
-	{
-		return (SearchNodeWG(Left(T), K) || SearchNodeWG(Right(T), K));
-	}
->>>>>>> 99b7b26079b3763a04bc50ff783abc85dbf76237
 }
 
 addrNode findTypeBinTree(Kata TypeYangDicari, BinTree T)

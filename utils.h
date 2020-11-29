@@ -112,19 +112,14 @@ boolean BahanCukup(TabBahan BahanPlayer, TabBahan BahanCost);
 boolean MoneyCukup(int MoneyPlayer, int MoneyCost);
 /* Mengecek apakah player memiliki uang yang cukup */
 
-<<<<<<< HEAD
+
 TabBahan AddBahan(TabBahan ListBahan, Bahan B);
 // Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan 
-=======
-// void AddBahan(TabBahan ListBahan, Bahan B);
-//  Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan
->>>>>>> 99b7b26079b3763a04bc50ff783abc85dbf76237
 
 TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2);
 /* Menjumlahkan elemen tiap bahan pada 2 List */
 /* Asumsi panjang ListBahan1=ListBahan2 */
 
-<<<<<<< HEAD
 TabBahan MinusBahan(TabBahan ListBahan, Bahan B);
 // Menagurangi bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan 
 
@@ -133,9 +128,6 @@ TabBahan MinusListBahan(TabBahan ListBahan1, TabBahan ListBahan2);
 /* Asumsi panjang ListBahan1=ListBahan2 */
 
 boolean SearchNodeWG (BinTree T, Kata K);
-=======
-boolean SearchNodeWG(BinTree T, Kata K);
->>>>>>> 99b7b26079b3763a04bc50ff783abc85dbf76237
 /* Mengirimkan true jika ada node dari T yang memiliki info.Type = K */
 
 addrNode findTypeBinTree(Kata TypeYangDicari, BinTree T);
