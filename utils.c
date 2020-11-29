@@ -500,6 +500,8 @@ TabCommand InitArrayCommand()
 	InsertNewCommand(&T, makeCommtype(CDetail, 0));
 	InsertNewCommand(&T, makeCommtype(COffice, 0));
 	InsertNewCommand(&T, makeCommtype(CPrepare, 0));
+	InsertNewCommand(&T, makeCommtype(CDetails, 0));
+	InsertNewCommand(&T, makeCommtype(CReport, 0));
 
 	return T;
 }

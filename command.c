@@ -19,6 +19,8 @@ Kata CRepair;
 Kata CDetail;
 Kata COffice;
 Kata CPrepare;
+Kata CDetails;
+Kata CReport;
 
 
 void InitGameCommand()
@@ -43,4 +45,6 @@ void InitGameCommand()
 	MakeKata(&CDetail, "detail", 6);
 	MakeKata(&COffice, "office", 6);
 	MakeKata(&CPrepare, "prepare", 7);
+	MakeKata(&CDetails, "Details", 7);
+	MakeKata(&CReport, "Report", 6);
 }
