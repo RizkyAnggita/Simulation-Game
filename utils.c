@@ -952,6 +952,8 @@ boolean IsAround(POINT Loc, MATRIKS Map, char C)
 	CRight = GetElementMap(Map, Right);
 
 	return !((CUp != C) && (CRight != C) && (CDown != C)  && (CLeft != C)) ;
+}
+
 void PrintKataListU(ListU L){
 	/* Mencetak elemen ListU (Kata) pada setiap node */
 	addressListU P;
