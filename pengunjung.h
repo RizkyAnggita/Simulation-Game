@@ -1,11 +1,13 @@
 
 #ifndef __PENGUNJUNG_H__
 #define __PENGUNJUNG_H__
+#include "mesinkata.h"
+#include "arraywahanaplayer.h"
 
 typedef struct 
 {
 	int Prio;
-	Kata[] ListWPeng;
+	Kata *ListWPeng;
 	int TotalWPeng;
 	int CurrWPeng;
 	int Kesabaran;
@@ -18,4 +20,9 @@ typedef struct
 #define CurrWPeng(P) (P).CurrWPeng
 #define Kesabaran(P) (P).Kesabaran
 
+Pengunjung GeneratePengunjung (TabWahanaPlayer T);
+/* Mengenerate seorang pengunjung dengan melakukan randomisasi
+jumlah wahana dan wahana apa saja yang dinaiki pengunjung tersebut */
+
+#endif
 
