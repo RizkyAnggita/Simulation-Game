@@ -170,4 +170,7 @@ PrioQueueChar MinusKesabaranQueue(PrioQueueChar Q, int X);
 boolean GenerateP(int TimeSkipVal);
 /* Menentukan apakah akan digenerate pengunjung atau tidak, dengan random */
 
+void PrintKataListU(ListU L);
+	/* Mencetak elemen ListU (Kata) pada setiap node */
+
 #endif

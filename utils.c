@@ -933,3 +933,17 @@ boolean GenerateP(int TimeSkipVal)
 	Maks = 10;
 	return (rand() % 10) < TimeSkipVal;
 }
+
+void PrintKataListU(ListU L){
+	/* Mencetak elemen ListU (Kata) pada setiap node */
+	addressListU P;
+	P = FirstListU(L);
+
+	while (P!=NilListU)
+	{
+		PrintKata(InfoListU(P));
+		printf(" <-- ");
+		P = NextListU(P);
+	}
+	
+}
