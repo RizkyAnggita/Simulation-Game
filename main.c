@@ -169,7 +169,7 @@ int main()
 					PrintTime(CurrentTime, PrepEndTime, true);
 					ENDL;
 
-					PrintPrepStat(AksiTotal, TimeNeededTotal, MoneyNeededTotal);
+					PrintPrepStat(AksiTotal, TimeNeededTotal, MoneyNeededTotal, ListBahanNeededTotal);
 					ENDL;
 					ENDL;
 
@@ -343,17 +343,17 @@ int main()
 							if (IsKataSama(CBuild, Function(NewInstruction)))
 							{
 
-								// SetElementMap(&Map1Prep, Point(NewInstruction), '-');
+								SetElementMap(&Map1Prep, Point(NewInstruction), '-');
 
-								// TimeNeeded = FindDuration(ArrayCommand, CBuild) * 60;
-								// TimeNeededTotal = PrevNDetik(TimeNeededTotal, TimeNeeded);
+								TimeNeeded = FindDuration(ArrayCommand, CBuild) * 60;
+								TimeNeededTotal = PrevNDetik(TimeNeededTotal, TimeNeeded);
 
-								// MoneyNeededTotal += MoneyNeeded;
+								MoneyNeededTotal -= MCost(NewInstruction);
 
-								// ListBahanNeededTotal = AddListBahan(ListBahanNeededTotal, ListBahanNeeded);
+								ListBahanNeededTotal = MinusListBahan(ListBahanNeededTotal, BCost(NewInstruction));
 
-								// AksiTotal += 1;
-								// printf("undo build\n");
+								AksiTotal -= 1;
+								printf("undo build\n");
 							} else if (IsKataSama(CBuy, Function(NewInstruction)))
 							{
 								printf("undo buy\n");
