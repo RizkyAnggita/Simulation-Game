@@ -1,18 +1,9 @@
-#include "listrek.h"
+
 #include "boolean.h"
 #include "graph.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-/* *** Konstruktor *** */
-Graph CreateGraph(int X)
-{
-    Graph P;
-    First(P) = X;
-
-    return P;
-}
-/* I.S. Sembarang; F.S. Terbentuk Graph dengan satu simpul dengan Id=X */
 adrNode AlokNode(int X)
 {
     adrNode P = (adrNode)malloc(sizeof(adrNode));
@@ -30,6 +21,16 @@ adrNode AlokNode(int X)
 /* Jika alokasi berhasil, maka address tidak Nil, misalnya
 menghasilkan P, maka Id(P)=X, Npred(P)=0, Trail(P)=Nil,
 dan Next(P)=Nil. Jika alokasi gagal, mengembalikan Nil. */
+
+/* *** Konstruktor *** */
+Graph CreateGraph(int X)
+{
+    Graph P;
+    First(P) = AlokNode(X);
+
+    return P;
+}
+/* I.S. Sembarang; F.S. Terbentuk Graph dengan satu simpul dengan Id=X */
 void DealokNode(adrNode P)
 {
     free(P);
@@ -104,9 +105,15 @@ adrSuccNode SearchEdge(Graph G, int prec, int succ)
         // di notal dosen harusnya codenya
         // while (Id(T) != prec && T != Nil)
         // tapi T (adrSuccNode) ga punya field Id, jadi gw ganti ke P
-        while (Id(P) != prec && T != Nil)
+        while ((T != Nil) && !found)
         {
-            T = Next(T);
+            if (Id(Succ(T)) != prec)
+            {
+                found = true;
+            } else
+            {
+                T = Next(T);    
+            }
         }
 
         return T;
@@ -127,6 +134,8 @@ adrNode InsertNode(Graph G, int X)
         }
         Next(P) = Pn;
     }
+
+    return Pn;
 }
 /* Menambahkan simpul X ke dalam graph, jika alokasi X berhasil. */
 /* I.S. G terdefinisi, X terdefinisi dan belum ada pada G. */
@@ -140,7 +149,7 @@ Graph InsertEdge(Graph G, int prec, int succ)
     if (SearchEdge(G, prec, succ) == Nil)
     {
         precNode = SearchNode(G, prec);
-        if (precNode = Nil)
+        if (precNode == Nil)
         {
             precNode = InsertNode(G, prec);
         }
@@ -154,14 +163,22 @@ Graph InsertEdge(Graph G, int prec, int succ)
 
         trail = Trail(precNode);
 
-        while (Next(trail) != Nil)
+        if (trail == Nil)
         {
-            trail = Next(trail);
+            trail = AlokSuccNode(succNode);
+        } else
+        {
+            while (Next(trail) != Nil)
+            {
+                trail = Next(trail);
+            }    
+            Next(trail) = AlokSuccNode(succNode);
         }
-
-        Next(trail) = AlokSuccNode(succNode);
+        
         Npred(succNode) = Npred(succNode) + 1;
     }
+
+    return G;
 }
 /*  Menambahkan busur dari prec menuju succ ke dalam G  */
 /*  I.S. G, prec, succ terdefinisi */
@@ -169,17 +186,3 @@ Graph InsertEdge(Graph G, int prec, int succ)
 (prec,succ) ke G. Jika simpul prec/succ belum ada pada G,
 tambahkan simpul tersebut dahulu. Jika sudah ada busur (prec,succ)
 di G, maka G tetap.  */
-Graph DeleteNode(Graph G, int X)
-{
-    adrNode P = SearchNode(G, X);
-    while (P != Nil)
-    {
-        Dealokasi(P);
-        P = SearchNode(G, X);
-    }
-}
-/*  Menghapus simpul X dari G  */
-/* I.S. G terdefinisi, X terdefinisi dan ada pada G, jumlah simpul
-pada G lebih dari 1 */
-/* F.S. simpul X dan semua busur yang terhubung ke X dihapus
-dari G. */

@@ -17,7 +17,7 @@ typedef struct Node
 {
     int Id;
     int NPred;
-    MATIRKS Map;
+    MATRIKS Map;
     adrSuccNode Trail;
     adrNode Next;
 } Node;
@@ -40,7 +40,6 @@ typedef struct Graph
 #define Trail(Pn) Pn->Trail
 #define Next(Pn) Pn->Next
 #define Succ(Pt) Pt->Succ
-#define Next(Pt) Pt->Next
 
 /* *** Konstruktor *** */
 Graph CreateGraph(int X);

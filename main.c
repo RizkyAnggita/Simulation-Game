@@ -132,9 +132,7 @@ int main()
 
 				while (Play && PrepPhase)
 				{
-					printf("Last idx wp %d\n", GetLastIdxListWP(ArrWahanaPlayer));
-
-
+					
 					printf("Preparation phase day %d\n", Day);
 
 					PrintMap(PlayerMap, PlayerPosition, Map1);
