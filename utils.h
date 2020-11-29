@@ -15,28 +15,28 @@
 #include "bintree.h"
 #include "listwahanagame.h"
 
-void GetBrsKolFileMap(int * NB, int * NK, char * filename);
+void GetBrsKolFileMap(int *NB, int *NK, char *filename);
 /* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map
    F.S. NBrs adalah jumlah baris pada filemap, begitu jg dengan NKol adalah jumlah kolom*/
 
-MATRIKS FileToMatriks(char * filename);
+MATRIKS FileToMatriks(char *filename);
 /* Membaca file yang berisi matriks dan mengembalikan matriks tersebut */
 
 char GetElementMap(MATRIKS Map, POINT Loc);
 /* Mengembalikan elemen yang ada pada Map pada koordinat Loc */
 
-void SetElementMap(MATRIKS * Map, POINT Loc, char el);
+void SetElementMap(MATRIKS *Map, POINT Loc, char el);
 /* I.S. Map, Loc, el terdefinisi
    F.S. Map pada koordinat Loc, di set element nya menjadi el */
 
-void MovePlayer(MATRIKS Map, char Command, POINT * Loc);
+void MovePlayer(MATRIKS Map, char Command, POINT *Loc);
 /* I.S. Map adalah matriks map yang akan diubah posisi player nya,
         Command adalah command yg di input pengguna 'w'. 'a'. 's'. 'd'.
         Loc adalah lokasi player sebelumnya
    F.S. Posisi pemain berubah jika tidak menabrak pagar yaitu char '*',
    		Map dan PlayerLoc akan berubah jika tidak menabrak*/
 
-TabBahan FileToListBahan(char * filename);
+TabBahan FileToListBahan(char *filename);
 /* Membaca file yang berisi nama bahan beserta harganya */
 /* Mengembalikan list bahan  */
 
@@ -58,14 +58,14 @@ int PriceBuyBahan(Kata name, int qty, TabBahan ShopBahan);
    shop bahan
    Jika tidak ada di shop bahan, akan mengembalikan total harga -999*/
 
-void PitaToTreeWahanaGame(BinTree * T, char * filename, TabBahan ListBahan);
+void PitaToTreeWahanaGame(BinTree *T, char *filename, TabBahan ListBahan);
 /* Dipakai jika input dari pita karakter */
 /* I.S. CC berisi ‘(‘ */
 /* F.S. T terdefinisi */
 /* Proses: Membaca isi pita karakter dan membangun pohon secara rekursif, hanya
 membutuhkan mesin karakter */
 
-ListWG FileToListTreeWahana(char * filename, TabBahan ListBahan);
+ListWG FileToListTreeWahana(char *filename, TabBahan ListBahan);
 /* Membaca file wahana yang berisi beberapa tree wahana, setiap tree wahana akan
    di-insert ke List wahana game. Mengembalikan list wahana game */
 
@@ -103,8 +103,8 @@ TabCommand InitArrayCommand();
 /* Commtype : < perintah : Kata, duration : integer > */
 
 int FindDuration(TabCommand T, Kata K);
-	/* Mengembalikan durasi sebuah command jika terdapat di TabCommand */
-	/* Jika tidak ada, return DurasiUndef=-999 */
+/* Mengembalikan durasi sebuah command jika terdapat di TabCommand */
+/* Jika tidak ada, return DurasiUndef=-999 */
 
 boolean BahanCukup(TabBahan BahanPlayer, TabBahan BahanCost);
 /* Mengecek apakah player memiliki bahan yang cukup */
@@ -113,13 +113,13 @@ boolean MoneyCukup(int MoneyPlayer, int MoneyCost);
 /* Mengecek apakah player memiliki uang yang cukup */
 
 // void AddBahan(TabBahan ListBahan, Bahan B);
-//  Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan 
+//  Menambahkan bahan kepada list bahan, bahan sudah pasti terdefinisi di list bahan
 
 TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2);
 /* Menjumlahkan elemen tiap bahan pada 2 List */
 /* Asumsi panjang ListBahan1=ListBahan2 */
 
-boolean SearchNodeWG (BinTree T, Kata K);
+boolean SearchNodeWG(BinTree T, Kata K);
 /* Mengirimkan true jika ada node dari T yang memiliki info.Type = K */
 
 addrNode findTypeBinTree(Kata TypeYangDicari, BinTree T);
@@ -130,5 +130,7 @@ Kata GenerateWahanaName(Kata TypeWahana, POINT PlayerLoc, int PlayerMap);
 /* Mengenerate Nama Wahana yang unik dari Type(Nama) Wahana Standar berdasarkan
 PlayerLoc dan Map */
 
+int PlayerTunnel(int MapIdPlayer, char Symbol);
+/* Menghasilkan perpindahan player dari symbol yang dimasukkan */
 
 #endif
