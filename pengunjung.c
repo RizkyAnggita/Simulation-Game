@@ -25,3 +25,17 @@ jumlah wahana dan wahana apa saja yang dinaiki pengunjung tersebut */
     return P;
 
 }
+
+void PrintPengunjung(Pengunjung P){
+    /* Mencetak Wahana apa saja yang ingin dinaiki pengunjung dan tingkat kesabarannya */
+    int i;
+    printf("(");
+    for (i=0; i< TotalWPeng(P); i++){
+        PrintKata(ElmtWPengunjung(P, i));
+        
+        if (i!=TotalWPeng(P)-1){
+            printf(",");
+        }
+    }
+    printf("), kesabaran: %d\n", Kesabaran(P));
+}
