@@ -660,7 +660,7 @@ int main()
 							if (!IsEmptyPQ(QueueP))
 							{
 								// random rusak atau tidak
-								if ((rand() % 1) < 1) //rusak
+								if ((rand() % 10) < 1) //rusak
 								{
 									Dequeue(&QueueP, &P);
 
@@ -670,7 +670,7 @@ int main()
 									i = GetFirstIdxListWP(ArrWahanaPlayer);
 									while(i <= GetLastIdxListWP(ArrWahanaPlayer))
 									{
-								        if (IsKataSama(NamaW(ElmtWP(ArrWahanaPlayer,i)), ElmtWPengunjung(P, CurrWPeng(P))));
+								        if (IsKataSama(NamaW(ElmtWP(ArrWahanaPlayer,i)), ElmtWPengunjung(P, CurrWPeng(P))))
 								        {
 								    		BrokenW(ElmtWP(ArrWahanaPlayer, i)) = true;
 								        }
@@ -765,6 +765,85 @@ int main()
 
 						} else if (IsKataSama(CKata, CRepair))
 						{
+							if (IsAround(PlayerPosition, Map1, 'W'))
+							{
+								boolean FoundBroken;
+								POINT Up, Down, Left, Right;
+
+								Up = NextY(PlayerPosition);
+								Left = PrevX(PlayerPosition);
+								Down = PrevY(PlayerPosition);
+								Right = NextX(PlayerPosition);
+
+								FoundBroken = false;
+
+								int i;
+							    i=GetFirstIdxListWP(ArrWahanaPlayer);
+							    while(i<=GetLastIdxListWP(ArrWahanaPlayer)){
+							        if (EQ(LocW(ElmtWP(ArrWahanaPlayer,i)), Up)&& MapW(ElmtWP(ArrWahanaPlayer,i))==PlayerMap){
+							            if (BrokenW(ElmtWP(ArrWahanaPlayer,i)))
+							            {
+							            	BrokenW(ElmtWP(ArrWahanaPlayer,i)) = false;
+							            	FailServe = false;
+							            	FoundBroken = true;	
+							            }
+							        }
+							        i++;
+							    }
+
+							    i=GetFirstIdxListWP(ArrWahanaPlayer);
+							    while(i<=GetLastIdxListWP(ArrWahanaPlayer)){
+							        if (EQ(LocW(ElmtWP(ArrWahanaPlayer,i)), Down)&& MapW(ElmtWP(ArrWahanaPlayer,i))==PlayerMap){
+							            if (BrokenW(ElmtWP(ArrWahanaPlayer,i)))
+							            {
+							            	BrokenW(ElmtWP(ArrWahanaPlayer,i)) = false;
+							            	FailServe = false;
+							            	FoundBroken = true;	
+							            }
+							        }
+							        i++;
+							    }
+
+							    i=GetFirstIdxListWP(ArrWahanaPlayer);
+							    while(i<=GetLastIdxListWP(ArrWahanaPlayer)){
+							        if (EQ(LocW(ElmtWP(ArrWahanaPlayer,i)), Right)&& MapW(ElmtWP(ArrWahanaPlayer,i))==PlayerMap){
+							            if (BrokenW(ElmtWP(ArrWahanaPlayer,i)))
+							            {
+							            	BrokenW(ElmtWP(ArrWahanaPlayer,i)) = false;
+							            	FailServe = false;
+							            	FoundBroken = true;	
+							            }
+							        }
+							        i++;
+							    }
+
+							    i=GetFirstIdxListWP(ArrWahanaPlayer);
+							    while(i<=GetLastIdxListWP(ArrWahanaPlayer)){
+							        if (EQ(LocW(ElmtWP(ArrWahanaPlayer,i)), Left)&& MapW(ElmtWP(ArrWahanaPlayer,i))==PlayerMap){
+							            if (BrokenW(ElmtWP(ArrWahanaPlayer,i)))
+							            {
+							            	BrokenW(ElmtWP(ArrWahanaPlayer,i)) = false;
+							            	FailServe = false;
+							            	FoundBroken = true;	
+							            }
+							        }
+							        i++;
+							    }
+
+							    if (!FoundBroken)
+							    {
+							 		printf("Tidak ada yang bisa diperbaiki disini!");
+									MainCommandSucces = false;
+									ENDL;   	
+							    }
+
+
+							} else
+							{
+								printf("Tidak ada yang bisa diperbaiki disini!");
+								MainCommandSucces = false;
+								ENDL;
+							}
 							printf("repair\n");
 
 						} else if (IsKataSama(CKata, CDetail))
