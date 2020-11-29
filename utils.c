@@ -92,7 +92,7 @@ void MovePlayer(MATRIKS Map, char Command, POINT *Loc)
 		break;
 	}
 
-	if ((GetElementMap(Map, NewLoc) != '*') && (GetElementMap(Map, NewLoc) != 'W'))
+	if ((GetElementMap(Map, NewLoc) != '*') && (GetElementMap(Map, NewLoc) != 'W') && (GetElementMap(Map, NewLoc) != 'A'))
 	{
 		*Loc = NewLoc;
 	}

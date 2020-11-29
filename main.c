@@ -37,9 +37,6 @@ int main()
 
 	//Initialize Map
 	MATRIKS Map1 = FileToMatriks(FILE_MAP_1);
-	
-
-	printf("11111111111111111111\n");
 
 	//Initialize Wahana Game
 	STARTKATA(FILE_WAHANA);
@@ -47,13 +44,8 @@ int main()
 	ListWG ListWahanaGame;
 	ListWahanaGame = FileToListTreeWahana(FILE_WAHANA, ShopBahan);
 	
-	PrintTree(InfoListWG(FirstListWG(ListWahanaGame)), 2);
-	PrintTree(InfoListWG(NextListWG(FirstListWG(ListWahanaGame))), 2);
-	printf("CC = '%c'\n", CC);
-	PrintKata(CKata);
-	ENDL;
 
-	
+
     // Player state
 
 	Kata Username;
@@ -383,9 +375,6 @@ int main()
 						}
 
 
-
-						printf("upgr\n");
-
 					} else if (IsKataSama(CKata, CBuy))
 					{
 						PrintBahanPlayer(BahanPlayer);
@@ -457,8 +446,7 @@ int main()
 								MoneyNeededTotal -= MCost(NewInstruction);
 
 								ListBahanNeededTotal = MinusListBahan(ListBahanNeededTotal, BCost(NewInstruction));
-							
-								printf("undo build\n");
+
 
 							} else if (IsKataSama(CBuy, Function(NewInstruction)))
 							{
@@ -468,7 +456,6 @@ int main()
 
 								MoneyNeededTotal -= MCost(NewInstruction);
 
-								printf("undo buy\n");
 
 							} else if (IsKataSama(CUpgrade, Function(NewInstruction)))
 							{
@@ -481,7 +468,6 @@ int main()
 
 								ListBahanNeededTotal = MinusListBahan(ListBahanNeededTotal, BCost(NewInstruction));
 							
-								printf("undo upgrade\n");
 							}
 							AksiTotal -= 1;
 
@@ -511,8 +497,6 @@ int main()
 
 								Kata NamaWBuild = GenerateWahanaName(Type(Akar(WGBuild)), Point(NewInstruction), Map(NewInstruction));
 
-								PrintKata(NamaWBuild);
-
 								WahanaPlayer NewWP;
 
 								ListU ListUBuild;
@@ -522,8 +506,6 @@ int main()
 
 
 								ElmtWP(ArrWahanaPlayer, GetLastIdxListWP(ArrWahanaPlayer) + 1) = NewWP;
-
-								printf(" exec build\n");
 
 							} else if (IsKataSama(CBuy, Function(NewInstruction)))
 							{
@@ -535,7 +517,6 @@ int main()
 								Val(NewBahan) = Quantity(NewInstruction);
 								BahanPlayer = AddBahan(BahanPlayer, NewBahan);
 
-								printf("exec buy\n");
 							} else if (IsKataSama(CUpgrade, Function(NewInstruction)))
 							{
 
@@ -557,7 +538,6 @@ int main()
 										InsVFirstListU(&HUpgradeW(ElmtWP(ArrWahanaPlayer,i)), NamaW(ElmtWP(ArrWahanaPlayer,i)));
 
 										Kata NamaWUpgrade = GenerateWahanaName(Type(Akar(WGUpgrade)), Point(NewInstruction), Map(NewInstruction));
-										PrintKata(NamaWUpgrade);
 										ENDL;
 										NamaW(ElmtWP(ArrWahanaPlayer,i)) = NamaWUpgrade;
 
@@ -571,12 +551,10 @@ int main()
 
 
 						PrepPhase = false;
-						printf("exec\n");
 
 					} else if (IsKataSama(CKata, CMain))
 					{
 						PrepPhase = false;
-						printf("Main\n");
 
 					} else if (IsKataSama(CKata, CExit))
 					{
@@ -740,8 +718,6 @@ int main()
 							MainCommandSucces = false;
 							ENDL;
 						}
-						
-						printf("serve\n");
 
 					} else 
 					{
@@ -844,7 +820,6 @@ int main()
 								MainCommandSucces = false;
 								ENDL;
 							}
-							printf("repair\n");
 
 						} else if (IsKataSama(CKata, CDetail))
 						{
@@ -923,12 +898,10 @@ int main()
 						{
 							PrepPhase = true;
 							Day += 1;
-							printf("Prepare\n");
 						
 						} else if (IsKataSama(CKata, CExit))
 						{
 							Play = false;
-
 						}
 
 						if (MainCommandSucces)
