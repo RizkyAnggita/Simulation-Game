@@ -98,7 +98,7 @@ int main()
 	IdxType idxBP;
 	for (idxBP = GetFirstIdxListBahan(BahanPlayer); idxBP <= GetLastIdxListBahan(BahanPlayer); ++idxBP)
 	{
-		Val(Elmt(BahanPlayer, idxBP)) = 99999;
+		Val(Elmt(BahanPlayer, idxBP)) = 999;
 	}
 
 	int MoneyPlayer = 99999;
@@ -372,6 +372,35 @@ int main()
 
 					} else if (IsKataSama(CKata, CExecute))
 					{
+
+						StackI TmpStackI = ReverseStack(InstructionStack);
+
+						while (!IsEmpty(TmpStackI))
+						{
+							Pop(&TmpStackI, &NewInstruction);
+
+							if (IsKataSama(CBuild, Function(NewInstruction)))
+							{
+								printf("exec build\n");
+
+							} else if (IsKataSama(CBuy, Function(NewInstruction)))
+							{
+
+								MoneyPlayer -= MCost(NewInstruction);
+
+								Bahan NewBahan;
+								Name(NewBahan) = Detail(NewInstruction);
+								Val(NewBahan) = Quantity(NewInstruction);
+								PrintKata(Name(NewBahan));
+								printf(" %d ", Val(NewBahan));
+								BahanPlayer = AddBahan(BahanPlayer, NewBahan);
+
+								printf("exec buy\n");
+							}
+						}
+
+
+
 						PrepPhase = false;
 						printf("exec\n");
 

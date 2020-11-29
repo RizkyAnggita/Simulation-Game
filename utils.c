@@ -582,6 +582,8 @@ TabBahan AddBahan(TabBahan ListBahan, Bahan B)
 			Val(Elmt(ListBahan, i)) += Val(B);
 		}
 	}
+
+	return ListBahan;
 }
 
 TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2)
