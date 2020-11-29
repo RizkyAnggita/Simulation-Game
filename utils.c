@@ -49,6 +49,19 @@ MATRIKS FileToMatriks(char * filename)
 	return Map;
 }
 
+char GetElementMap(MATRIKS Map, POINT Loc)
+/* Mengembalikan elemen yang ada pada Map pada koordinat Loc */
+{
+	return ElmtM(Map, Ordinat(Loc), Absis(Loc));
+}
+
+void SetElementMap(MATRIKS * Map, POINT Loc, char el)
+/* I.S. Map, Loc, el terdefinisi
+   F.S. Map pada koordinat Loc, di set element nya menjadi el */
+{
+	ElmtM(*Map, Ordinat(Loc), Absis(Loc)) = el;	
+}
+
 void MovePlayer(MATRIKS Map, char Command, POINT * Loc)
 /* I.S. Map adalah matriks map yang akan diubah posisi player nya,
         Command adalah command yg di input pengguna 'w'. 'a'. 's'. 'd'.
@@ -79,7 +92,7 @@ void MovePlayer(MATRIKS Map, char Command, POINT * Loc)
 			break;
 	}
 
-	if (ElmtM(Map, Ordinat(NewLoc), Absis(NewLoc)) != '*')
+	if ((GetElementMap(Map, NewLoc) != '*') && (GetElementMap(Map, NewLoc) != 'W') )
 	{
 		*Loc = NewLoc;
 	}
@@ -399,23 +412,52 @@ void PrintMainQueue()
 	printf("(Wangky's Universe), Kesabaran: 5");
 }
 
-// void PrintWahana(ListWG ListWahana)
-// /*  I.S. ListWahana terdefinisi
-//     F.S. menampilkan list wahana game ke layar */
-// {
-//     printf("ingin membangun apa?\n");
-//     printf("List:\n");
+void PrintBuildWahana(ListWG ListWahanaGame)
+/*  I.S. ListWahana terdefinisi
+    F.S. menampilkan list wahana game ke layar */
+{
+    printf("ingin membangun apa?\n");
+    printf("List:\n");
 
-//     addressListWG P = FirstListWG(ListWahana);
-//     while (P!=NilListWG){
-//         printf("   -");
-//         PrintKata(Type(Akar(InfoListWG(ListWahana))));
-//         printf("\n");
-//         P=NextListWG(P);
-//     }
+    addressListWG P = FirstListWG(ListWahanaGame);
+    while (P != NilListWG)
+    {
+        printf("   -");
+        PrintKata(Type(Akar(InfoListWG(P))));
+        printf("\n");
+        P = NextListWG(P);
+    }
+}
 
+BinTree FindBasicWahana(ListWG ListWahanaGame, Kata K)
+/* Mencari tree wahana basic, dengan type tertentu, yaitu K, kalau ditemukan akan mengembalikan
+   Alamat pohon tersebut, jika tidak akan mengembalikan NilBinTree */
+{
+	boolean found;
+	BinTree T;
+	addressListWG P ;
 
-// }
+	P = FirstListWG(ListWahanaGame);
+	found = false;
+
+    while ((P != NilListWG) && (!found))
+    {
+        if (IsKataSama(Type(Akar(InfoListWG(P))), K))
+        {
+        	T = InfoListWG(P);
+        	found = true;
+        }
+        P = NextListWG(P);
+    }
+
+    if (found)
+    {
+ 		return T;   	
+    } else
+    {
+    	return NilBinTree;
+    }
+}
 
 TabCommand InitArrayCommand(){
 	/* Mengembalikan List/Array Command yang setiap elemen bertipe Commtype */
@@ -429,7 +471,7 @@ TabCommand InitArrayCommand(){
     InsertNewCommand(&T, makeCommtype(CA, 1));
     InsertNewCommand(&T, makeCommtype(CS, 1));
     InsertNewCommand(&T, makeCommtype(CD, 1));
-    InsertNewCommand(&T, makeCommtype(CBuild, 3));
+    InsertNewCommand(&T, makeCommtype(CBuild, 75));
     InsertNewCommand(&T, makeCommtype(CUpgrade, 3));
     InsertNewCommand(&T, makeCommtype(CBuy, 60));
     InsertNewCommand(&T, makeCommtype(CUndo, 0));
@@ -501,13 +543,13 @@ boolean MoneyCukup(int MoneyPlayer, int MoneyCost){
 
 // 	MakeEmptyListBahan(&Hasil);
 
-// 	for (i = GetFirstIdxListBahan(ListBahan); i <= GetLastIdxListBahan(ListBahan); ++i)
-// 	{
-// 		if (Name(Elmt(ListBahan, i)) == Name(B))
-// 		{
+	// for (i = GetFirstIdxListBahan(ListBahan); i <= GetLastIdxListBahan(ListBahan); ++i)
+	// {
+	// 	if (Name(Elmt(ListBahan, i)) == Name(B))
+	// 	{
 
-// 		}
-// 	}
+	// 	}
+	// }
 // }
 
 TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2){
@@ -516,14 +558,13 @@ TabBahan AddListBahan(TabBahan ListBahan1, TabBahan ListBahan2){
 
 	TabBahan Hasil;
 	MakeEmptyListBahan(&Hasil);
-	int n = NbElmtListBahan(ListBahan1);
+	IdxType i;
 
 	//Me-assign Nama Bahan dan jumlah bahan ke TabBahan Hasil;
-	int i = 0;
-	while (i<n){
+	for (i = GetFirstIdxListBahan(ListBahan1); i <= GetLastIdxListBahan(ListBahan1); ++i)
+	{
 		Elmt(Hasil,i).Name = Elmt(ListBahan1,i).Name;
 		Elmt(Hasil,i).Val = Elmt(ListBahan1,i).Val + Elmt(ListBahan2,i).Val;
-		i++;
 	}
 
 	return Hasil;

@@ -22,6 +22,13 @@ void GetBrsKolFileMap(int * NB, int * NK, char * filename);
 MATRIKS FileToMatriks(char * filename);
 /* Membaca file yang berisi matriks dan mengembalikan matriks tersebut */
 
+char GetElementMap(MATRIKS Map, POINT Loc);
+/* Mengembalikan elemen yang ada pada Map pada koordinat Loc */
+
+void SetElementMap(MATRIKS * Map, POINT Loc, char el);
+/* I.S. Map, Loc, el terdefinisi
+   F.S. Map pada koordinat Loc, di set element nya menjadi el */
+
 void MovePlayer(MATRIKS Map, char Command, POINT * Loc);
 /* I.S. Map adalah matriks map yang akan diubah posisi player nya,
         Command adalah command yg di input pengguna 'w'. 'a'. 's'. 'd'.
@@ -84,9 +91,12 @@ void PrintPrepStat(int Aksi, JAM J, int Money);
 void PrintMainQueue();
 /* Menampilkan  antrian pengunjung saat main phase*/
 
-void PrintWahana(ListWG ListWahana);
+void PrintBuildWahana(ListWG ListWahanaGame);
 /*  I.S. ListWahana terdefinisi
     F.S. menampilkan list wahana game ke layar */
+
+BinTree FindBasicWahana(ListWG ListWahanaGame, Kata T);
+/* Mencari tree wahana basic, dengan type tertentu, yaitu K */
 
 TabCommand InitArrayCommand();
 /* Mengembalikan List/Array Command yang setiap elemen bertipe Commtype */
