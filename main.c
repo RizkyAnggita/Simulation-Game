@@ -584,6 +584,8 @@ int main()
 					}
 					ENDL;	
 				}
+
+				CurrentTime = MainStartTime;
 				
 
 			} else // Main Phase
@@ -600,15 +602,18 @@ int main()
 
 				while (!PrepPhase && Play)
 				{
+					QueueP = MinusKesabaranQueue(QueueP, TimeSkipVal);
 
 					if (NbElmtListWP(ArrWahanaPlayer) > 0)
 					{
-
-						if (GenerateP(TimeSkipVal))
+						if (!IsFullPQ(QueueP))
 						{
+							if (GenerateP(TimeSkipVal))
+							{
 
-							P = GeneratePengunjung(ArrWahanaPlayer);
-							Enqueue(&QueueP, P);	
+								P = GeneratePengunjung(ArrWahanaPlayer);
+								Enqueue(&QueueP, P);	
+							}	
 						}
 					}
 
@@ -637,6 +642,8 @@ int main()
 
 					} else 
 					{
+						CurrentTime = TimeSkip(CurrentTime, ArrayCommand, CKata);
+						TimeSkipVal = FindDuration(ArrayCommand, CKata);
 						if (IsKataSama(CKata, CW))
 						{
 							MovePlayer(Map1, 'w', &PlayerPosition);

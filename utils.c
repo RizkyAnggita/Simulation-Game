@@ -494,10 +494,10 @@ TabCommand InitArrayCommand()
 	InsertNewCommand(&T, makeCommtype(CNew, 0));
 	InsertNewCommand(&T, makeCommtype(CLoad, 0));
 	InsertNewCommand(&T, makeCommtype(CExit, 0));
-	InsertNewCommand(&T, makeCommtype(CW, 1));
-	InsertNewCommand(&T, makeCommtype(CA, 1));
-	InsertNewCommand(&T, makeCommtype(CS, 1));
-	InsertNewCommand(&T, makeCommtype(CD, 1));
+	InsertNewCommand(&T, makeCommtype(CW, 2));
+	InsertNewCommand(&T, makeCommtype(CA, 2));
+	InsertNewCommand(&T, makeCommtype(CS, 2));
+	InsertNewCommand(&T, makeCommtype(CD, 2));
 	InsertNewCommand(&T, makeCommtype(CBuild, 75));
 	InsertNewCommand(&T, makeCommtype(CUpgrade, 3));
 	InsertNewCommand(&T, makeCommtype(CBuy, 60));
