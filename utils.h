@@ -17,6 +17,8 @@
 #include "wahanaplayer.h"
 #include "arraywahanaplayer.h"
 #include "stackins.h"
+#include "pengunjung.h"
+#include "prioqueuechar.h"
 
 void GetBrsKolFileMap(int *NB, int *NK, char *filename);
 /* I.S. NBrs, NKol, terdefinisi dan sembarang, filename adalah nama file map
@@ -91,7 +93,7 @@ void PrintPrepStat(int Aksi, JAM J, int Money, TabBahan ListBahan);
 /* Menampilkan stat khusus preparation phase, total aksi waktu
    dan uang yang dibutuhkan */
 
-void PrintMainQueue();
+void PrintMainQueue(PrioQueueChar Q);
 /* Menampilkan  antrian pengunjung saat main phase*/
 
 void PrintBuildWahana(ListWG ListWahanaGame);
@@ -160,5 +162,12 @@ void FindAround(POINT P, MATRIKS MapMat, int MapInt, TabWahanaPlayer ArrayWP);
 
 JAM TimeSkip(JAM Sekarang, TabCommand T, Kata K);
 /* Mengembalikan JAM yang sudah di-timeskip setelah menjalankan command */
+
+PrioQueueChar MinusKesabaranQueue(PrioQueueChar Q, int X);
+/* Mengurangi nilai kesabaran dari setiap pengunjung pada antrian sebanyak X
+   jika nilai kesabaran kurang dari 0, maka pengunjung akan keluar*/
+
+boolean GenerateP(int TimeSkipVal);
+/* Menentukan apakah akan digenerate pengunjung atau tidak, dengan random */
 
 #endif

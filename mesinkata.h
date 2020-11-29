@@ -22,7 +22,7 @@ typedef struct {
 extern boolean EndKata;
 extern Kata CKata;
 
-Kata MakeKata(Kata * C, char * command, int length);
+void MakeKata(Kata * C, char * command, int length);
 /* Membuat command dengan TabKata = command, dan Length = length*/
 
 boolean IsKataSama(Kata K1, Kata K2);

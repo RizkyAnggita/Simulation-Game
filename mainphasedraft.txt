@@ -6,19 +6,23 @@ timeskip
 
 ---------------------------------------
 
+resetwahanaplayercount
+emptyqueue
 timeskip = max
 
 while Mainphase and play do
 
-	if pengunjung terakhir blm selesai
-	enqueue pengunjung terakhir
 	pengunjung = generate(timeskip)
 	enqueue pengunjung
+	
+	printqueue
 
 	if (W a s d, office, detail, dan lainnya selain serve )
 		proses
 
 		timeskip = findduration
+
+		minus kesabaran
 
 	else if (serve)
 
@@ -31,10 +35,17 @@ while Mainphase and play do
 			dequeue
 			pengunjung + priority
 			pengunjung terakhir = hasil dequeue yang blm dikurangin list wahana yg ingin dinaikin
+
+			
+			
 		else
 			timeskip = duration wahana
 			dequeue
 			pengunjung terakhir = hasil dequeue yang udh dikurangin list wahana yg ingin dinaikin
+
+			minus kesabaran
+
+			enqueue pengunjung terakhir
 
 	currentime = nextndetik(currenttime, timeskip * 60)
 
