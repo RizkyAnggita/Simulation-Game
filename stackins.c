@@ -66,3 +66,19 @@ Proses: Top(S) berkurang 1
 */
 	Top(*S)--;
 }
+
+StackI ReverseStack(StackI SPrev){
+/*	Mengembalikan Stack of Instruction kebalikan dari SPrev
+	Top dari SPrev menjadi elemen pertama Stack baru dan seterusnya*/
+	StackI SNew;
+	Instruction I;
+
+	CreateEmpty(&SNew);
+	
+	while (!(IsEmpty(SPrev))) {
+		Pop(&SPrev, &I);
+		Push(&SNew, I);;
+	}
+
+	return SNew;
+}
