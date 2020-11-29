@@ -93,6 +93,11 @@ int main()
 	JAM MainEndTime = MakeJAM(21, 0, 0);
 
 	TabBahan BahanPlayer = CreateEmptyBahan(ShopBahan);
+	IdxType idxBP;
+	for (idxBP = GetFirstIdxListBahan(BahanPlayer); idxBP <= GetLastIdxListBahan(BahanPlayer); ++idxBP)
+	{
+		Val(Elmt(BahanPlayer, idxBP)) = 99999;
+	}
 
 	int MoneyPlayer = 99999;
 
@@ -132,14 +137,20 @@ int main()
 				StackI InstructionStack;
 				CreateEmpty(&InstructionStack);
 
-				TabBahan BahanNeededTotal = CreateEmptyBahan(ShopBahan);
+				Instruction NewInstruction;
 
 				int MoneyNeededTotal = 0;
+				int MoneyNeeded;
 
 				JAM TimeNeededTotal = MakeJAM(0, 0, 0);
 				int TimeNeeded; //dalam menit (satuan waktu terkecil)
 
 				int AksiTotal = 0;
+
+				TabBahan ListBahanNeededTotal = CreateEmptyBahan(ShopBahan);
+				TabBahan ListBahanNeeded;
+
+				MATRIKS Map1Prep = Map1;
 
 
 
@@ -186,8 +197,84 @@ int main()
 
 					} else if (IsKataSama(CKata, CBuild))
 					{
+						BinTree WahanaGameBasicTree;
+						WahanaGame WahanaGameBasic;
+						boolean SuccesBuild;
 
-						printf("Build\n");
+						PrintBuildWahana(ListWahanaGame);
+						ENDL;
+
+						STARTKALIMAT(" ");
+
+						WahanaGameBasicTree = FindBasicWahana(ListWahanaGame, CKata);
+
+						if (WahanaGameBasicTree != NilBinTree) // Wahana basic ditemukan
+						{
+							SuccesBuild = true;
+
+							WahanaGameBasic = Akar(WahanaGameBasicTree);
+
+							MoneyNeeded = MoneyCost(WahanaGameBasic);
+							ListBahanNeeded = BahanCost(WahanaGameBasic);
+
+							if (!(MoneyCukup(MoneyPlayer, (MoneyNeeded + MoneyNeededTotal))))
+							{
+								SuccesBuild = false;
+								printf("Uang anda tidak mencukupi!");
+								ENDL;
+							}
+
+							if (!(BahanCukup(BahanPlayer, AddListBahan(ListBahanNeededTotal, ListBahanNeeded))))
+							{
+								SuccesBuild = false;
+								printf("Bahan anda tidak mencukupi!");
+								ENDL;
+							}
+
+							if (SuccesBuild) // Bahan dan uang cukup untuk membangun
+							{
+								if (GetElementMap(Map1Prep, PlayerPosition) == '-') // Lahan kosong
+								{
+									SetElementMap(&Map1Prep, PlayerPosition, 'W');
+
+									NewInstruction = CreateInstruction(CBuild, PlayerPosition, Type(WahanaGameBasic), 1, PlayerMap);
+									Push(&InstructionStack, NewInstruction);
+
+									TimeNeeded = FindDuration(ArrayCommand, CBuild) * 60;
+									TimeNeededTotal = NextNDetik(TimeNeededTotal, TimeNeeded);
+
+									MoneyNeededTotal += MoneyNeeded;
+
+									ListBahanNeededTotal = AddListBahan(ListBahanNeededTotal, ListBahanNeeded);
+
+									AksiTotal += 1;
+
+									PrintKata(Type(WahanaGameBasic));
+									printf(" dapat dibangun!");
+									ENDL;	
+
+								} else // Sudah terdapat wahana ditempat berdiri
+								{
+
+									printf("Anda sudah merencanakan untuk memabngun wahana disini, bangun di tempat lain!");
+									ENDL;
+								}
+								
+
+							} else
+							{
+								PrintKata(Type(WahanaGameBasic));
+								printf(" tidak dapat dibangun!");
+								ENDL;
+
+							}
+
+						} else
+						{
+							printf("Type wahana yang anda input tidak ditemukan!");
+							ENDL;
+
+						}
 
 					} else if (IsKataSama(CKata, CUpgrade))
 					{
@@ -207,7 +294,7 @@ int main()
 						ADVKATA(" ");
 						Name(CBahan) = CKata;				
 
-						int MoneyNeeded = PriceBuyBahan(Name(CBahan), Val(CBahan), ShopBahan);
+						MoneyNeeded = PriceBuyBahan(Name(CBahan), Val(CBahan), ShopBahan);
 						if (MoneyNeeded == -999) //Nama bahan tidak ditemukan
 						{
 							printf("Bahan yang ingin anda beli tidak tersedia\n");
@@ -217,7 +304,7 @@ int main()
 							if ((MoneyNeeded + MoneyNeededTotal) <= MoneyPlayer) // Uang mencukupi
 							{
 
-								Instruction NewInstruction = CreateInstruction(CBuy, PlayerPosition, Name(CBahan), Val(CBahan), PlayerMap);
+								NewInstruction = CreateInstruction(CBuy, PlayerPosition, Name(CBahan), Val(CBahan), PlayerMap);
 								Push(&InstructionStack, NewInstruction);
 
 								TimeNeeded = FindDuration(ArrayCommand, CBuy) * 60;
@@ -244,6 +331,16 @@ int main()
 
 					} else if (IsKataSama(CKata, CUndo))
 					{
+						if (IsEmpty(InstructionStack))
+						{
+							printf("Anda tidak memiliki perintah sama sekali, undo gagal!");
+							ENDL;
+
+						} else
+						{
+							Pop(&InstructionStack, &NewInstruction);
+							
+						}
 						printf("undo\n");
 
 					} else if (IsKataSama(CKata, CExecute))
@@ -260,60 +357,64 @@ int main()
 					{
 						Play = false;
 
-					}	
+					}
+					ENDL;	
 				}
 				
 
 			} else // Main Phase
 			{
-
-				printf("Main phase day %d\n", Day);
-
-				PrintMap(PlayerMap, PlayerPosition, Map1);
-				ENDL;
-				ENDL;
-
-				PrintPlayerStat(Username);
-				ENDL;
-
-				PrintTime(CurrentTime, MainEndTime, false);
-				ENDL;
-
-				PrintMainQueue();
-				ENDL;
-				ENDL;
-
-				printf("Masukkan perintah:\n");
-
-				STARTKATA(" ");
-
-				if (IsKataSama(CKata, CServe))
+				while (!PrepPhase && Play)
 				{
-					printf("serve\n");
+					printf("Main phase day %d\n", Day);
 
-				} else if (IsKataSama(CKata, CRepair))
-				{
-					printf("repair\n");
+					PrintMap(PlayerMap, PlayerPosition, Map1);
+					ENDL;
+					ENDL;
 
-				} else if (IsKataSama(CKata, CDetail))
-				{
-					printf("Detail\n");
+					PrintPlayerStat(Username);
+					ENDL;
 
-				} else if (IsKataSama(CKata, COffice))
-				{
-					printf("Office\n");
+					PrintTime(CurrentTime, MainEndTime, false);
+					ENDL;
 
-				} else if (IsKataSama(CKata, CPrepare))
-				{
-					PrepPhase = true;
-					Day += 1;
-					printf("Prepare\n");
+					PrintMainQueue();
+					ENDL;
+					ENDL;
+
+					printf("Masukkan perintah:\n");
+
+					STARTKATA(" ");
+
+					if (IsKataSama(CKata, CServe))
+					{
+						printf("serve\n");
+
+					} else if (IsKataSama(CKata, CRepair))
+					{
+						printf("repair\n");
+
+					} else if (IsKataSama(CKata, CDetail))
+					{
+						printf("Detail\n");
+
+					} else if (IsKataSama(CKata, COffice))
+					{
+						printf("Office\n");
+
+					} else if (IsKataSama(CKata, CPrepare))
+					{
+						PrepPhase = true;
+						Day += 1;
+						printf("Prepare\n");
+					
+					} else if (IsKataSama(CKata, CExit))
+					{
+						Play = false;
+
+					}					
+				}
 				
-				} else if (IsKataSama(CKata, CExit))
-				{
-					Play = false;
-
-				}				
 			}
 
 			 
