@@ -934,7 +934,6 @@ boolean GenerateP(int TimeSkipVal)
 	return (rand() % 10) < TimeSkipVal;
 }
 
-<<<<<<< HEAD
 boolean IsAround(POINT Loc, MATRIKS Map, char C)
 /* return true jika disekitar (atas bawah krii kanan) Loc terdapat C pada Map */
 {
@@ -953,7 +952,6 @@ boolean IsAround(POINT Loc, MATRIKS Map, char C)
 	CRight = GetElementMap(Map, Right);
 
 	return !((CUp != C) && (CRight != C) && (CDown != C)  && (CLeft != C)) ;
-=======
 void PrintKataListU(ListU L){
 	/* Mencetak elemen ListU (Kata) pada setiap node */
 	addressListU P;
@@ -966,5 +964,4 @@ void PrintKataListU(ListU L){
 		P = NextListU(P);
 	}
 	
->>>>>>> 706accb85e68f8facf5d1297e7338cb31d19c127
 }
