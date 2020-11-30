@@ -2,23 +2,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "mesinkata.h"
-#include "point.h"
-#include "jam.h"
-#include "instruction.h"
-#include "stackins.h"
-#include "command.h"
-#include "arraybahan.h"
+#include "./MesinKata/mesinkata.h"
+#include "./Point/point.h"
+#include "./Jam/jam.h"
+#include "./ADTLain/instruction.h"
+#include "./Stack/stackins.h"
+#include "./ADTLain/command.h"
+#include "./Array/arraybahan.h"
 #include "utils.h"
-#include "constants.h"
-#include "bintree.h"
-#include "wahanagame.h"
-#include "listwahanagame.h"
-#include "listupgrade.h"
-#include "wahanaplayer.h"
-#include "arraywahanaplayer.h"
-#include "pengunjung.h"
-#include "graph.h"
+#include "./MesinKata/constants.h"
+#include "./BinTree/bintree.h"
+#include "./ADTLain/wahanagame.h"
+#include "./ListBerkait/listwahanagame.h"
+#include "./ListBerkait/listupgrade.h"
+#include "./ADTLain/wahanaplayer.h"
+#include "./Array/arraywahanaplayer.h"
+#include "./ADTLain/pengunjung.h"
+#include "./Graph/graph.h"
 
 
 #define ENDL printf("\n")
@@ -32,6 +32,7 @@ int main()
 
 	//Initialisasi GameCommand
 	InitGameCommand();
+
 
 	TabCommand ArrayCommand = InitArrayCommand();
 
@@ -500,81 +501,90 @@ int main()
 
 					} else if (IsKataSama(CKata, CExecute))
 					{
-
-						StackI TmpStackI = ReverseStack(InstructionStack);
-
-						while (!IsEmpty(TmpStackI))
+						if (JLT(DetikToJAM(Durasi(PrepStartTime, PrepEndTime)), TimeNeededTotal))
 						{
-							Pop(&TmpStackI, &NewInstruction);
+							printf("Waktu yang dibutuhkan melebihi waktu yang tersisa!");
+							ENDL;
 
-							if (IsKataSama(CBuild, Function(NewInstruction)))
+						} else
+						{
+							StackI TmpStackI = ReverseStack(InstructionStack);
+
+							while (!IsEmpty(TmpStackI))
 							{
-								SetElementMap(&MapG(SearchNodeG(G, PlayerMap)), Point(NewInstruction), 'W');
+								Pop(&TmpStackI, &NewInstruction);
 
-								MoneyPlayer -= MCost(NewInstruction);
-
-								BahanPlayer = MinusListBahan(BahanPlayer, BCost(NewInstruction));
-
-
-								BinTree WGBuild;
-								WGBuild = FindListWahana(Detail(NewInstruction), ListWahanaGame);
-
-								Kata NamaWBuild = GenerateWahanaName(Type(Akar(WGBuild)), Point(NewInstruction), Map(NewInstruction));
-
-								WahanaPlayer NewWP;
-
-								ListU ListUBuild;
-								CreateEmptyListU(&ListUBuild);
-
-								NewWP = MakeWahanaPlayer(WGBuild, NamaWBuild, Point(NewInstruction), Map(NewInstruction), ListUBuild, 0, 0, 0, 0, false);
-
-
-								ElmtWP(ArrWahanaPlayer, GetLastIdxListWP(ArrWahanaPlayer) + 1) = NewWP;
-
-							} else if (IsKataSama(CBuy, Function(NewInstruction)))
-							{
-
-								MoneyPlayer -= MCost(NewInstruction);
-
-								Bahan NewBahan;
-								Name(NewBahan) = Detail(NewInstruction);
-								Val(NewBahan) = Quantity(NewInstruction);
-								BahanPlayer = AddBahan(BahanPlayer, NewBahan);
-
-							} else if (IsKataSama(CUpgrade, Function(NewInstruction)))
-							{
-
-								MoneyPlayer -= MCost(NewInstruction);
-
-								BahanPlayer = MinusListBahan(BahanPlayer, BCost(NewInstruction));
-
-								int i;
-								i = GetFirstIdxListWP(ArrWahanaPlayer);
-								while(i <= GetLastIdxListWP(ArrWahanaPlayer))
+								if (IsKataSama(CBuild, Function(NewInstruction)))
 								{
-							        if (EQ(LocW(ElmtWP(ArrWahanaPlayer,i)), Point(NewInstruction)) && MapW(ElmtWP(ArrWahanaPlayer,i)) == Map(NewInstruction))
-							        {
-							    		
-							    		BinTree WGUpgrade;
-										WGUpgrade = FindListWahana(Detail(NewInstruction), ListWahanaGame);
-										StatW(ElmtWP(ArrWahanaPlayer,i)) = WGUpgrade;
+									SetElementMap(&MapG(SearchNodeG(G, PlayerMap)), Point(NewInstruction), 'W');
 
-										InsVFirstListU(&HUpgradeW(ElmtWP(ArrWahanaPlayer,i)), NamaW(ElmtWP(ArrWahanaPlayer,i)));
+									MoneyPlayer -= MCost(NewInstruction);
 
-										Kata NamaWUpgrade = GenerateWahanaName(Type(Akar(WGUpgrade)), Point(NewInstruction), Map(NewInstruction));
-										ENDL;
-										NamaW(ElmtWP(ArrWahanaPlayer,i)) = NamaWUpgrade;
+									BahanPlayer = MinusListBahan(BahanPlayer, BCost(NewInstruction));
 
-							        }
-							        i++;
-							    }
 
+									BinTree WGBuild;
+									WGBuild = FindListWahana(Detail(NewInstruction), ListWahanaGame);
+
+									Kata NamaWBuild = GenerateWahanaName(Type(Akar(WGBuild)), Point(NewInstruction), Map(NewInstruction));
+
+									WahanaPlayer NewWP;
+
+									ListU ListUBuild;
+									CreateEmptyListU(&ListUBuild);
+
+									NewWP = MakeWahanaPlayer(WGBuild, NamaWBuild, Point(NewInstruction), Map(NewInstruction), ListUBuild, 0, 0, 0, 0, false);
+
+
+									ElmtWP(ArrWahanaPlayer, GetLastIdxListWP(ArrWahanaPlayer) + 1) = NewWP;
+
+								} else if (IsKataSama(CBuy, Function(NewInstruction)))
+								{
+
+									MoneyPlayer -= MCost(NewInstruction);
+
+									Bahan NewBahan;
+									Name(NewBahan) = Detail(NewInstruction);
+									Val(NewBahan) = Quantity(NewInstruction);
+									BahanPlayer = AddBahan(BahanPlayer, NewBahan);
+
+								} else if (IsKataSama(CUpgrade, Function(NewInstruction)))
+								{
+
+									MoneyPlayer -= MCost(NewInstruction);
+
+									BahanPlayer = MinusListBahan(BahanPlayer, BCost(NewInstruction));
+
+									int i;
+									i = GetFirstIdxListWP(ArrWahanaPlayer);
+									while(i <= GetLastIdxListWP(ArrWahanaPlayer))
+									{
+								        if (EQ(LocW(ElmtWP(ArrWahanaPlayer,i)), Point(NewInstruction)) && MapW(ElmtWP(ArrWahanaPlayer,i)) == Map(NewInstruction))
+								        {
+								    		
+								    		BinTree WGUpgrade;
+											WGUpgrade = FindListWahana(Detail(NewInstruction), ListWahanaGame);
+											StatW(ElmtWP(ArrWahanaPlayer,i)) = WGUpgrade;
+
+											InsVFirstListU(&HUpgradeW(ElmtWP(ArrWahanaPlayer,i)), NamaW(ElmtWP(ArrWahanaPlayer,i)));
+
+											Kata NamaWUpgrade = GenerateWahanaName(Type(Akar(WGUpgrade)), Point(NewInstruction), Map(NewInstruction));
+											ENDL;
+											NamaW(ElmtWP(ArrWahanaPlayer,i)) = NamaWUpgrade;
+
+								        }
+								        i++;
+								    }
+
+								}
 							}
+
+
+
+							PrepPhase = false;
 						}
 
-
-
-						PrepPhase = false;
+							
 
 					} else if (IsKataSama(CKata, CMain))
 					{
@@ -709,6 +719,8 @@ int main()
 									        i++;
 									    }
 
+									    MoneyPlayer += Price(Akar(StatW(ElmtWP(ArrWahanaPlayer,i - 1))));
+
 										CurrWPeng(P) += 1;
 
 										if (CurrWPeng(P) != TotalWPeng(P))
@@ -716,6 +728,8 @@ int main()
 											Prio(P) += 1;
 											Enqueue(&QueueP, P);
 										}
+
+
 
 
 										TimeSkipVal = DurationW(Akar(StatW(WPeng)));
@@ -956,8 +970,12 @@ int main()
 							TimeSkipVal = FindDuration(ArrayCommand, CKata);
 						}	
 					}
+
+					PrepPhase = JGT(CurrentTime, MainEndTime);
 										
 				}
+
+				CurrentTime = PrepStartTime;
 				
 			}
 
